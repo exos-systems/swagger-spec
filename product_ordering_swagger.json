@@ -2708,6 +2708,7 @@ definitions:
       query:
         type: string
         description: additional data to be passed
+  
   ProductOrderCreateEvent:
     type: object
     description: The notification data structure
@@ -2747,9 +2748,47 @@ definitions:
         type: string
         format: date-time
         description: The time the event occured.
+      session:
+        description: Mandatory session headers
+        type: object 
+        $ref: "#/definitions/Session"
       event:
         description: The event payload linked to the involved resource object
         $ref: '#/definitions/ProductOrderCreateEventPayload'
+  Session:
+    type: object
+    properties:
+      attribute:
+        description: Mandatory session headers
+        type: object 
+        $ref: "#/definitions/Attribute"
+      correlationId:
+        type: string
+        description: Adding correlationId
+      xcorrelationId:
+        type: string
+        description: Adding xcorrelationId
+      loginName:
+        type: string
+        description: Adding loginName
+      email:
+        type: string
+        description: Adding email
+      fullName:
+        type: string
+        description: Adding fullName
+  Attribute:
+    type: object
+    properties:
+      additionalProp1:
+        type: string
+        description: Adding prop1
+      additionalProp2:
+        type: string
+        description: Adding prop2
+      additionalProp3:
+        type: string
+        description: Adding prop3
   ProductOrderCreateEventPayload:
     type: object
     description: The event data structure
