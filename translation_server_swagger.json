@@ -1,0 +1,4058 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Api Documentation",
+    "version": "1.0",
+    "title": "Api Documentation",
+    "termsOfService": "urn:tos",
+    "contact": {},
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "host": "localhost:8081",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "access-no-controller",
+      "description": "Access No Controller"
+    },
+    {
+      "name": "basket-controller",
+      "description": "Basket Controller"
+    },
+    {
+      "name": "catalogue-controller",
+      "description": "Catalogue Controller"
+    },
+    {
+      "name": "customer-controller",
+      "description": "Customer Controller"
+    },
+    {
+      "name": "health-check-controller",
+      "description": "Health Check Controller"
+    },
+    {
+      "name": "login-controller",
+      "description": "Login Controller"
+    },
+    {
+      "name": "products-controller",
+      "description": "Products Controller"
+    },
+    {
+      "name": "service-controller",
+      "description": "Service Controller"
+    }
+  ],
+  "paths": {
+    "/api/basket": {
+      "post": {
+        "tags": [
+          "basket-controller"
+        ],
+        "summary": "addBasket",
+        "operationId": "addBasketUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "pBasketDataRequest",
+            "description": "pBasketDataRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BasketData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AddBasketResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "basket-controller"
+        ],
+        "summary": "modifyBasket",
+        "operationId": "modifyBasketUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "pBasketDataRequest",
+            "description": "pBasketDataRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BasketData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ModifyBasketResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/catalogue/list": {
+      "post": {
+        "tags": [
+          "catalogue-controller"
+        ],
+        "summary": "getCatalogues",
+        "operationId": "getCataloguesUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "pCatalogueCriteria",
+            "description": "pCatalogueCriteria",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogueSearchCriteria"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CatalogueDetailListResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/customer": {
+      "post": {
+        "tags": [
+          "customer-controller"
+        ],
+        "summary": "addCustomer",
+        "operationId": "addCustomerUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "pCustomerDetailItemRequest",
+            "description": "pCustomerDetailItemRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomerDetailItemRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomerResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/customerAndAccount": {
+      "post": {
+        "tags": [
+          "customer-controller"
+        ],
+        "summary": "addCustomerAndAccount",
+        "operationId": "addCustomerAndAccountUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "pCustomerAndAccountDetail",
+            "description": "pCustomerAndAccountDetail",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomerAndAccountDetailRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomerResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/findAccessNumbersForAllocation": {
+      "post": {
+        "tags": [
+          "access-no-controller"
+        ],
+        "summary": "findAccessNumbers",
+        "operationId": "findAccessNumbersUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "pAccessNumberAllocationCriteria",
+            "description": "pAccessNumberAllocationCriteria",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessNumberAllocationCriteria"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessAllocationResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/findBasket": {
+      "post": {
+        "tags": [
+          "basket-controller"
+        ],
+        "summary": "findBasket",
+        "operationId": "findBasketUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "pCriteria",
+            "description": "pCriteria",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BasketCriteria"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BasketDataSetItemResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/findServiceByAccessNumber": {
+      "post": {
+        "tags": [
+          "service-controller"
+        ],
+        "summary": "findAccessNumbers",
+        "operationId": "findAccessNumbersUsingPOST_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "pAccessNumberCriteria",
+            "description": "pAccessNumberCriteria",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessNumberCriteria"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessNumberQueryListResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/healthcheck/exception": {
+      "get": {
+        "tags": [
+          "health-check-controller"
+        ],
+        "summary": "exceptionTest",
+        "operationId": "exceptionTestUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/healthcheck/ping": {
+      "get": {
+        "tags": [
+          "health-check-controller"
+        ],
+        "summary": "healthCheck",
+        "operationId": "healthCheckUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "tags": [
+          "login-controller"
+        ],
+        "summary": "login",
+        "operationId": "loginUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "pRequest",
+            "description": "pRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LoginResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/products/detail": {
+      "post": {
+        "tags": [
+          "products-controller"
+        ],
+        "summary": "getDetailForProduct",
+        "operationId": "getDetailForProductUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "pProductDetailSearchCriteria",
+            "description": "pProductDetailSearchCriteria",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductDetailSearchCriteria"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProductDetailItemResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/products/list": {
+      "post": {
+        "tags": [
+          "products-controller"
+        ],
+        "summary": "getProducts",
+        "operationId": "getProductsUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "pProductSearchCriteria",
+            "description": "pProductSearchCriteria",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductSearchCriteria"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProductLimitedListItemResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccBillDeliveryDetailItem": {
+      "type": "object",
+      "properties": {
+        "accountNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "billCopies": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "billMediaCd": {
+          "type": "string"
+        },
+        "billingEmailAddress": {
+          "type": "string"
+        },
+        "billingFaxNumber": {
+          "type": "string"
+        }
+      },
+      "title": "AccBillDeliveryDetailItem"
+    },
+    "AccDetailItemRequest": {
+      "type": "object",
+      "properties": {
+        "accountCategoryCode": {
+          "type": "string"
+        },
+        "accountClassificationCode": {
+          "type": "string"
+        },
+        "accountCurrencyCode": {
+          "type": "string"
+        },
+        "accountGroupCd": {
+          "type": "string"
+        },
+        "accountNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "accountReviewDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "accountSubGroupCd": {
+          "type": "string"
+        },
+        "accountTypeCode": {
+          "type": "string"
+        },
+        "annCommFromDt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "bankAccountName": {
+          "type": "string"
+        },
+        "basicCollectionPlanCode": {
+          "type": "string"
+        },
+        "billDeliveryDetails": {
+          "$ref": "#/definitions/AccBillDeliveryDetailItem"
+        },
+        "billLanguageCode": {
+          "type": "string"
+        },
+        "billingAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "billingAddressUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "communicationConsent": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "companyRegisteredAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "companyRegisteredAddressUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "companyRegistrationDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "companyRegistrationNo": {
+          "type": "string"
+        },
+        "contactsAndAssociations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerContactDetailList"
+          }
+        },
+        "correspondenceAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "correspondenceAddressUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "creditCheckRequest": {
+          "$ref": "#/definitions/AccountCreditCheckRequestItem"
+        },
+        "creditCheckResults": {
+          "$ref": "#/definitions/AccountCreditCheckResultsItem"
+        },
+        "creditLimit": {
+          "$ref": "#/definitions/CustomCurrency"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "customerUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "depositInsure": {
+          "type": "boolean"
+        },
+        "directoryDeliveryDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DirDeliveryDetailItem"
+          }
+        },
+        "discountGroupCode": {
+          "type": "string"
+        },
+        "dpConsentYn": {
+          "$ref": "#/definitions/CustomVariant"
+        },
+        "externalReference": {
+          "type": "string"
+        },
+        "faultPriority": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "fcaShareProfile": {
+          "type": "string"
+        },
+        "guarantorDetails": {
+          "$ref": "#/definitions/AccGuarantorDetailItem"
+        },
+        "handle": {
+          "type": "string"
+        },
+        "highSpendCreditLimit": {
+          "$ref": "#/definitions/CustomCurrency"
+        },
+        "idFields": {
+          "$ref": "#/definitions/AccountIdentificationFieldsItem"
+        },
+        "ignoreDuplicationCheck": {
+          "type": "boolean"
+        },
+        "includeInArchiving": {
+          "type": "boolean"
+        },
+        "jointAccountDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerParticipantName"
+          }
+        },
+        "lastBillingRunDt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "latePaymentChargingRuleDetails": {
+          "$ref": "#/definitions/AccountLatePaymentChargingRuleDetailItem"
+        },
+        "marketingDetails": {
+          "$ref": "#/definitions/CustomVariant"
+        },
+        "marketingQuestions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountMarketingQuestionItem"
+          }
+        },
+        "name": {
+          "$ref": "#/definitions/CustomerParticipantName"
+        },
+        "overrideCustomerLevelSecurity": {
+          "$ref": "#/definitions/CustomVariant"
+        },
+        "parentAccountNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "partnerTypeCd": {
+          "type": "string"
+        },
+        "paymentMethodsDetailItem": {
+          "$ref": "#/definitions/AccountPaymentMethodsDetailItem"
+        },
+        "salesBarNoteUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "securityProfileAndAnswers": {
+          "$ref": "#/definitions/AccountSecurityProfileAndAnswersDetailItem"
+        },
+        "statusCode": {
+          "type": "string"
+        },
+        "taxSchemeCode": {
+          "type": "string"
+        },
+        "tradingAs": {
+          "type": "string"
+        },
+        "userDefinedFieldSet": {
+          "$ref": "#/definitions/CustomerUDFList"
+        }
+      },
+      "title": "AccDetailItemRequest"
+    },
+    "AccGuarantorDetailItem": {
+      "type": "object",
+      "properties": {
+        "guarantorAccountNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "guarantorName": {
+          "type": "string"
+        }
+      },
+      "title": "AccGuarantorDetailItem"
+    },
+    "AccListItem": {
+      "type": "object",
+      "properties": {
+        "accountCategoryCode": {
+          "type": "string"
+        },
+        "accountClassCode": {
+          "type": "string"
+        },
+        "accountCurrencyCode": {
+          "type": "string"
+        },
+        "accountGroupCd": {
+          "type": "string"
+        },
+        "accountHasBalance": {
+          "type": "boolean"
+        },
+        "accountNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "accountSubGroupCd": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "billingAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "companyRegisteredAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "correspondenceAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "customerUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "$ref": "#/definitions/CustomerParticipantName"
+        },
+        "statusCode": {
+          "type": "string"
+        }
+      },
+      "title": "AccListItem"
+    },
+    "AccessAllocationResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AllocationQueryItemData"
+          }
+        }
+      },
+      "title": "AccessAllocationResponse"
+    },
+    "AccessNoItem": {
+      "type": "object",
+      "properties": {
+        "accessNo": {
+          "type": "string"
+        },
+        "exDirectory": {
+          "type": "boolean"
+        },
+        "pbx": {
+          "type": "boolean"
+        },
+        "pbxQuantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pbxSx": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "AccessNoItem"
+    },
+    "AccessNumberAllocationCriteria": {
+      "type": "object",
+      "properties": {
+        "accessStartWith": {
+          "type": "string"
+        },
+        "accountName": {
+          "type": "string"
+        },
+        "accountNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "allocationStatus": {
+          "type": "string"
+        },
+        "autoAllocateQuantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "customerName": {
+          "type": "string"
+        },
+        "customerNumber": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "dealership": {
+          "type": "string"
+        },
+        "exchangeCd": {
+          "type": "string"
+        },
+        "handle": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
+        },
+        "numberGroup": {
+          "type": "string"
+        },
+        "serviceType": {
+          "type": "string"
+        },
+        "session": {
+          "$ref": "#/definitions/SessionRequest"
+        }
+      },
+      "title": "AccessNumberAllocationCriteria"
+    },
+    "AccessNumberCriteria": {
+      "type": "object",
+      "properties": {
+        "accessNo": {
+          "type": "string"
+        },
+        "handle": {
+          "type": "string"
+        },
+        "session": {
+          "$ref": "#/definitions/SessionRequest"
+        }
+      },
+      "title": "AccessNumberCriteria"
+    },
+    "AccessNumberQueryAccountItem": {
+      "type": "object",
+      "properties": {
+        "accountClassificationCode": {
+          "type": "string"
+        },
+        "accountGroupCd": {
+          "type": "string"
+        },
+        "accountName": {
+          "$ref": "#/definitions/CustomerParticipantName"
+        },
+        "accountNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "accountSubGroupCd": {
+          "type": "string"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessNumberQueryAccountLocationItem"
+          }
+        },
+        "statusCode": {
+          "type": "string"
+        }
+      },
+      "title": "AccessNumberQueryAccountItem"
+    },
+    "AccessNumberQueryAccountLocationItem": {
+      "type": "object",
+      "properties": {
+        "serviceAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceListItemInfo"
+          }
+        }
+      },
+      "title": "AccessNumberQueryAccountLocationItem"
+    },
+    "AccessNumberQueryListResponse": {
+      "type": "object",
+      "properties": {
+        "matchingAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessNumberQueryAccountItem"
+          }
+        }
+      },
+      "title": "AccessNumberQueryListResponse"
+    },
+    "AccountCreditCheckRequestItem": {
+      "type": "object",
+      "properties": {
+        "accountType": {
+          "type": "string"
+        },
+        "companyRegNo": {
+          "type": "string"
+        },
+        "contractValue": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "currentAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "forename": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "movedCurrentAddress": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "movedPreviousAddress": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "previousAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "surname": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "userDefinedFieldSet": {
+          "$ref": "#/definitions/CustomerUDFList"
+        }
+      },
+      "title": "AccountCreditCheckRequestItem"
+    },
+    "AccountCreditCheckResultsItem": {
+      "type": "object",
+      "properties": {
+        "creditCheckAccTypeCode": {
+          "type": "string"
+        },
+        "creditScore": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "decisionClassification": {
+          "type": "string"
+        },
+        "depositAmount": {
+          "type": "string"
+        },
+        "depositCode": {
+          "type": "string"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "experianReference": {
+          "type": "string"
+        },
+        "grade": {
+          "type": "string"
+        },
+        "xmlResponse": {
+          "type": "string"
+        }
+      },
+      "title": "AccountCreditCheckResultsItem"
+    },
+    "AccountIdentificationFieldsItem": {
+      "type": "object",
+      "properties": {
+        "id1Label": {
+          "type": "string"
+        },
+        "id1Value": {
+          "type": "string"
+        },
+        "id2Label": {
+          "type": "string"
+        },
+        "id2Value": {
+          "type": "string"
+        },
+        "id3Label": {
+          "type": "string"
+        },
+        "id3Value": {
+          "type": "string"
+        },
+        "id4Label": {
+          "type": "string"
+        },
+        "id4Value": {
+          "type": "string"
+        },
+        "id5Label": {
+          "type": "string"
+        },
+        "id5Value": {
+          "type": "string"
+        }
+      },
+      "title": "AccountIdentificationFieldsItem"
+    },
+    "AccountLatePaymentChargingRuleDetailItem": {
+      "type": "object",
+      "properties": {
+        "latePaymentGracePeriod": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "latePaymentStatusCd": {
+          "type": "string"
+        }
+      },
+      "title": "AccountLatePaymentChargingRuleDetailItem"
+    },
+    "AccountMandateItem": {
+      "type": "object",
+      "properties": {
+        "agreementDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "cerillionAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "creditorAddressLine1": {
+          "type": "string"
+        },
+        "creditorAddressLine2": {
+          "type": "string"
+        },
+        "creditorBIC": {
+          "type": "string"
+        },
+        "creditorCountryCode": {
+          "type": "string"
+        },
+        "creditorIBAN": {
+          "type": "string"
+        },
+        "creditorId": {
+          "type": "string"
+        },
+        "creditorName": {
+          "type": "string"
+        },
+        "ddMandateRef": {
+          "type": "string"
+        },
+        "debtorAddressLine1": {
+          "type": "string"
+        },
+        "debtorAddressLine2": {
+          "type": "string"
+        },
+        "debtorBIC": {
+          "type": "string"
+        },
+        "debtorCountryCode": {
+          "type": "string"
+        },
+        "debtorCurrency": {
+          "type": "string"
+        },
+        "debtorIBAN": {
+          "type": "string"
+        },
+        "debtorName": {
+          "type": "string"
+        },
+        "firstPaymentRequestYn": {
+          "type": "string"
+        },
+        "newMandate": {
+          "type": "boolean"
+        },
+        "transType": {
+          "type": "string"
+        }
+      },
+      "title": "AccountMandateItem"
+    },
+    "AccountMarketingQuestionItem": {
+      "type": "object",
+      "properties": {
+        "answerText": {
+          "type": "string"
+        },
+        "categoryCode": {
+          "type": "string"
+        },
+        "questionText": {
+          "type": "string"
+        },
+        "questionUid": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "AccountMarketingQuestionItem"
+    },
+    "AccountPaymentMethodsCCFullItem": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "associatedAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccListItem"
+          }
+        },
+        "avs": {
+          "type": "string"
+        },
+        "cardNo": {
+          "type": "string"
+        },
+        "cvv2": {
+          "type": "string"
+        },
+        "expiryDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "issue": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "statusCode": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "title": "AccountPaymentMethodsCCFullItem"
+    },
+    "AccountPaymentMethodsCCRefItem": {
+      "type": "object",
+      "properties": {
+        "ccName": {
+          "type": "string"
+        },
+        "ccReference": {
+          "type": "string"
+        },
+        "ccType": {
+          "type": "string"
+        },
+        "expiryDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "statusCode": {
+          "type": "string"
+        },
+        "transactionId": {
+          "type": "string"
+        }
+      },
+      "title": "AccountPaymentMethodsCCRefItem"
+    },
+    "AccountPaymentMethodsDDFullItem": {
+      "type": "object",
+      "properties": {
+        "agreementCancelNotifyDt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "agreementCancelRequestDt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "agreementEndDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "agreementNumber": {
+          "type": "string"
+        },
+        "agreementRequestDt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "agreementSentDt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "agreementStartDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "agreementStatusCode": {
+          "type": "string"
+        },
+        "bankAccountName": {
+          "type": "string"
+        },
+        "bankAccountNo": {
+          "type": "string"
+        },
+        "bankAreaLocation": {
+          "type": "string"
+        },
+        "bankBranchName": {
+          "type": "string"
+        },
+        "bankName": {
+          "type": "string"
+        },
+        "bankPostCode": {
+          "type": "string"
+        },
+        "bankSortCode": {
+          "type": "string"
+        },
+        "bankTownLocation": {
+          "type": "string"
+        },
+        "budgetPayAmount": {
+          "$ref": "#/definitions/CustomCurrency"
+        },
+        "budgetPayDay": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "budgetPayRecommendedAmount": {
+          "$ref": "#/definitions/CustomCurrency"
+        },
+        "ddOriginatorReferenceCD": {
+          "type": "string"
+        },
+        "directDebitAgreementRef": {
+          "type": "string"
+        },
+        "directDebitConfirmLetterDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "AccountPaymentMethodsDDFullItem"
+    },
+    "AccountPaymentMethodsDDRefItem": {
+      "type": "object",
+      "properties": {
+        "bacsReference": {
+          "type": "string"
+        },
+        "ddReference": {
+          "type": "string"
+        }
+      },
+      "title": "AccountPaymentMethodsDDRefItem"
+    },
+    "AccountPaymentMethodsDetailItem": {
+      "type": "object",
+      "properties": {
+        "bankAccountNoLength": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bankAccountNoRegex": {
+          "type": "string"
+        },
+        "ccFull": {
+          "$ref": "#/definitions/AccountPaymentMethodsCCFullItem"
+        },
+        "ccRef": {
+          "$ref": "#/definitions/AccountPaymentMethodsCCRefItem"
+        },
+        "creditorAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "currentMethod": {
+          "type": "boolean"
+        },
+        "ddFull": {
+          "$ref": "#/definitions/AccountPaymentMethodsDDFullItem"
+        },
+        "ddRef": {
+          "$ref": "#/definitions/AccountPaymentMethodsDDRefItem"
+        },
+        "debtorAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "fileFormatCode": {
+          "type": "string"
+        },
+        "paymentDetailsCode": {
+          "type": "string"
+        },
+        "paymentMethodCanBeSuspended": {
+          "type": "boolean"
+        },
+        "paymentMethodCode": {
+          "type": "string"
+        },
+        "paymentMethodSuspended": {
+          "type": "boolean"
+        },
+        "paymentSuspensionEndDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sepaMandateItem": {
+          "$ref": "#/definitions/AccountMandateItem"
+        },
+        "sortCodeValRegex": {
+          "type": "string"
+        }
+      },
+      "title": "AccountPaymentMethodsDetailItem"
+    },
+    "AccountSecurityAnswerItem": {
+      "type": "object",
+      "properties": {
+        "answerValue": {
+          "type": "string"
+        },
+        "customQuestionValue": {
+          "type": "string"
+        },
+        "securityQuestionTypeCode": {
+          "type": "string"
+        }
+      },
+      "title": "AccountSecurityAnswerItem"
+    },
+    "AccountSecurityProfileAndAnswersDetailItem": {
+      "type": "object",
+      "properties": {
+        "securityAnswers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountSecurityAnswerItem"
+          }
+        },
+        "securityQuestionProfileUid": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "AccountSecurityProfileAndAnswersDetailItem"
+    },
+    "AddBasketResponse": {
+      "type": "object",
+      "properties": {
+        "newRecordIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomRecordId"
+          }
+        }
+      },
+      "title": "AddBasketResponse"
+    },
+    "AllocationQueryItemData": {
+      "type": "object",
+      "properties": {
+        "allocationStatusCode": {
+          "type": "string"
+        },
+        "customerName": {
+          "$ref": "#/definitions/CustomerParticipantName"
+        },
+        "customerUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "exchangeCode": {
+          "type": "string"
+        },
+        "lineTypeCode": {
+          "type": "string"
+        },
+        "msisdn": {
+          "type": "string"
+        },
+        "reservationReason": {
+          "type": "string"
+        },
+        "reservedToDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "serviceTypeCode": {
+          "type": "string"
+        }
+      },
+      "title": "AllocationQueryItemData"
+    },
+    "AutoTopupDetail": {
+      "type": "object",
+      "properties": {
+        "balanceDefnUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "finalOperationCode": {
+          "type": "string"
+        },
+        "finalThresholdHadValue": {
+          "type": "boolean"
+        },
+        "finalThresholdValue": {
+          "type": "number"
+        },
+        "firstOperationCode": {
+          "type": "string"
+        },
+        "firstThresholdHadValue": {
+          "type": "boolean"
+        },
+        "firstThresholdValue": {
+          "type": "number"
+        },
+        "secondOperationCode": {
+          "type": "string"
+        },
+        "secondThresholdHadValue": {
+          "type": "boolean"
+        },
+        "secondThresholdValue": {
+          "type": "number"
+        },
+        "tariffCode": {
+          "type": "string"
+        },
+        "tariffSx": {
+          "type": "string"
+        },
+        "tariffVer": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "topupPaymentMethodCd": {
+          "type": "string"
+        }
+      },
+      "title": "AutoTopupDetail"
+    },
+    "BalanceKeyInfo": {
+      "type": "object",
+      "properties": {
+        "accountCd": {
+          "type": "string"
+        },
+        "accountLevelBal": {
+          "type": "boolean"
+        },
+        "accountNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "balDefUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "balFunctionSetUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "balanceGroupCd": {
+          "type": "string"
+        },
+        "balanceLogicalId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "communityOwnerEquipUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "communityUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "definitionName": {
+          "type": "string"
+        },
+        "equipUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "linepoolCd": {
+          "type": "string"
+        },
+        "permissionCd": {
+          "type": "string"
+        },
+        "shared": {
+          "type": "boolean"
+        },
+        "statusCd": {
+          "type": "string"
+        },
+        "unitName": {
+          "type": "string"
+        },
+        "unitSystemCd": {
+          "type": "string"
+        }
+      },
+      "title": "BalanceKeyInfo"
+    },
+    "BalanceSpendingLimitDetail": {
+      "type": "object",
+      "properties": {
+        "balCategory": {
+          "type": "string"
+        },
+        "balThresholdAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "balanceKey": {
+          "$ref": "#/definitions/BalanceKeyInfo"
+        },
+        "finalThresholdAction": {
+          "type": "string"
+        },
+        "finalThresholdDefinedLimit": {
+          "type": "number",
+          "format": "double"
+        },
+        "firstThresholdAction": {
+          "type": "string"
+        },
+        "firstThresholdDefinedLimit": {
+          "type": "number",
+          "format": "double"
+        },
+        "hardThresholdNumber": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isIncludedYn": {
+          "type": "boolean"
+        },
+        "isOperatorLimitYn": {
+          "type": "string"
+        },
+        "limitAllowedYn": {
+          "type": "string"
+        },
+        "limitFirstUseAction": {
+          "type": "string"
+        },
+        "limitReachedAction": {
+          "type": "string"
+        },
+        "limitValue": {
+          "type": "number",
+          "format": "double"
+        },
+        "maxFinalDefinedLimit": {
+          "type": "number",
+          "format": "double"
+        },
+        "operatorDefaultFinalValueAction": {
+          "type": "string"
+        },
+        "operatorDefaultFirstThreshold": {
+          "type": "number",
+          "format": "double"
+        },
+        "operatorDefaultSecondThreshold": {
+          "type": "number",
+          "format": "double"
+        },
+        "operatorDefaultThreshold1Action": {
+          "type": "string"
+        },
+        "operatorDefaultThreshold2Action": {
+          "type": "string"
+        },
+        "prepaid": {
+          "type": "boolean"
+        },
+        "secondThresholdAction": {
+          "type": "string"
+        },
+        "secondThresholdDefinedLimit": {
+          "type": "number",
+          "format": "double"
+        },
+        "serviceLevelCd": {
+          "type": "string"
+        },
+        "serviceUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "spendingLimitAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "timeBasedAutotopup": {
+          "type": "boolean"
+        }
+      },
+      "title": "BalanceSpendingLimitDetail"
+    },
+    "BasketConfigInfo": {
+      "type": "object",
+      "properties": {
+        "contractMandatory": {
+          "type": "boolean"
+        },
+        "includedInSale": {
+          "type": "boolean"
+        },
+        "inventoryTrackedItem": {
+          "type": "boolean"
+        },
+        "occurrence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BasketConfigOccurrenceInfo"
+          }
+        },
+        "option": {
+          "$ref": "#/definitions/OptionIdInfo"
+        },
+        "productInfoReadOnly": {
+          "$ref": "#/definitions/ProductDetail"
+        },
+        "relations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RelationConfigDetail"
+          }
+        },
+        "representsOldProduct": {
+          "type": "boolean"
+        },
+        "secondaryUsageProductIncluded": {
+          "type": "boolean"
+        },
+        "thirdUserReferenceNumber": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "BasketConfigInfo"
+    },
+    "BasketConfigOccurrenceInfo": {
+      "type": "object",
+      "properties": {
+        "acceptedExistingNumber": {
+          "type": "boolean"
+        },
+        "apn": {
+          "type": "string"
+        },
+        "autoTopupItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutoTopupDetail"
+          }
+        },
+        "bendAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "broadbandConfig": {
+          "$ref": "#/definitions/BroadBandConfigDetail"
+        },
+        "chosenRecommendedWoNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "communityName": {
+          "type": "string"
+        },
+        "contact": {
+          "$ref": "#/definitions/CustomerContactDetailList"
+        },
+        "contractUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "creditProfileConfig": {
+          "$ref": "#/definitions/CreditProfileDetail"
+        },
+        "defaultWorkTaskConfig": {
+          "$ref": "#/definitions/BasketWorkTaskDetail"
+        },
+        "directoryEntry": {
+          "$ref": "#/definitions/DirectoryEntryDetail"
+        },
+        "effectiveInstallationAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "equipmentConfig": {
+          "$ref": "#/definitions/EquipmentConfigDetail"
+        },
+        "gsmConfig": {
+          "$ref": "#/definitions/GSMConfigDetail"
+        },
+        "initialInstallDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "installationAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "itemisationConfig": {
+          "$ref": "#/definitions/ItemisationConfigDetail"
+        },
+        "leasedLineConfig": {
+          "$ref": "#/definitions/LeasedLineConfigDetail"
+        },
+        "linePlantAdditionalService": {
+          "type": "boolean"
+        },
+        "linePlantIntegrationInfo": {
+          "$ref": "#/definitions/LinePlantIntegrationInfoDetail"
+        },
+        "linePlantIntegrationItem": {
+          "type": "boolean"
+        },
+        "linePlantIntegrationProduct": {
+          "type": "boolean"
+        },
+        "nominatedOldEquipUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NoteListItemDetail"
+          }
+        },
+        "occurrence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "oldProductEquipUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "operatorLimitsConfig": {
+          "$ref": "#/definitions/OperatorLimitsConfigDetail"
+        },
+        "orderNoteLastUpdateDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "orderNoteLastUpdateUser": {
+          "type": "string"
+        },
+        "originalAccessNo": {
+          "type": "string"
+        },
+        "originalAccountNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "originalExchangeCode": {
+          "type": "string"
+        },
+        "originalInstallationAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "pbxServiceConfig": {
+          "$ref": "#/definitions/PBXServiceConfigDetail"
+        },
+        "requiresCoverageCheck": {
+          "type": "boolean"
+        },
+        "secondUserReferenceNumber": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "serialNo": {
+          "type": "string"
+        },
+        "serviceConfig": {
+          "$ref": "#/definitions/ServiceConfigDetail"
+        },
+        "standardBalanceConfig": {
+          "$ref": "#/definitions/StandardBalanceConfigDetail"
+        },
+        "suretyDepositConfig": {
+          "$ref": "#/definitions/SuretyDepositConfigDetail"
+        },
+        "topupPaymentMethodCd": {
+          "type": "string"
+        },
+        "userDefinedFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomUDF"
+          }
+        },
+        "userDefinedLimitsIncludedForItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BalanceSpendingLimitDetail"
+          }
+        },
+        "workOrderProfileCode": {
+          "type": "string"
+        },
+        "workOrderProvideDetails": {
+          "$ref": "#/definitions/BasketWODetailsConfig"
+        },
+        "workOrderRecoverDetails": {
+          "$ref": "#/definitions/BasketWODetailsConfig"
+        },
+        "workTaskConfig": {
+          "$ref": "#/definitions/BasketWorkTaskDetail"
+        }
+      },
+      "title": "BasketConfigOccurrenceInfo"
+    },
+    "BasketCriteria": {
+      "type": "object",
+      "properties": {
+        "basketUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "handle": {
+          "type": "string"
+        },
+        "session": {
+          "$ref": "#/definitions/SessionRequest"
+        }
+      },
+      "title": "BasketCriteria"
+    },
+    "BasketData": {
+      "type": "object",
+      "properties": {
+        "accountNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "accountSubGroupCd": {
+          "type": "string"
+        },
+        "action": {
+          "$ref": "#/definitions/BasketTopLevAction"
+        },
+        "basketItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BasketItem"
+          }
+        },
+        "basketReferralInfo": {
+          "$ref": "#/definitions/BasketReferral"
+        },
+        "basketStatusCode": {
+          "type": "string"
+        },
+        "basketUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bulkRecovery": {
+          "type": "boolean"
+        },
+        "defaultsProcessName": {
+          "type": "string"
+        },
+        "estimation": {
+          "type": "boolean"
+        },
+        "finalBillYn": {
+          "type": "boolean"
+        },
+        "handle": {
+          "type": "string"
+        },
+        "manuallyValidatedYn": {
+          "type": "boolean"
+        },
+        "newBillAddrUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NumberRangeInfo"
+          }
+        },
+        "participantName": {
+          "$ref": "#/definitions/CustomerParticipantName"
+        },
+        "postSaleForTempBasket": {
+          "type": "boolean"
+        },
+        "repatriation": {
+          "type": "boolean"
+        },
+        "rtmOrderUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "salesChannel": {
+          "type": "string"
+        },
+        "salesPartnerItem": {
+          "$ref": "#/definitions/RtmDetails"
+        },
+        "salesPerson": {
+          "type": "string"
+        },
+        "salesPersonInternal": {
+          "type": "boolean"
+        },
+        "session": {
+          "$ref": "#/definitions/SessionRequest"
+        },
+        "taskStepPassedYn": {
+          "type": "boolean"
+        },
+        "temporary": {
+          "type": "boolean"
+        },
+        "upfrontPaymentDetails": {
+          "$ref": "#/definitions/UpfrontPaymentInfo"
+        },
+        "workTaskListSetToDefault": {
+          "type": "boolean"
+        },
+        "wscOrderNumber": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "BasketData"
+    },
+    "BasketDataSetItemResponse": {
+      "type": "object",
+      "properties": {
+        "basketDataSet": {
+          "$ref": "#/definitions/BasketData"
+        }
+      },
+      "title": "BasketDataSetItemResponse"
+    },
+    "BasketItem": {
+      "type": "object",
+      "properties": {
+        "actionCharge": {
+          "type": "boolean"
+        },
+        "allowActionIgnoringPackage": {
+          "type": "boolean"
+        },
+        "basketConfig": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BasketConfigInfo"
+          }
+        },
+        "basketItemId": {
+          "$ref": "#/definitions/BasketItemIdInfo"
+        },
+        "bulkCollectDataTypeItem": {
+          "type": "boolean"
+        },
+        "contractUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "externalUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "firstUserReferenceNumber": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "loadOnlyMandOptions": {
+          "type": "boolean"
+        },
+        "method": {
+          "type": "string"
+        },
+        "nodeId": {
+          "type": "string"
+        },
+        "options": {
+          "$ref": "#/definitions/ConfigurationOptionsInfo"
+        },
+        "ownerDeptCd": {
+          "type": "string"
+        },
+        "package": {
+          "type": "boolean"
+        },
+        "packageConfig": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PackageConfigInfo"
+          }
+        },
+        "packageHasOpenOrders": {
+          "type": "boolean"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "recoveryReasonCode": {
+          "type": "string"
+        },
+        "relatedToBasketItemNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "remove": {
+          "type": "boolean"
+        },
+        "statusCode": {
+          "type": "string"
+        },
+        "totalQuantity": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "BasketItem"
+    },
+    "BasketItemIdInfo": {
+      "type": "object",
+      "properties": {
+        "barcode": {
+          "type": "string"
+        },
+        "catalogueItemUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "catalogueReference": {
+          "type": "string"
+        },
+        "catalogueUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "existingItemNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "oldEquipUids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "selectedInstallAddrUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "serialNo": {
+          "type": "string"
+        },
+        "tariffCode": {
+          "type": "string"
+        }
+      },
+      "title": "BasketItemIdInfo"
+    },
+    "BasketReferral": {
+      "type": "object",
+      "properties": {
+        "salesPartnerAccountNo": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "BasketReferral"
+    },
+    "BasketTopLevAction": {
+      "type": "object",
+      "properties": {
+        "acceptLinePlantResults": {
+          "type": "boolean"
+        },
+        "commit": {
+          "type": "boolean"
+        },
+        "commitSynchronously": {
+          "type": "boolean"
+        },
+        "remove": {
+          "type": "boolean"
+        },
+        "validate": {
+          "type": "boolean"
+        }
+      },
+      "title": "BasketTopLevAction"
+    },
+    "BasketWODetailsConfig": {
+      "type": "object",
+      "properties": {
+        "activationDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "contactEmail": {
+          "type": "string"
+        },
+        "contactName": {
+          "type": "string"
+        },
+        "contactPhoneNo": {
+          "type": "string"
+        },
+        "groupReference": {
+          "type": "string"
+        },
+        "preferredActionDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "purchaseOrderNo": {
+          "type": "string"
+        },
+        "targetDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "tempProductTerminationDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "warrantyExpireDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "BasketWODetailsConfig"
+    },
+    "BasketWorkTaskDetail": {
+      "type": "object",
+      "properties": {
+        "quotaGroupForProvideSide": {
+          "type": "string"
+        },
+        "quotaGroupForSimpleActionOrRecoverSide": {
+          "type": "string"
+        },
+        "simpleActionOrSeparateOptions": {
+          "type": "boolean"
+        },
+        "workTasksForProvideSide": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkTaskListItemDetail"
+          }
+        },
+        "workTasksForSimpleActionOrRecoverSide": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkTaskListItemDetail"
+          }
+        }
+      },
+      "title": "BasketWorkTaskDetail"
+    },
+    "BillSectionSettingsForNumberItemDetail": {
+      "type": "object",
+      "properties": {
+        "accessNo": {
+          "type": "string"
+        },
+        "accountNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "billSectionSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillSectionSettingsItemDetail"
+          }
+        },
+        "equipUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "productDescription": {
+          "type": "string"
+        },
+        "productType": {
+          "type": "string"
+        }
+      },
+      "title": "BillSectionSettingsForNumberItemDetail"
+    },
+    "BillSectionSettingsItemDetail": {
+      "type": "object",
+      "properties": {
+        "billSection": {
+          "type": "string"
+        },
+        "itemisationProductCharge": {
+          "$ref": "#/definitions/CustomCurrency"
+        },
+        "itemisationProductCode": {
+          "type": "string"
+        },
+        "itemisationProductDescription": {
+          "type": "string"
+        },
+        "itemisationProductSuffix": {
+          "type": "string"
+        },
+        "itemisationProductSuffixDescription": {
+          "type": "string"
+        },
+        "option": {
+          "type": "string"
+        }
+      },
+      "title": "BillSectionSettingsItemDetail"
+    },
+    "BroadBandConfigDetail": {
+      "type": "object",
+      "properties": {
+        "contactEmailAddress": {
+          "type": "string"
+        },
+        "domainName": {
+          "type": "string"
+        },
+        "dslUserNameSuffix": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "BroadBandConfigDetail"
+    },
+    "CatalogueDetailListItem": {
+      "type": "object",
+      "properties": {
+        "catalogueEffectiveDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "catalogueName": {
+          "type": "string"
+        },
+        "catalogueUid": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "CatalogueDetailListItem"
+    },
+    "CatalogueDetailListResponse": {
+      "type": "object",
+      "properties": {
+        "catalogues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogueDetailListItem"
+          }
+        }
+      },
+      "title": "CatalogueDetailListResponse"
+    },
+    "CatalogueSearchCriteria": {
+      "type": "object",
+      "properties": {
+        "catalogueUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "handle": {
+          "type": "string"
+        },
+        "session": {
+          "$ref": "#/definitions/SessionRequest"
+        }
+      },
+      "title": "CatalogueSearchCriteria"
+    },
+    "ChargeOptionIdInfo": {
+      "type": "object",
+      "properties": {
+        "chargeTypeCode": {
+          "type": "string"
+        },
+        "compGroupCode": {
+          "type": "string"
+        },
+        "salesAmendedPrice": {
+          "$ref": "#/definitions/CustomCurrency"
+        },
+        "tariffCode": {
+          "type": "string"
+        },
+        "thirdPayment": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ThirdPaymentInfo"
+          }
+        }
+      },
+      "title": "ChargeOptionIdInfo"
+    },
+    "ConfigurationOptionsInfo": {
+      "type": "object",
+      "properties": {
+        "excludeCharges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChargeOptionIdInfo"
+          }
+        },
+        "excludeTariffCodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OptionIdInfo"
+          }
+        },
+        "includeCharges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChargeOptionIdInfo"
+          }
+        },
+        "includeTariffCodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OptionIdInfo"
+          }
+        }
+      },
+      "title": "ConfigurationOptionsInfo"
+    },
+    "CreditProfileDetail": {
+      "type": "object",
+      "properties": {
+        "barrable": {
+          "$ref": "#/definitions/CustomVariant"
+        },
+        "creditProfileCode": {
+          "type": "string"
+        }
+      },
+      "title": "CreditProfileDetail"
+    },
+    "CustomCurrency": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "itemised": {
+          "type": "boolean"
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "title": "CustomCurrency"
+    },
+    "CustomRecordId": {
+      "type": "object",
+      "properties": {
+        "recordIdType": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "CustomRecordId"
+    },
+    "CustomUDF": {
+      "type": "object",
+      "properties": {
+        "fieldName": {
+          "type": "string"
+        },
+        "fieldValue": {
+          "$ref": "#/definitions/CustomVariant"
+        },
+        "hidden": {
+          "type": "boolean"
+        }
+      },
+      "title": "CustomUDF"
+    },
+    "CustomVariant": {
+      "type": "object",
+      "properties": {
+        "booleanValue": {
+          "type": "boolean"
+        },
+        "currencyValue": {
+          "$ref": "#/definitions/CustomCurrency"
+        },
+        "dateValue": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "doubleValue": {
+          "type": "number",
+          "format": "double"
+        },
+        "intValue": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "stringValue": {
+          "type": "string"
+        },
+        "variantType": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "CustomVariant"
+    },
+    "CustomerAddress": {
+      "type": "object",
+      "properties": {
+        "addressLine1": {
+          "type": "string"
+        },
+        "addressLine2": {
+          "type": "string"
+        },
+        "addressLookupKey": {
+          "type": "string"
+        },
+        "addressProfileUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "areaName": {
+          "type": "string"
+        },
+        "countryName": {
+          "type": "string"
+        },
+        "dpid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "entrance": {
+          "type": "string"
+        },
+        "exchangeCode": {
+          "type": "string"
+        },
+        "extension": {
+          "type": "string"
+        },
+        "externalAddressUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "flatNo": {
+          "type": "string"
+        },
+        "informalAddress": {
+          "type": "string"
+        },
+        "manuallyEditedYn": {
+          "type": "string"
+        },
+        "networkNodeIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerNodeId"
+          }
+        },
+        "organizationName": {
+          "type": "string"
+        },
+        "pcode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "placeName": {
+          "type": "string"
+        },
+        "postCode": {
+          "type": "string"
+        },
+        "streetName": {
+          "type": "string"
+        },
+        "streetNo": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "CustomerAddress"
+    },
+    "CustomerAndAccountDetailRequest": {
+      "type": "object",
+      "properties": {
+        "accountDetailItem": {
+          "$ref": "#/definitions/AccDetailItemRequest"
+        },
+        "customerDetailItem": {
+          "$ref": "#/definitions/CustomerDetailItemRequest"
+        },
+        "session": {
+          "$ref": "#/definitions/SessionRequest"
+        }
+      },
+      "title": "CustomerAndAccountDetailRequest"
+    },
+    "CustomerContactAssociation": {
+      "type": "object",
+      "properties": {
+        "contactAssociationUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "locked": {
+          "type": "boolean"
+        },
+        "primaryContact": {
+          "type": "boolean"
+        },
+        "reasonCode": {
+          "type": "string"
+        }
+      },
+      "title": "CustomerContactAssociation"
+    },
+    "CustomerContactDetail": {
+      "type": "object",
+      "properties": {
+        "accountGroupCd": {
+          "type": "string"
+        },
+        "accountSubGroupCd": {
+          "type": "string"
+        },
+        "birthDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "companyName": {
+          "type": "string"
+        },
+        "contactUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "correspondenceAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "departmentName": {
+          "type": "string"
+        },
+        "dpConsentYn": {
+          "$ref": "#/definitions/CustomVariant"
+        },
+        "emailAddress1": {
+          "type": "string"
+        },
+        "emailAddress2": {
+          "type": "string"
+        },
+        "fileReferenceNo": {
+          "type": "string"
+        },
+        "genderCode": {
+          "type": "string"
+        },
+        "idNumber": {
+          "type": "string"
+        },
+        "information1": {
+          "type": "string"
+        },
+        "information2": {
+          "type": "string"
+        },
+        "isLocked": {
+          "$ref": "#/definitions/CustomVariant"
+        },
+        "maritalStatusCode": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/definitions/CustomerParticipantName"
+        },
+        "officeName": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "personTypeCode": {
+          "type": "string"
+        },
+        "phoneNumbers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerPhoneNumber"
+          }
+        },
+        "position": {
+          "type": "string"
+        },
+        "userDefinedFieldSet": {
+          "$ref": "#/definitions/CustomerUDFList"
+        }
+      },
+      "title": "CustomerContactDetail"
+    },
+    "CustomerContactDetailList": {
+      "type": "object",
+      "properties": {
+        "contactAssociation": {
+          "$ref": "#/definitions/CustomerContactAssociation"
+        },
+        "contactDetail": {
+          "$ref": "#/definitions/CustomerContactDetail"
+        }
+      },
+      "title": "CustomerContactDetailList"
+    },
+    "CustomerDetailItemRequest": {
+      "type": "object",
+      "properties": {
+        "accountGroupCd": {
+          "type": "string"
+        },
+        "accountSubGroupCd": {
+          "type": "string"
+        },
+        "allowCustomerLevelSecurity": {
+          "$ref": "#/definitions/CustomVariant"
+        },
+        "class1TypeCode": {
+          "type": "string"
+        },
+        "class2CategoryCode": {
+          "type": "string"
+        },
+        "class3ClassCode": {
+          "type": "string"
+        },
+        "contactsAndAssociations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerContactDetailList"
+          }
+        },
+        "correspondenceAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "customerUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "dpConsentYn": {
+          "$ref": "#/definitions/CustomVariant"
+        },
+        "handle": {
+          "type": "string"
+        },
+        "importanceCode": {
+          "type": "string"
+        },
+        "importanceReason": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/definitions/CustomerParticipantName"
+        },
+        "session": {
+          "$ref": "#/definitions/SessionRequest"
+        },
+        "skipEmailAndPhoneNumberValidation": {
+          "type": "boolean"
+        },
+        "statusCode": {
+          "type": "string"
+        },
+        "userDefinedFieldSet": {
+          "$ref": "#/definitions/CustomerUDFList"
+        }
+      },
+      "title": "CustomerDetailItemRequest"
+    },
+    "CustomerNodeId": {
+      "type": "object",
+      "properties": {
+        "available": {
+          "type": "boolean"
+        },
+        "networkNodeUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "nodeId": {
+          "type": "string"
+        },
+        "ownerDeptCd": {
+          "type": "string"
+        }
+      },
+      "title": "CustomerNodeId"
+    },
+    "CustomerParticipantName": {
+      "type": "object",
+      "properties": {
+        "forenamesInitials": {
+          "type": "string"
+        },
+        "honours": {
+          "type": "string"
+        },
+        "middleName": {
+          "type": "string"
+        },
+        "surnameCompanyName": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "title": "CustomerParticipantName"
+    },
+    "CustomerPhoneNumber": {
+      "type": "object",
+      "properties": {
+        "phoneNumber": {
+          "type": "string"
+        },
+        "phoneTypeCd": {
+          "type": "string"
+        }
+      },
+      "title": "CustomerPhoneNumber"
+    },
+    "CustomerResponse": {
+      "type": "object",
+      "properties": {
+        "newRecordIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomRecordId"
+          }
+        }
+      },
+      "title": "CustomerResponse"
+    },
+    "CustomerUDFList": {
+      "type": "object",
+      "properties": {
+        "userDefinedFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomUDF"
+          }
+        }
+      },
+      "title": "CustomerUDFList"
+    },
+    "DSLServiceTypeDetail": {
+      "type": "object",
+      "properties": {
+        "estimatedMaximumDownstreamSpeed": {
+          "type": "string"
+        },
+        "estimatedMaximumUpstreamSpeed": {
+          "type": "string"
+        },
+        "estimatedMinimumDownstreamSpeed": {
+          "type": "string"
+        },
+        "estimatedMinimumUpstreamSpeed": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "DSLServiceTypeDetail"
+    },
+    "DirDeliveryDetailItem": {
+      "type": "object",
+      "properties": {
+        "directoryDeliveryAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "directoryDeliveryAddressUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "directoryDeliveryQuantity": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "DirDeliveryDetailItem"
+    },
+    "DirectoryEntryDetail": {
+      "type": "object",
+      "properties": {
+        "accessNo": {
+          "type": "string"
+        },
+        "accountNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "additionalText1": {
+          "type": "string"
+        },
+        "additionalText2": {
+          "type": "string"
+        },
+        "addressLine1": {
+          "type": "string"
+        },
+        "areaName": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "deleted": {
+          "type": "boolean"
+        },
+        "detailsGenerated": {
+          "type": "boolean"
+        },
+        "directorySection": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "exportStatusCd": {
+          "type": "string"
+        },
+        "forename": {
+          "type": "string"
+        },
+        "inclusionStatus": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "knownAs": {
+          "type": "string"
+        },
+        "placeName": {
+          "type": "string"
+        },
+        "postCode": {
+          "type": "string"
+        },
+        "profession": {
+          "type": "string"
+        },
+        "qualifications": {
+          "type": "string"
+        },
+        "seqNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sortKey": {
+          "type": "string"
+        },
+        "staffUsername": {
+          "type": "string"
+        },
+        "streetName": {
+          "type": "string"
+        },
+        "surname": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "woNo": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "DirectoryEntryDetail"
+    },
+    "EquipmentConfigDetail": {
+      "type": "object",
+      "properties": {
+        "agentCode": {
+          "type": "string"
+        },
+        "referenceNo": {
+          "type": "string"
+        }
+      },
+      "title": "EquipmentConfigDetail"
+    },
+    "GSMConfigDetail": {
+      "type": "object",
+      "properties": {
+        "customerId": {
+          "type": "string"
+        },
+        "handsetNo": {
+          "type": "string"
+        },
+        "handsetTypeCode": {
+          "type": "string"
+        },
+        "homeZone": {
+          "type": "string"
+        },
+        "iccid": {
+          "type": "string"
+        },
+        "mailboxNo": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "title": "GSMConfigDetail"
+    },
+    "ItemisationConfigDetail": {
+      "type": "object",
+      "properties": {
+        "billSectionSettingsForNumber": {
+          "$ref": "#/definitions/BillSectionSettingsForNumberItemDetail"
+        },
+        "chargeForItemisation": {
+          "type": "boolean"
+        },
+        "itemisationDestInternational": {
+          "type": "boolean"
+        },
+        "itemisationDestLocal": {
+          "type": "boolean"
+        },
+        "itemisationDestNational": {
+          "type": "boolean"
+        },
+        "itemisationLevelCode": {
+          "type": "string"
+        }
+      },
+      "title": "ItemisationConfigDetail"
+    },
+    "LeasedLineConfigDetail": {
+      "type": "object",
+      "properties": {
+        "bEndAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "circuitName": {
+          "type": "string"
+        },
+        "contactName": {
+          "type": "string"
+        },
+        "contactNo": {
+          "type": "string"
+        },
+        "contractReference": {
+          "type": "string"
+        },
+        "customerName": {
+          "type": "string"
+        },
+        "functionCode": {
+          "type": "string"
+        },
+        "lineLength": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "serialNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "signalling": {
+          "type": "string"
+        },
+        "specification": {
+          "type": "string"
+        }
+      },
+      "title": "LeasedLineConfigDetail"
+    },
+    "LinePlantIntegrationInfoDetail": {
+      "type": "object",
+      "properties": {
+        "capacityCheckErrorCode": {
+          "type": "string"
+        },
+        "capacityCheckMessage": {
+          "type": "string"
+        },
+        "capacityCheckResultCode": {
+          "type": "string"
+        },
+        "carryOutCoverageCheck": {
+          "type": "boolean"
+        },
+        "carryOutLinePlantCapacityCheck": {
+          "type": "boolean"
+        },
+        "carryOutLinePlantReservation": {
+          "type": "boolean"
+        },
+        "confirmToTerminateAndReserve": {
+          "type": "boolean"
+        },
+        "reservationErrorCode": {
+          "type": "string"
+        },
+        "reservationMessage": {
+          "type": "string"
+        },
+        "reservationResultCode": {
+          "type": "string"
+        },
+        "reservationStatusCode": {
+          "type": "string"
+        },
+        "reservedAccessNo": {
+          "type": "string"
+        },
+        "suggestedExchangeCode": {
+          "type": "string"
+        },
+        "supportedDSLServiceTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DSLServiceTypeDetail"
+          }
+        }
+      },
+      "title": "LinePlantIntegrationInfoDetail"
+    },
+    "LoginRequest": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "session": {
+          "$ref": "#/definitions/SessionRequest"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "title": "LoginRequest"
+    },
+    "LoginResponse": {
+      "type": "object",
+      "properties": {
+        "handle": {
+          "type": "string"
+        }
+      },
+      "title": "LoginResponse"
+    },
+    "ModifyBasketResponse": {
+      "type": "object",
+      "properties": {
+        "newRecordIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomRecordId"
+          }
+        }
+      },
+      "title": "ModifyBasketResponse"
+    },
+    "NoteListItemDetail": {
+      "type": "object",
+      "properties": {
+        "accountNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "lineDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "noteType": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        }
+      },
+      "title": "NoteListItemDetail"
+    },
+    "NumberRangeInfo": {
+      "type": "object",
+      "properties": {
+        "exchangeCd": {
+          "type": "string"
+        },
+        "groupName": {
+          "type": "string"
+        },
+        "highestDDINumber": {
+          "type": "string"
+        },
+        "lineTypeCd": {
+          "type": "string"
+        },
+        "lowestDDINumber": {
+          "type": "string"
+        },
+        "numberRangeTypeCd": {
+          "type": "string"
+        },
+        "rangeQuantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "statusCode": {
+          "type": "string"
+        }
+      },
+      "title": "NumberRangeInfo"
+    },
+    "OperatorLimitsConfigDetail": {
+      "type": "object",
+      "properties": {
+        "operatorLimitsDefinedForItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BalanceSpendingLimitDetail"
+          }
+        },
+        "operatorLimitsIncludedForItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BalanceSpendingLimitDetail"
+          }
+        }
+      },
+      "title": "OperatorLimitsConfigDetail"
+    },
+    "OptionIdInfo": {
+      "type": "object",
+      "properties": {
+        "compGroupCode": {
+          "type": "string"
+        },
+        "tariffCode": {
+          "type": "string"
+        }
+      },
+      "title": "OptionIdInfo"
+    },
+    "PBXLineServiceListItemInfo": {
+      "type": "object",
+      "properties": {
+        "accessNo": {
+          "$ref": "#/definitions/AccessNoItem"
+        },
+        "equipUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "installationAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "levelOfCover": {
+          "type": "string"
+        },
+        "lineTypeCode": {
+          "type": "string"
+        },
+        "numberRangeTypeCode": {
+          "type": "string"
+        },
+        "serviceCode": {
+          "type": "string"
+        },
+        "serviceHasBalance": {
+          "type": "boolean"
+        },
+        "statusCode": {
+          "type": "string"
+        },
+        "supportContractNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tariffCode": {
+          "type": "string"
+        }
+      },
+      "title": "PBXLineServiceListItemInfo"
+    },
+    "PBXServiceConfigDetail": {
+      "type": "object",
+      "properties": {
+        "existingGroupAccessNo": {
+          "type": "string"
+        },
+        "pbxGroupName": {
+          "type": "string"
+        },
+        "pbxSuffix": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "PBXServiceConfigDetail"
+    },
+    "PackageConfigInfo": {
+      "type": "object",
+      "properties": {
+        "occurrence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "packageInfoReadOnly": {
+          "$ref": "#/definitions/PackageInfoDetail"
+        },
+        "representsOldProduct": {
+          "type": "boolean"
+        },
+        "workOrderProfileCode": {
+          "type": "string"
+        }
+      },
+      "title": "PackageConfigInfo"
+    },
+    "PackageInfoDetail": {
+      "type": "object",
+      "properties": {
+        "serviceCode": {
+          "type": "string"
+        }
+      },
+      "title": "PackageInfoDetail"
+    },
+    "ProductDetail": {
+      "type": "object",
+      "properties": {
+        "communityTypeCode": {
+          "type": "string"
+        },
+        "defaultApn": {
+          "type": "string"
+        },
+        "fttp": {
+          "type": "boolean"
+        },
+        "line": {
+          "type": "boolean"
+        },
+        "numberPlanCode": {
+          "type": "string"
+        },
+        "numberRangeTypeCode": {
+          "type": "string"
+        },
+        "productTypeCode": {
+          "type": "string"
+        },
+        "serviceCode": {
+          "type": "string"
+        },
+        "staticIpProduct": {
+          "type": "boolean"
+        },
+        "tariffActionCode": {
+          "type": "string"
+        }
+      },
+      "title": "ProductDetail"
+    },
+    "ProductDetailItemInfo": {
+      "type": "object",
+      "properties": {
+        "associationMandatory": {
+          "type": "boolean"
+        },
+        "associationOptional": {
+          "type": "boolean"
+        },
+        "communityProduct": {
+          "type": "boolean"
+        },
+        "defaultAPN": {
+          "type": "string"
+        },
+        "gsmNumberClass": {
+          "type": "string"
+        },
+        "hasAdhocDiscount": {
+          "type": "boolean"
+        },
+        "isArchived": {
+          "type": "boolean"
+        },
+        "isEnhanced": {
+          "type": "boolean"
+        },
+        "isEquipment": {
+          "type": "boolean"
+        },
+        "isLine": {
+          "type": "boolean"
+        },
+        "isPackage": {
+          "type": "boolean"
+        },
+        "isSSAutoDeactivation": {
+          "type": "boolean"
+        },
+        "isService": {
+          "type": "boolean"
+        },
+        "isTemporary": {
+          "type": "boolean"
+        },
+        "linkOptionCode": {
+          "type": "string"
+        },
+        "order11Code": {
+          "type": "string"
+        },
+        "packageCode": {
+          "type": "string"
+        },
+        "productTypeCode": {
+          "type": "string"
+        },
+        "routineMaIntegerenanceFrequency": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "serviceCode": {
+          "type": "string"
+        },
+        "staticIpProductYn": {
+          "type": "string"
+        },
+        "subscriptionGroup": {
+          "type": "string"
+        },
+        "systemTypeCode": {
+          "type": "string"
+        },
+        "tariffActionCode": {
+          "type": "string"
+        },
+        "tariffCode": {
+          "type": "string"
+        },
+        "tariffDescription": {
+          "type": "string"
+        },
+        "tariffGroupCode": {
+          "type": "string"
+        },
+        "tariffPeriod": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "teleService": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "usageTypeCode": {
+          "type": "string"
+        },
+        "warrantyPeriod": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "ProductDetailItemInfo"
+    },
+    "ProductDetailItemResponse": {
+      "type": "object",
+      "properties": {
+        "productDetailItemInfo": {
+          "$ref": "#/definitions/ProductDetailItemInfo"
+        }
+      },
+      "title": "ProductDetailItemResponse"
+    },
+    "ProductDetailSearchCriteria": {
+      "type": "object",
+      "properties": {
+        "handle": {
+          "type": "string"
+        },
+        "session": {
+          "$ref": "#/definitions/SessionRequest"
+        },
+        "tariffCode": {
+          "type": "string"
+        }
+      },
+      "title": "ProductDetailSearchCriteria"
+    },
+    "ProductGroupLimitedDetailsInfo": {
+      "type": "object",
+      "properties": {
+        "groupCode": {
+          "type": "string"
+        },
+        "groupProducts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductLimitedDetailInfo"
+          }
+        }
+      },
+      "title": "ProductGroupLimitedDetailsInfo"
+    },
+    "ProductLimitedDetailInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "desc": {
+          "type": "string"
+        },
+        "pkg": {
+          "type": "boolean"
+        },
+        "srvCode": {
+          "type": "string"
+        },
+        "typeCode": {
+          "type": "string"
+        }
+      },
+      "title": "ProductLimitedDetailInfo"
+    },
+    "ProductLimitedListItemResponse": {
+      "type": "object",
+      "properties": {
+        "productLimitedDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductGroupLimitedDetailsInfo"
+          }
+        }
+      },
+      "title": "ProductLimitedListItemResponse"
+    },
+    "ProductSearchCriteria": {
+      "type": "object",
+      "properties": {
+        "handle": {
+          "type": "string"
+        },
+        "session": {
+          "$ref": "#/definitions/SessionRequest"
+        }
+      },
+      "title": "ProductSearchCriteria"
+    },
+    "RelationConfigDetail": {
+      "type": "object",
+      "properties": {
+        "occurrence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "toAccessNo": {
+          "type": "string"
+        },
+        "toBasketItemNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "toBasketOptionNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "toEquipEquipUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "toExternalAccessNo": {
+          "type": "string"
+        },
+        "toOccurrence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "toRelationship": {
+          "$ref": "#/definitions/OptionIdInfo"
+        },
+        "toServiceCode": {
+          "type": "string"
+        },
+        "toServiceEquipUid": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "RelationConfigDetail"
+    },
+    "RtmDetails": {
+      "type": "object",
+      "properties": {
+        "clientUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "companyUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "salesPersonId": {
+          "type": "string"
+        }
+      },
+      "title": "RtmDetails"
+    },
+    "ServiceConfigDetail": {
+      "type": "object",
+      "properties": {
+        "accessNo": {
+          "type": "string"
+        },
+        "agentCode": {
+          "type": "string"
+        },
+        "costingEndDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "costingStartDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "customerId": {
+          "type": "string"
+        },
+        "exchangeCode": {
+          "type": "string"
+        },
+        "lineTypeCode": {
+          "type": "string"
+        },
+        "numberType": {
+          "type": "string"
+        },
+        "numberTypeCode": {
+          "type": "string"
+        },
+        "portInDSL": {
+          "type": "string"
+        },
+        "portingAction": {
+          "type": "string"
+        },
+        "portingDonorOpCd": {
+          "type": "string"
+        },
+        "portingEmailAddr": {
+          "type": "string"
+        },
+        "portingOpCd": {
+          "type": "string"
+        },
+        "portingPhoneNo": {
+          "type": "string"
+        },
+        "portingRecipientOpCd": {
+          "type": "string"
+        },
+        "portingStatus": {
+          "type": "string"
+        }
+      },
+      "title": "ServiceConfigDetail"
+    },
+    "ServiceListItemInfo": {
+      "type": "object",
+      "properties": {
+        "accessNo": {
+          "$ref": "#/definitions/AccessNoItem"
+        },
+        "equipUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "installationAddress": {
+          "$ref": "#/definitions/CustomerAddress"
+        },
+        "levelOfCover": {
+          "type": "string"
+        },
+        "lineTypeCode": {
+          "type": "string"
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PBXLineServiceListItemInfo"
+          }
+        },
+        "numberRangeTypeCode": {
+          "type": "string"
+        },
+        "serviceCode": {
+          "type": "string"
+        },
+        "serviceHasBalance": {
+          "type": "boolean"
+        },
+        "statusCode": {
+          "type": "string"
+        },
+        "supportContractNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tariffCode": {
+          "type": "string"
+        }
+      },
+      "title": "ServiceListItemInfo"
+    },
+    "SessionRequest": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "loginName": {
+          "type": "string"
+        },
+        "xCorrelationId": {
+          "type": "string"
+        }
+      },
+      "title": "SessionRequest"
+    },
+    "StandardBalanceConfigDetail": {
+      "type": "object",
+      "properties": {
+        "standardBalanceDefinedForItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BalanceSpendingLimitDetail"
+          }
+        },
+        "standardBalanceIncludedForItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BalanceSpendingLimitDetail"
+          }
+        }
+      },
+      "title": "StandardBalanceConfigDetail"
+    },
+    "SuretyDepositConfigDetail": {
+      "type": "object",
+      "properties": {
+        "exclusionReason": {
+          "type": "string"
+        },
+        "paidCharge": {
+          "$ref": "#/definitions/CustomCurrency"
+        },
+        "refundDeposit": {
+          "type": "string"
+        }
+      },
+      "title": "SuretyDepositConfigDetail"
+    },
+    "ThirdPaymentInfo": {
+      "type": "object",
+      "properties": {
+        "basketItemNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "basketOptionNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "occurrence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "thirdAccountNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "thirdEndDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "thirdPaymentAmount": {
+          "$ref": "#/definitions/CustomCurrency"
+        },
+        "thirdPaymentPercent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "thirdQuantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "thirdStartDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "thirdStatusCode": {
+          "type": "string"
+        }
+      },
+      "title": "ThirdPaymentInfo"
+    },
+    "UpfrontPaymentInfo": {
+      "type": "object",
+      "properties": {
+        "bankAccountNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bankSortCode": {
+          "type": "string"
+        },
+        "billingAgreementId": {
+          "type": "string"
+        },
+        "cardNo": {
+          "type": "string"
+        },
+        "cardType": {
+          "type": "string"
+        },
+        "changeAmount": {
+          "$ref": "#/definitions/CustomCurrency"
+        },
+        "chequeNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "customerName": {
+          "type": "string"
+        },
+        "equipUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "expiryDt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "newCard": {
+          "type": "boolean"
+        },
+        "paymentDt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "paymentMethodCd": {
+          "type": "string"
+        },
+        "primeUid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "receiptNo": {
+          "type": "string"
+        },
+        "saveNewCard": {
+          "type": "boolean"
+        },
+        "statusCd": {
+          "type": "string"
+        },
+        "tenderedAmount": {
+          "$ref": "#/definitions/CustomCurrency"
+        },
+        "tenderedUsedAmount": {
+          "$ref": "#/definitions/CustomCurrency"
+        }
+      },
+      "title": "UpfrontPaymentInfo"
+    },
+    "WorkTaskListItemDetail": {
+      "type": "object",
+      "properties": {
+        "points": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seqNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "workTaskCharge": {
+          "$ref": "#/definitions/CustomCurrency"
+        },
+        "workTaskCode": {
+          "type": "string"
+        },
+        "workTaskDescription": {
+          "type": "string"
+        }
+      },
+      "title": "WorkTaskListItemDetail"
+    }
+  }
+}
