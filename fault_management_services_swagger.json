@@ -1,0 +1,287 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Fault Management Services API",
+      "description": "",
+      "version": ""
+    },
+    "host": "127.0.0.1:8005",
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/api/troubleTicket/": {
+        "get": {
+          "operationId": "list",
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "parameters": [
+            {
+              "name": "limit",
+              "required": false,
+              "in": "query",
+              "description": "Number of results to return per page.",
+              "type": "integer"
+            },
+            {
+              "name": "offset",
+              "required": false,
+              "in": "query",
+              "description": "The initial index from which to return the results.",
+              "type": "integer"
+            }
+          ],
+          "tags": [
+            "troubleTicket"
+          ]
+        },
+        "post": {
+          "operationId": "create",
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          },
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "creationDate": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "expectedResolutionDate": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "lastUpdate": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "priority": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "requestedResolutionDate": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "resolutionDate": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "severity": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "statusChangeDate": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "statusChangeReason": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "ticketType": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "status": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "@baseType": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "@type": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "@schemaLocation": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "description",
+                  "name"
+                ]
+              }
+            }
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "tags": [
+            "troubleTicket"
+          ]
+        }
+      },
+      "/api/troubleTicket/{id}/": {
+        "get": {
+          "operationId": "read",
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "description": "A unique integer value identifying this trouble ticket.",
+              "type": "integer"
+            }
+          ],
+          "tags": [
+            "troubleTicket"
+          ]
+        },
+        "patch": {
+          "operationId": "partial_update",
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "description": "A unique integer value identifying this trouble ticket.",
+              "type": "integer"
+            },
+            {
+              "name": "data",
+              "in": "body",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "creationDate": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "expectedResolutionDate": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "lastUpdate": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "priority": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "requestedResolutionDate": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "resolutionDate": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "severity": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "statusChangeDate": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "statusChangeReason": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "ticketType": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "status": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "@baseType": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "@type": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "@schemaLocation": {
+                    "description": "",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "tags": [
+            "troubleTicket"
+          ]
+        },
+        "delete": {
+          "operationId": "delete",
+          "responses": {
+            "204": {
+              "description": ""
+            }
+          },
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "description": "A unique integer value identifying this trouble ticket.",
+              "type": "integer"
+            }
+          ],
+          "tags": [
+            "troubleTicket"
+          ]
+        }
+      }
+    },
+    "securityDefinitions": {
+      "basic": {
+        "type": "basic"
+      }
+    }
+  }

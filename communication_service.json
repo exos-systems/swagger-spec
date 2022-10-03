@@ -1,0 +1,303 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Communication Services API",
+      "description": "",
+      "version": ""
+    },
+    "host": "127.0.0.1:8001",
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/api/communication-log/": {
+        "get": {
+          "operationId": "communication-log_list",
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "parameters": [
+            
+          ],
+          "tags": [
+            "communication-log"
+          ]
+        }
+      },
+      "/api/communication-log/{id}/": {
+        "get": {
+          "operationId": "communication-log_read",
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "description": "A unique integer value identifying this communication log.",
+              "type": "integer"
+            }
+          ],
+          "tags": [
+            "communication-log"
+          ]
+        }
+      },
+      "/api/communication-request/": {
+        "get": {
+          "operationId": "communication-request_list",
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "parameters": [
+            
+          ],
+          "tags": [
+            "communication-request"
+          ]
+        }
+      },
+      "/api/communication-request/{id}/": {
+        "get": {
+          "operationId": "communication-request_read",
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "description": "A unique integer value identifying this communication request.",
+              "type": "integer"
+            }
+          ],
+          "tags": [
+            "communication-request"
+          ]
+        }
+      },
+      "/api/email-template/": {
+        "get": {
+          "operationId": "email-template_list",
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "parameters": [
+            
+          ],
+          "tags": [
+            "email-template"
+          ]
+        },
+        "post": {
+          "operationId": "email-template_create",
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          },
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "template_key": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "template_name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "subject": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "html_body": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "input_parameters": {
+                    "description": "",
+                    "type": "object"
+                  },
+                  "is_active": {
+                    "description": "",
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "template_key",
+                  "template_name",
+                  "subject",
+                  "html_body"
+                ]
+              }
+            }
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "tags": [
+            "email-template"
+          ]
+        }
+      },
+      "/api/email-template/{id}/": {
+        "get": {
+          "operationId": "email-template_read",
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "description": "A unique integer value identifying this email template.",
+              "type": "integer"
+            }
+          ],
+          "tags": [
+            "email-template"
+          ]
+        },
+        "patch": {
+          "operationId": "email-template_partial_update",
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "description": "A unique integer value identifying this email template.",
+              "type": "integer"
+            },
+            {
+              "name": "data",
+              "in": "body",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "template_key": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "template_name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "subject": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "html_body": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "input_parameters": {
+                    "description": "",
+                    "type": "object"
+                  },
+                  "is_active": {
+                    "description": "",
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "tags": [
+            "email-template"
+          ]
+        },
+        "delete": {
+          "operationId": "email-template_delete",
+          "responses": {
+            "204": {
+              "description": ""
+            }
+          },
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "description": "A unique integer value identifying this email template.",
+              "type": "integer"
+            }
+          ],
+          "tags": [
+            "email-template"
+          ]
+        }
+      },
+      "/api/send-communication-email/": {
+        "post": {
+          "operationId": "send-communication-email_create",
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          },
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "acutal_request_details": {
+                    "description": "",
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "tags": [
+            "send-communication-email"
+          ]
+        }
+      }
+    },
+    "securityDefinitions": {
+      "basic": {
+        "type": "basic"
+      }
+    }
+  }
