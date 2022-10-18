@@ -1,0 +1,22 @@
+openapi: 3.0.1
+info:
+  title: Booster Orchestration Services API
+  description: ""
+  version: ""
+servers:
+  - url: http://127.0.0.1:8002/
+paths:
+  /boosterOrchestration/:
+    post:
+      tags:
+        - boosterOrchestration
+      operationId: create
+      responses:
+        201:
+          description: ""
+          content: {}
+components:
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic

@@ -1,0 +1,218 @@
+openapi: 3.0.1
+info:
+  title: Communication Services API
+  description: ""
+  version: ""
+servers:
+  - url: http://127.0.0.1:8000/
+paths:
+  /api/communication-log/:
+    get:
+      tags:
+        - communication-log
+      operationId: communication-log_list
+      responses:
+        200:
+          description: ""
+          content: {}
+  /api/communication-log/{id}/:
+    get:
+      tags:
+        - communication-log
+      operationId: communication-log_read
+      parameters:
+        - name: id
+          in: path
+          description: A unique integer value identifying this communication log.
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: ""
+          content: {}
+  /api/communication-request/:
+    get:
+      tags:
+        - communication-request
+      operationId: communication-request_list
+      responses:
+        200:
+          description: ""
+          content: {}
+  /api/communication-request/{id}/:
+    get:
+      tags:
+        - communication-request
+      operationId: communication-request_read
+      parameters:
+        - name: id
+          in: path
+          description: A unique integer value identifying this communication request.
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: ""
+          content: {}
+  /api/email-template/:
+    get:
+      tags:
+        - email-template
+      operationId: email-template_list
+      responses:
+        200:
+          description: ""
+          content: {}
+    post:
+      tags:
+        - email-template
+      operationId: email-template_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - html_body
+                - subject
+                - template_key
+                - template_name
+              type: object
+              properties:
+                template_key:
+                  type: string
+                  description: ""
+                template_name:
+                  type: string
+                  description: ""
+                description:
+                  type: string
+                  description: ""
+                subject:
+                  type: string
+                  description: ""
+                html_body:
+                  type: string
+                  description: ""
+                input_parameters:
+                  type: object
+                  properties: {}
+                  description: ""
+                is_active:
+                  type: boolean
+                  description: ""
+                sender_email:
+                  type: string
+                  description: ""
+        required: false
+      responses:
+        201:
+          description: ""
+          content: {}
+      x-codegen-request-body-name: data
+  /api/email-template/{id}/:
+    get:
+      tags:
+        - email-template
+      operationId: email-template_read
+      parameters:
+        - name: id
+          in: path
+          description: A unique integer value identifying this email template.
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: ""
+          content: {}
+    delete:
+      tags:
+        - email-template
+      operationId: email-template_delete
+      parameters:
+        - name: id
+          in: path
+          description: A unique integer value identifying this email template.
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: ""
+          content: {}
+    patch:
+      tags:
+        - email-template
+      operationId: email-template_partial_update
+      parameters:
+        - name: id
+          in: path
+          description: A unique integer value identifying this email template.
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                template_key:
+                  type: string
+                  description: ""
+                template_name:
+                  type: string
+                  description: ""
+                description:
+                  type: string
+                  description: ""
+                subject:
+                  type: string
+                  description: ""
+                html_body:
+                  type: string
+                  description: ""
+                input_parameters:
+                  type: object
+                  properties: {}
+                  description: ""
+                is_active:
+                  type: boolean
+                  description: ""
+                sender_email:
+                  type: string
+                  description: ""
+        required: false
+      responses:
+        200:
+          description: ""
+          content: {}
+      x-codegen-request-body-name: data
+  /api/send-communication-email/:
+    post:
+      tags:
+        - send-communication-email
+      operationId: send-communication-email_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                acutal_request_details:
+                  type: object
+                  properties: {}
+                  description: ""
+        required: false
+      responses:
+        201:
+          description: ""
+          content: {}
+      x-codegen-request-body-name: data
+components:
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic

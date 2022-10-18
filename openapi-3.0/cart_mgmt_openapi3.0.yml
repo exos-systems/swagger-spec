@@ -1,0 +1,268 @@
+openapi: 3.0.1
+info:
+  title: Cart Management Services API
+  description: ""
+  version: ""
+servers:
+  - url: http://127.0.0.1:8003/
+paths:
+  /api/shopping-cart-change-event/:
+    post:
+      tags:
+        - shopping-cart-change-event
+      summary: Shopping cart attribute change event
+      description: Shopping cart attribute change event
+      operationId: shopping-cart-change-event_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                eventId:
+                  type: string
+                  description: ""
+                eventTime:
+                  type: string
+                  description: ""
+                eventType:
+                  type: string
+                  description: ""
+                correlationId:
+                  type: string
+                  description: ""
+                domain:
+                  type: string
+                  description: ""
+                title:
+                  type: string
+                  description: ""
+                description:
+                  type: string
+                  description: ""
+                priority:
+                  type: string
+                  description: ""
+                fieldPath:
+                  type: string
+                  description: ""
+        required: false
+      responses:
+        201:
+          description: ""
+          content: {}
+      x-codegen-request-body-name: data
+  /api/shopping-cart-delete-event/:
+    post:
+      tags:
+        - shopping-cart-delete-event
+      summary: Shopping Cart Delete event
+      description: Shopping Cart Delete event
+      operationId: shopping-cart-delete-event_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: ""
+                href:
+                  type: string
+                  description: ""
+                eventId:
+                  type: string
+                  description: ""
+                eventType:
+                  type: string
+                  description: ""
+                eventTime:
+                  type: string
+                  description: ""
+                correlationId:
+                  type: string
+                  description: ""
+                domain:
+                  type: string
+                  description: ""
+                title:
+                  type: string
+                  description: ""
+                description:
+                  type: string
+                  description: ""
+                priority:
+                  type: string
+                  description: ""
+                timeOcurred:
+                  type: string
+                  description: ""
+        required: false
+      responses:
+        201:
+          description: ""
+          content: {}
+      x-codegen-request-body-name: data
+  /api/shopping-cart-event/:
+    post:
+      tags:
+        - shopping-cart-event
+      summary: Shopping cart create event
+      description: Shopping cart create event
+      operationId: shopping-cart-event_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: ""
+                href:
+                  type: string
+                  description: ""
+                eventId:
+                  type: string
+                  description: ""
+                eventTime:
+                  type: string
+                  description: ""
+                eventType:
+                  type: string
+                  description: ""
+                correlationId:
+                  type: string
+                  description: ""
+                domain:
+                  type: string
+                  description: ""
+                title:
+                  type: string
+                  description: ""
+                description:
+                  type: string
+                  description: ""
+                priority:
+                  type: string
+                  description: ""
+                timeOcurred:
+                  type: string
+                  description: ""
+        required: false
+      responses:
+        201:
+          description: ""
+          content: {}
+      x-codegen-request-body-name: data
+  /api/shoppingCart/:
+    get:
+      tags:
+        - shoppingCart
+      operationId: shoppingCart_list
+      responses:
+        200:
+          description: ""
+          content: {}
+    post:
+      tags:
+        - shoppingCart
+      operationId: shoppingCart_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - href
+              type: object
+              properties:
+                href:
+                  type: string
+                  description: ""
+                '@baseType':
+                  type: string
+                  description: ""
+                '@type':
+                  type: string
+                  description: ""
+                '@schemaLocation':
+                  type: string
+                  description: ""
+        required: false
+      responses:
+        201:
+          description: ""
+          content: {}
+      x-codegen-request-body-name: data
+  /api/shoppingCart/{id}/:
+    get:
+      tags:
+        - shoppingCart
+      operationId: shoppingCart_read
+      parameters:
+        - name: id
+          in: path
+          description: A unique integer value identifying this shopping cart.
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: ""
+          content: {}
+    delete:
+      tags:
+        - shoppingCart
+      operationId: shoppingCart_delete
+      parameters:
+        - name: id
+          in: path
+          description: A unique integer value identifying this shopping cart.
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: ""
+          content: {}
+    patch:
+      tags:
+        - shoppingCart
+      operationId: shoppingCart_partial_update
+      parameters:
+        - name: id
+          in: path
+          description: A unique integer value identifying this shopping cart.
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                href:
+                  type: string
+                  description: ""
+                '@baseType':
+                  type: string
+                  description: ""
+                '@type':
+                  type: string
+                  description: ""
+                '@schemaLocation':
+                  type: string
+                  description: ""
+        required: false
+      responses:
+        200:
+          description: ""
+          content: {}
+      x-codegen-request-body-name: data
+components:
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic

@@ -1,0 +1,65 @@
+{
+  "inputs": [
+    {
+      "inputFile": "./openapi-3.0/booster_orch_openapi3.0.yml",
+      "pathModification": {
+        "prepend": "/booster"
+      }
+    },
+    {
+      "inputFile": "./openapi-3.0/cart_mgmt_openapi3.0.yml",
+      "pathModification": {
+        "prepend": "/cart_mgmt"
+      }
+    },
+    {
+      "inputFile": "./openapi-3.0/catalogue_mgmt_openapi3.0.yml",
+      "pathModification": {
+        "prepend": "/catalogue"
+      }
+    },
+    {
+      "inputFile": "./openapi-3.0/cerillion_translation_openapi3.0.yml",
+      "pathModification": {
+        "prepend": "/app"
+      }
+    },
+    {
+      "inputFile": "./openapi-3.0/communication_openapi3.0.yml",
+      "pathModification": {
+        "prepend": "/communication"
+      }
+    },
+    {
+      "inputFile": "./openapi-3.0/fault_mgmt_openapi3.0.yml",
+      "pathModification": {
+        "prepend": "/fault_mgmt"
+      }
+    },
+    {
+      "inputFile": "./openapi-3.0/i3_openapi3.0.yml",
+      "pathModification": {
+        "prepend": "/i3"
+      }
+    },
+    {
+      "inputFile": "./openapi-3.0/product_order_openapi3.0.yml",
+      "pathModification": {
+        "prepend": "/product_order"
+      }
+    },
+    {
+      "inputFile": "./openapi-3.0/session_openapi3.0.yml",
+      "pathModification": {
+        "prepend": "/session"
+      }
+    },
+    {
+      "inputFile": "./openapi-3.0/zendesk_openapi3.0.yml",
+      "pathModification": {
+        "prepend": "/zendesk"
+      }
+    }
+  ],
+  "output": "./final.yml"
+}

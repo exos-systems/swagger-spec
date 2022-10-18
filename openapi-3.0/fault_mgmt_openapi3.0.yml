@@ -1,0 +1,208 @@
+openapi: 3.0.1
+info:
+  title: Fault Management Services API
+  description: ""
+  version: ""
+servers:
+  - url: http://127.0.0.1:8005/
+paths:
+  /api/troubleTicket/:
+    get:
+      tags:
+        - troubleTicket
+      operationId: list
+      parameters:
+        - name: limit
+          in: query
+          description: Number of results to return per page.
+          schema:
+            type: integer
+        - name: offset
+          in: query
+          description: The initial index from which to return the results.
+          schema:
+            type: integer
+      responses:
+        200:
+          description: ""
+          content: {}
+    post:
+      tags:
+        - troubleTicket
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - description
+                - name
+              type: object
+              properties:
+                description:
+                  type: string
+                  description: ""
+                creationDate:
+                  type: string
+                  description: ""
+                expectedResolutionDate:
+                  type: string
+                  description: ""
+                externalId:
+                  type: string
+                  description: ""
+                lastUpdate:
+                  type: string
+                  description: ""
+                name:
+                  type: string
+                  description: ""
+                priority:
+                  type: string
+                  description: ""
+                requestedResolutionDate:
+                  type: string
+                  description: ""
+                resolutionDate:
+                  type: string
+                  description: ""
+                severity:
+                  type: string
+                  description: ""
+                statusChangeDate:
+                  type: string
+                  description: ""
+                statusChangeReason:
+                  type: string
+                  description: ""
+                ticketType:
+                  type: string
+                  description: ""
+                status:
+                  type: string
+                  description: ""
+                '@baseType':
+                  type: string
+                  description: ""
+                '@type':
+                  type: string
+                  description: ""
+                '@schemaLocation':
+                  type: string
+                  description: ""
+        required: false
+      responses:
+        201:
+          description: ""
+          content: {}
+      x-codegen-request-body-name: data
+  /api/troubleTicket/{id}/:
+    get:
+      tags:
+        - troubleTicket
+      operationId: read
+      parameters:
+        - name: id
+          in: path
+          description: A unique integer value identifying this trouble ticket.
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: ""
+          content: {}
+    delete:
+      tags:
+        - troubleTicket
+      operationId: delete
+      parameters:
+        - name: id
+          in: path
+          description: A unique integer value identifying this trouble ticket.
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: ""
+          content: {}
+    patch:
+      tags:
+        - troubleTicket
+      operationId: partial_update
+      parameters:
+        - name: id
+          in: path
+          description: A unique integer value identifying this trouble ticket.
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  description: ""
+                creationDate:
+                  type: string
+                  description: ""
+                expectedResolutionDate:
+                  type: string
+                  description: ""
+                externalId:
+                  type: string
+                  description: ""
+                lastUpdate:
+                  type: string
+                  description: ""
+                name:
+                  type: string
+                  description: ""
+                priority:
+                  type: string
+                  description: ""
+                requestedResolutionDate:
+                  type: string
+                  description: ""
+                resolutionDate:
+                  type: string
+                  description: ""
+                severity:
+                  type: string
+                  description: ""
+                statusChangeDate:
+                  type: string
+                  description: ""
+                statusChangeReason:
+                  type: string
+                  description: ""
+                ticketType:
+                  type: string
+                  description: ""
+                status:
+                  type: string
+                  description: ""
+                '@baseType':
+                  type: string
+                  description: ""
+                '@type':
+                  type: string
+                  description: ""
+                '@schemaLocation':
+                  type: string
+                  description: ""
+        required: false
+      responses:
+        200:
+          description: ""
+          content: {}
+      x-codegen-request-body-name: data
+components:
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic

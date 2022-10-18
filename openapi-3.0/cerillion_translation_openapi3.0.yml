@@ -1,0 +1,3313 @@
+openapi: 3.0.3
+info:
+  title: Api Documentation
+  description: Api Documentation
+  termsOfService: urn:tos
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: '1.0'
+servers:
+  - url: http://localhost:8081
+    description: Inferred Url
+tags:
+  - name: access-no-controller
+    description: Access No Controller
+  - name: basket-controller
+    description: Basket Controller
+  - name: catalogue-controller
+    description: Catalogue Controller
+  - name: customer-controller
+    description: Customer Controller
+  - name: health-check-controller
+    description: Health Check Controller
+  - name: login-controller
+    description: Login Controller
+  - name: products-controller
+    description: Products Controller
+  - name: service-controller
+    description: Service Controller
+  - name: work-order-controller
+    description: Work Order Controller
+paths:
+  /api/findAccessNumbersForAllocation:
+    post:
+      tags:
+        - access-no-controller
+      summary: findAccessNumbers
+      operationId: findAccessNumbersUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessNumberAllocationCriteria'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessAllocationResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/basket:
+    put:
+      tags:
+        - basket-controller
+      summary: modifyBasket
+      operationId: modifyBasketUsingPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasketData'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyBasketResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+        - basket-controller
+      summary: addBasket
+      operationId: addBasketUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasketData'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddBasketResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/basket/commit:
+    post:
+      tags:
+        - basket-controller
+      summary: commitBasket
+      operationId: commitBasketUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasketCommitCriteria'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommitBasketActionResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/basketSales:
+    post:
+      tags:
+        - basket-controller
+      summary: getBasketSales
+      operationId: getBasketSalesUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasketInfoSearchCriteria'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketListInfoResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/findBasket:
+    post:
+      tags:
+        - basket-controller
+      summary: findBasket
+      operationId: findBasketUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasketCriteria'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketDataSetItemResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/catalogue/list:
+    post:
+      tags:
+        - catalogue-controller
+      summary: getCatalogues
+      operationId: getCataloguesUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogueSearchCriteria'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogueDetailListResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/customer:
+    post:
+      tags:
+        - customer-controller
+      summary: addCustomer
+      operationId: addCustomerUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerDetailItemRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/customerAndAccount:
+    post:
+      tags:
+        - customer-controller
+      summary: addCustomerAndAccount
+      operationId: addCustomerAndAccountUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerAndAccountDetailRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/healthCheck:
+    get:
+      tags:
+        - health-check-controller
+      summary: healthCheck
+      operationId: healthCheckUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/login:
+    post:
+      tags:
+        - login-controller
+      summary: login
+      operationId: loginUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/products/detail:
+    post:
+      tags:
+        - products-controller
+      summary: getDetailForProduct
+      operationId: getDetailForProductUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductDetailSearchCriteria'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductDetailItemResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/products/list:
+    post:
+      tags:
+        - products-controller
+      summary: getProducts
+      operationId: getProductsUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductSearchCriteria'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductLimitedListItemResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/products/topup:
+    post:
+      tags:
+        - products-controller
+      summary: addtoBalanceAndSaleProduct
+      operationId: addtoBalanceAndSaleProductUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BalanceTopupCriteria'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BalanceTopupResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/products/topup/v2:
+    post:
+      tags:
+        - products-controller
+      summary: addtoBalanceAndSaleProductV2
+      operationId: addtoBalanceAndSaleProductV2UsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BalanceTopupCriteria'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BalanceTopupResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/findServiceByAccessNumber:
+    post:
+      tags:
+        - service-controller
+      summary: findAccessNumbers
+      operationId: findAccessNumbersUsingPOST_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessNumberCriteria'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessNumberQueryListResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/getSummaryForService:
+    post:
+      tags:
+        - service-controller
+      summary: getSummaryForService
+      operationId: getSummaryForServiceUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceSummaryCriteria'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceSummaryItemResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/detailForWorkOrder:
+    post:
+      tags:
+        - work-order-controller
+      summary: getDetailForWorkOrder
+      operationId: getDetailForWorkOrderUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkOrderDetailCriteria'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrderDetailsItemResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+components:
+  schemas:
+    AccBillDeliveryDetailItem:
+      title: AccBillDeliveryDetailItem
+      type: object
+      properties:
+        accountNo:
+          type: integer
+          format: int32
+        billCopies:
+          type: integer
+          format: int32
+        billMediaCd:
+          type: string
+        billingEmailAddress:
+          type: string
+        billingFaxNumber:
+          type: string
+    AccDetailItemRequest:
+      title: AccDetailItemRequest
+      type: object
+      properties:
+        accountCategoryCode:
+          type: string
+        accountClassificationCode:
+          type: string
+        accountCurrencyCode:
+          type: string
+        accountGroupCd:
+          type: string
+        accountNo:
+          type: integer
+          format: int32
+        accountReviewDate:
+          type: string
+          format: date-time
+        accountSubGroupCd:
+          type: string
+        accountTypeCode:
+          type: string
+        annCommFromDt:
+          type: string
+          format: date-time
+        bankAccountName:
+          type: string
+        basicCollectionPlanCode:
+          type: string
+        billDeliveryDetails:
+          $ref: '#/components/schemas/AccBillDeliveryDetailItem'
+        billLanguageCode:
+          type: string
+        billingAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        billingAddressUid:
+          type: integer
+          format: int32
+        communicationConsent:
+          type: array
+          items:
+            type: string
+        companyRegisteredAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        companyRegisteredAddressUid:
+          type: integer
+          format: int32
+        companyRegistrationDate:
+          type: string
+          format: date-time
+        companyRegistrationNo:
+          type: string
+        contactsAndAssociations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerContactDetailList'
+        correspondenceAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        correspondenceAddressUid:
+          type: integer
+          format: int32
+        creditCheckRequest:
+          $ref: '#/components/schemas/AccountCreditCheckRequestItem'
+        creditCheckResults:
+          $ref: '#/components/schemas/AccountCreditCheckResultsItem'
+        creditLimit:
+          $ref: '#/components/schemas/CustomCurrency'
+        currencyCode:
+          type: string
+        customerUid:
+          type: integer
+          format: int32
+        depositInsure:
+          type: boolean
+        directoryDeliveryDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/DirDeliveryDetailItem'
+        discountGroupCode:
+          type: string
+        dpConsentYn:
+          $ref: '#/components/schemas/CustomVariant'
+        externalReference:
+          type: string
+        faultPriority:
+          type: integer
+          format: int32
+        fcaShareProfile:
+          type: string
+        guarantorDetails:
+          $ref: '#/components/schemas/AccGuarantorDetailItem'
+        handle:
+          type: string
+        highSpendCreditLimit:
+          $ref: '#/components/schemas/CustomCurrency'
+        idFields:
+          $ref: '#/components/schemas/AccountIdentificationFieldsItem'
+        ignoreDuplicationCheck:
+          type: boolean
+        includeInArchiving:
+          type: boolean
+        jointAccountDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerParticipantName'
+        lastBillingRunDt:
+          type: string
+          format: date-time
+        latePaymentChargingRuleDetails:
+          $ref: '#/components/schemas/AccountLatePaymentChargingRuleDetailItem'
+        marketingDetails:
+          $ref: '#/components/schemas/CustomVariant'
+        marketingQuestions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountMarketingQuestionItem'
+        name:
+          $ref: '#/components/schemas/CustomerParticipantName'
+        overrideCustomerLevelSecurity:
+          $ref: '#/components/schemas/CustomVariant'
+        parentAccountNo:
+          type: integer
+          format: int32
+        partnerTypeCd:
+          type: string
+        paymentMethodsDetailItem:
+          $ref: '#/components/schemas/AccountPaymentMethodsDetailItem'
+        salesBarNoteUid:
+          type: integer
+          format: int32
+        securityProfileAndAnswers:
+          $ref: '#/components/schemas/AccountSecurityProfileAndAnswersDetailItem'
+        statusCode:
+          type: string
+        taxSchemeCode:
+          type: string
+        tradingAs:
+          type: string
+        userDefinedFieldSet:
+          $ref: '#/components/schemas/CustomerUDFList'
+    AccGuarantorDetailItem:
+      title: AccGuarantorDetailItem
+      type: object
+      properties:
+        guarantorAccountNo:
+          type: integer
+          format: int32
+        guarantorName:
+          type: string
+    AccListItem:
+      title: AccListItem
+      type: object
+      properties:
+        accountCategoryCode:
+          type: string
+        accountClassCode:
+          type: string
+        accountCurrencyCode:
+          type: string
+        accountGroupCd:
+          type: string
+        accountHasBalance:
+          type: boolean
+        accountNo:
+          type: integer
+          format: int32
+        accountSubGroupCd:
+          type: string
+        address:
+          $ref: '#/components/schemas/CustomerAddress'
+        billingAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        companyRegisteredAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        correspondenceAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        customerUid:
+          type: integer
+          format: int32
+        name:
+          $ref: '#/components/schemas/CustomerParticipantName'
+        statusCode:
+          type: string
+    AccessAllocationResponse:
+      title: AccessAllocationResponse
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllocationQueryItemData'
+    AccessNoEquipUidItemInfo:
+      title: AccessNoEquipUidItemInfo
+      type: object
+      properties:
+        accessNo:
+          type: string
+        equipUid:
+          type: integer
+          format: int32
+    AccessNoItem:
+      title: AccessNoItem
+      type: object
+      properties:
+        accessNo:
+          type: string
+        exDirectory:
+          type: boolean
+        pbx:
+          type: boolean
+        pbxQuantity:
+          type: integer
+          format: int32
+        pbxSx:
+          type: integer
+          format: int32
+    AccessNumberAllocationCriteria:
+      title: AccessNumberAllocationCriteria
+      type: object
+      properties:
+        accessStartWith:
+          type: string
+        accountName:
+          type: string
+        accountNo:
+          type: integer
+          format: int32
+        allocationStatus:
+          type: string
+        autoAllocateQuantity:
+          type: integer
+          format: int32
+        customerName:
+          type: string
+        customerNumber:
+          type: integer
+          format: int32
+        dealership:
+          type: string
+        exchangeCd:
+          type: string
+        handle:
+          type: string
+        number:
+          type: string
+        numberGroup:
+          type: string
+        serviceType:
+          type: string
+        session:
+          $ref: '#/components/schemas/SessionRequest'
+    AccessNumberCriteria:
+      title: AccessNumberCriteria
+      type: object
+      properties:
+        accessNo:
+          type: string
+        handle:
+          type: string
+        session:
+          $ref: '#/components/schemas/SessionRequest'
+    AccessNumberQueryAccountItem:
+      title: AccessNumberQueryAccountItem
+      type: object
+      properties:
+        accountClassificationCode:
+          type: string
+        accountGroupCd:
+          type: string
+        accountName:
+          $ref: '#/components/schemas/CustomerParticipantName'
+        accountNo:
+          type: integer
+          format: int32
+        accountSubGroupCd:
+          type: string
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessNumberQueryAccountLocationItem'
+        statusCode:
+          type: string
+    AccessNumberQueryAccountLocationItem:
+      title: AccessNumberQueryAccountLocationItem
+      type: object
+      properties:
+        serviceAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceListItemInfo'
+    AccessNumberQueryListResponse:
+      title: AccessNumberQueryListResponse
+      type: object
+      properties:
+        matchingAccounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessNumberQueryAccountItem'
+    AccountCreditCheckRequestItem:
+      title: AccountCreditCheckRequestItem
+      type: object
+      properties:
+        accountType:
+          type: string
+        companyRegNo:
+          type: string
+        contractValue:
+          type: integer
+          format: int32
+        currentAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        dateOfBirth:
+          type: string
+          format: date-time
+        forename:
+          type: string
+        gender:
+          type: string
+        movedCurrentAddress:
+          type: string
+          format: date-time
+        movedPreviousAddress:
+          type: string
+          format: date-time
+        previousAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        surname:
+          type: string
+        title:
+          type: string
+        userDefinedFieldSet:
+          $ref: '#/components/schemas/CustomerUDFList'
+    AccountCreditCheckResultsItem:
+      title: AccountCreditCheckResultsItem
+      type: object
+      properties:
+        creditCheckAccTypeCode:
+          type: string
+        creditScore:
+          type: integer
+          format: int32
+        decisionClassification:
+          type: string
+        depositAmount:
+          type: string
+        depositCode:
+          type: string
+        errorMessage:
+          type: string
+        experianReference:
+          type: string
+        grade:
+          type: string
+        xmlResponse:
+          type: string
+    AccountIdentificationFieldsItem:
+      title: AccountIdentificationFieldsItem
+      type: object
+      properties:
+        id1Label:
+          type: string
+        id1Value:
+          type: string
+        id2Label:
+          type: string
+        id2Value:
+          type: string
+        id3Label:
+          type: string
+        id3Value:
+          type: string
+        id4Label:
+          type: string
+        id4Value:
+          type: string
+        id5Label:
+          type: string
+        id5Value:
+          type: string
+    AccountLatePaymentChargingRuleDetailItem:
+      title: AccountLatePaymentChargingRuleDetailItem
+      type: object
+      properties:
+        latePaymentGracePeriod:
+          type: integer
+          format: int32
+        latePaymentStatusCd:
+          type: string
+    AccountMandateItem:
+      title: AccountMandateItem
+      type: object
+      properties:
+        agreementDate:
+          type: string
+          format: date-time
+        cerillionAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        creditorAddressLine1:
+          type: string
+        creditorAddressLine2:
+          type: string
+        creditorBIC:
+          type: string
+        creditorCountryCode:
+          type: string
+        creditorIBAN:
+          type: string
+        creditorId:
+          type: string
+        creditorName:
+          type: string
+        ddMandateRef:
+          type: string
+        debtorAddressLine1:
+          type: string
+        debtorAddressLine2:
+          type: string
+        debtorBIC:
+          type: string
+        debtorCountryCode:
+          type: string
+        debtorCurrency:
+          type: string
+        debtorIBAN:
+          type: string
+        debtorName:
+          type: string
+        firstPaymentRequestYn:
+          type: string
+        newMandate:
+          type: boolean
+        transType:
+          type: string
+    AccountMarketingQuestionItem:
+      title: AccountMarketingQuestionItem
+      type: object
+      properties:
+        answerText:
+          type: string
+        categoryCode:
+          type: string
+        questionText:
+          type: string
+        questionUid:
+          type: integer
+          format: int32
+    AccountPaymentMethodsCCFullItem:
+      title: AccountPaymentMethodsCCFullItem
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/CustomerAddress'
+        associatedAccounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccListItem'
+        avs:
+          type: string
+        cardNo:
+          type: string
+        cvv2:
+          type: string
+        expiryDate:
+          type: string
+          format: date-time
+        issue:
+          type: string
+        issuer:
+          type: string
+        name:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        statusCode:
+          type: string
+        type:
+          type: string
+    AccountPaymentMethodsCCRefItem:
+      title: AccountPaymentMethodsCCRefItem
+      type: object
+      properties:
+        ccName:
+          type: string
+        ccReference:
+          type: string
+        ccType:
+          type: string
+        expiryDate:
+          type: string
+          format: date-time
+        statusCode:
+          type: string
+        transactionId:
+          type: string
+    AccountPaymentMethodsDDFullItem:
+      title: AccountPaymentMethodsDDFullItem
+      type: object
+      properties:
+        agreementCancelNotifyDt:
+          type: string
+          format: date-time
+        agreementCancelRequestDt:
+          type: string
+          format: date-time
+        agreementEndDate:
+          type: string
+          format: date-time
+        agreementNumber:
+          type: string
+        agreementRequestDt:
+          type: string
+          format: date-time
+        agreementSentDt:
+          type: string
+          format: date-time
+        agreementStartDate:
+          type: string
+          format: date-time
+        agreementStatusCode:
+          type: string
+        bankAccountName:
+          type: string
+        bankAccountNo:
+          type: string
+        bankAreaLocation:
+          type: string
+        bankBranchName:
+          type: string
+        bankName:
+          type: string
+        bankPostCode:
+          type: string
+        bankSortCode:
+          type: string
+        bankTownLocation:
+          type: string
+        budgetPayAmount:
+          $ref: '#/components/schemas/CustomCurrency'
+        budgetPayDay:
+          type: integer
+          format: int32
+        budgetPayRecommendedAmount:
+          $ref: '#/components/schemas/CustomCurrency'
+        ddOriginatorReferenceCD:
+          type: string
+        directDebitAgreementRef:
+          type: string
+        directDebitConfirmLetterDate:
+          type: string
+          format: date-time
+    AccountPaymentMethodsDDRefItem:
+      title: AccountPaymentMethodsDDRefItem
+      type: object
+      properties:
+        bacsReference:
+          type: string
+        ddReference:
+          type: string
+    AccountPaymentMethodsDetailItem:
+      title: AccountPaymentMethodsDetailItem
+      type: object
+      properties:
+        bankAccountNoLength:
+          type: integer
+          format: int32
+        bankAccountNoRegex:
+          type: string
+        ccFull:
+          $ref: '#/components/schemas/AccountPaymentMethodsCCFullItem'
+        ccRef:
+          $ref: '#/components/schemas/AccountPaymentMethodsCCRefItem'
+        creditorAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        currentMethod:
+          type: boolean
+        ddFull:
+          $ref: '#/components/schemas/AccountPaymentMethodsDDFullItem'
+        ddRef:
+          $ref: '#/components/schemas/AccountPaymentMethodsDDRefItem'
+        debtorAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        fileFormatCode:
+          type: string
+        paymentDetailsCode:
+          type: string
+        paymentMethodCanBeSuspended:
+          type: boolean
+        paymentMethodCode:
+          type: string
+        paymentMethodSuspended:
+          type: boolean
+        paymentSuspensionEndDate:
+          type: string
+          format: date-time
+        sepaMandateItem:
+          $ref: '#/components/schemas/AccountMandateItem'
+        sortCodeValRegex:
+          type: string
+    AccountSecurityAnswerItem:
+      title: AccountSecurityAnswerItem
+      type: object
+      properties:
+        answerValue:
+          type: string
+        customQuestionValue:
+          type: string
+        securityQuestionTypeCode:
+          type: string
+    AccountSecurityProfileAndAnswersDetailItem:
+      title: AccountSecurityProfileAndAnswersDetailItem
+      type: object
+      properties:
+        securityAnswers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountSecurityAnswerItem'
+        securityQuestionProfileUid:
+          type: integer
+          format: int32
+    AddBasketResponse:
+      title: AddBasketResponse
+      type: object
+      properties:
+        newRecordIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomRecordId'
+    AllocationQueryItemData:
+      title: AllocationQueryItemData
+      type: object
+      properties:
+        allocationStatusCode:
+          type: string
+        customerName:
+          $ref: '#/components/schemas/CustomerParticipantName'
+        customerUid:
+          type: integer
+          format: int32
+        exchangeCode:
+          type: string
+        lineTypeCode:
+          type: string
+        msisdn:
+          type: string
+        reservationReason:
+          type: string
+        reservedToDate:
+          type: string
+          format: date-time
+        serviceTypeCode:
+          type: string
+    AutoTopupDetail:
+      title: AutoTopupDetail
+      type: object
+      properties:
+        balanceDefnUid:
+          type: integer
+          format: int32
+        finalOperationCode:
+          type: string
+        finalThresholdHadValue:
+          type: boolean
+        finalThresholdValue:
+          type: number
+          format: bigdecimal
+        firstOperationCode:
+          type: string
+        firstThresholdHadValue:
+          type: boolean
+        firstThresholdValue:
+          type: number
+          format: bigdecimal
+        secondOperationCode:
+          type: string
+        secondThresholdHadValue:
+          type: boolean
+        secondThresholdValue:
+          type: number
+          format: bigdecimal
+        tariffCode:
+          type: string
+        tariffSx:
+          type: string
+        tariffVer:
+          type: integer
+          format: int32
+        topupPaymentMethodCd:
+          type: string
+    BalanceKeyInfo:
+      title: BalanceKeyInfo
+      type: object
+      properties:
+        accountCd:
+          type: string
+        accountLevelBal:
+          type: boolean
+        accountNo:
+          type: integer
+          format: int32
+        balDefUid:
+          type: integer
+          format: int32
+        balFunctionSetUid:
+          type: integer
+          format: int32
+        balanceGroupCd:
+          type: string
+        balanceLogicalId:
+          type: integer
+          format: int64
+        communityOwnerEquipUid:
+          type: integer
+          format: int32
+        communityUid:
+          type: integer
+          format: int32
+        currencyCode:
+          type: string
+        definitionName:
+          type: string
+        equipUid:
+          type: integer
+          format: int32
+        linepoolCd:
+          type: string
+        permissionCd:
+          type: string
+        shared:
+          type: boolean
+        statusCd:
+          type: string
+        unitName:
+          type: string
+        unitSystemCd:
+          type: string
+    BalanceSpendingLimitDetail:
+      title: BalanceSpendingLimitDetail
+      type: object
+      properties:
+        balCategory:
+          type: string
+        balThresholdAmount:
+          type: number
+          format: double
+        balanceKey:
+          $ref: '#/components/schemas/BalanceKeyInfo'
+        finalThresholdAction:
+          type: string
+        finalThresholdDefinedLimit:
+          type: number
+          format: double
+        firstThresholdAction:
+          type: string
+        firstThresholdDefinedLimit:
+          type: number
+          format: double
+        hardThresholdNumber:
+          type: integer
+          format: int32
+        isIncludedYn:
+          type: boolean
+        isOperatorLimitYn:
+          type: string
+        limitAllowedYn:
+          type: string
+        limitFirstUseAction:
+          type: string
+        limitReachedAction:
+          type: string
+        limitValue:
+          type: number
+          format: double
+        maxFinalDefinedLimit:
+          type: number
+          format: double
+        operatorDefaultFinalValueAction:
+          type: string
+        operatorDefaultFirstThreshold:
+          type: number
+          format: double
+        operatorDefaultSecondThreshold:
+          type: number
+          format: double
+        operatorDefaultThreshold1Action:
+          type: string
+        operatorDefaultThreshold2Action:
+          type: string
+        prepaid:
+          type: boolean
+        secondThresholdAction:
+          type: string
+        secondThresholdDefinedLimit:
+          type: number
+          format: double
+        serviceLevelCd:
+          type: string
+        serviceUid:
+          type: integer
+          format: int32
+        spendingLimitAmount:
+          type: number
+          format: double
+        timeBasedAutotopup:
+          type: boolean
+    BalanceTopupCriteria:
+      title: BalanceTopupCriteria
+      type: object
+      properties:
+        equipUid:
+          type: integer
+          format: int32
+        handle:
+          type: string
+        session:
+          $ref: '#/components/schemas/SessionRequest'
+        tariffCode:
+          type: string
+        topupPaymentMethodCd:
+          type: string
+    BalanceTopupResponse:
+      title: BalanceTopupResponse
+      type: object
+      properties:
+        newRecordIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomRecordId'
+    BasketCommitCriteria:
+      title: BasketCommitCriteria
+      type: object
+      properties:
+        basketNo:
+          type: integer
+          format: int32
+        handle:
+          type: string
+        session:
+          $ref: '#/components/schemas/SessionRequest'
+    BasketConfigInfo:
+      title: BasketConfigInfo
+      type: object
+      properties:
+        contractMandatory:
+          type: boolean
+        includedInSale:
+          type: boolean
+        inventoryTrackedItem:
+          type: boolean
+        occurrence:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketConfigOccurrenceInfo'
+        option:
+          $ref: '#/components/schemas/OptionIdInfo'
+        productInfoReadOnly:
+          $ref: '#/components/schemas/ProductDetail'
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationConfigDetail'
+        representsOldProduct:
+          type: boolean
+        secondaryUsageProductIncluded:
+          type: boolean
+        thirdUserReferenceNumber:
+          type: integer
+          format: int32
+    BasketConfigOccurrenceInfo:
+      title: BasketConfigOccurrenceInfo
+      type: object
+      properties:
+        acceptedExistingNumber:
+          type: boolean
+        apn:
+          type: string
+        autoTopupItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutoTopupDetail'
+        bendAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        broadbandConfig:
+          $ref: '#/components/schemas/BroadBandConfigDetail'
+        chosenRecommendedWoNo:
+          type: integer
+          format: int32
+        communityName:
+          type: string
+        contact:
+          $ref: '#/components/schemas/CustomerContactDetailList'
+        contractUid:
+          type: integer
+          format: int32
+        creditProfileConfig:
+          $ref: '#/components/schemas/CreditProfileDetail'
+        defaultWorkTaskConfig:
+          $ref: '#/components/schemas/BasketWorkTaskDetail'
+        directoryEntry:
+          $ref: '#/components/schemas/DirectoryEntryDetail'
+        effectiveInstallationAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        equipmentConfig:
+          $ref: '#/components/schemas/EquipmentConfigDetail'
+        gsmConfig:
+          $ref: '#/components/schemas/GSMConfigDetail'
+        initialInstallDate:
+          type: string
+          format: date-time
+        installationAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        ipAddress:
+          type: string
+        itemisationConfig:
+          $ref: '#/components/schemas/ItemisationConfigDetail'
+        leasedLineConfig:
+          $ref: '#/components/schemas/LeasedLineConfigDetail'
+        linePlantAdditionalService:
+          type: boolean
+        linePlantIntegrationInfo:
+          $ref: '#/components/schemas/LinePlantIntegrationInfoDetail'
+        linePlantIntegrationItem:
+          type: boolean
+        linePlantIntegrationProduct:
+          type: boolean
+        nominatedOldEquipUid:
+          type: integer
+          format: int32
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/NoteListItemDetail'
+        occurrence:
+          type: integer
+          format: int32
+        oldProductEquipUid:
+          type: integer
+          format: int32
+        operatorLimitsConfig:
+          $ref: '#/components/schemas/OperatorLimitsConfigDetail'
+        orderNoteLastUpdateDate:
+          type: string
+          format: date-time
+        orderNoteLastUpdateUser:
+          type: string
+        originalAccessNo:
+          type: string
+        originalAccountNo:
+          type: integer
+          format: int32
+        originalExchangeCode:
+          type: string
+        originalInstallationAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        pbxServiceConfig:
+          $ref: '#/components/schemas/PBXServiceConfigDetail'
+        requiresCoverageCheck:
+          type: boolean
+        secondUserReferenceNumber:
+          type: integer
+          format: int32
+        serialNo:
+          type: string
+        serviceConfig:
+          $ref: '#/components/schemas/ServiceConfigDetail'
+        standardBalanceConfig:
+          $ref: '#/components/schemas/StandardBalanceConfigDetail'
+        suretyDepositConfig:
+          $ref: '#/components/schemas/SuretyDepositConfigDetail'
+        topupPaymentMethodCd:
+          type: string
+        userDefinedFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomUDF'
+        userDefinedLimitsIncludedForItem:
+          type: array
+          items:
+            $ref: '#/components/schemas/BalanceSpendingLimitDetail'
+        workOrderProfileCode:
+          type: string
+        workOrderProvideDetails:
+          $ref: '#/components/schemas/BasketWODetailsConfig'
+        workOrderRecoverDetails:
+          $ref: '#/components/schemas/BasketWODetailsConfig'
+        workTaskConfig:
+          $ref: '#/components/schemas/BasketWorkTaskDetail'
+    BasketCriteria:
+      title: BasketCriteria
+      type: object
+      properties:
+        basketUid:
+          type: integer
+          format: int32
+        handle:
+          type: string
+        session:
+          $ref: '#/components/schemas/SessionRequest'
+    BasketData:
+      title: BasketData
+      type: object
+      properties:
+        accountNo:
+          type: integer
+          format: int32
+        accountSubGroupCd:
+          type: string
+        action:
+          $ref: '#/components/schemas/BasketTopLevAction'
+        basketItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketItem'
+        basketReferralInfo:
+          $ref: '#/components/schemas/BasketReferral'
+        basketStatusCode:
+          type: string
+        basketUid:
+          type: integer
+          format: int32
+        bulkRecovery:
+          type: boolean
+        defaultsProcessName:
+          type: string
+        estimation:
+          type: boolean
+        finalBillYn:
+          type: boolean
+        handle:
+          type: string
+        manuallyValidatedYn:
+          type: boolean
+        newBillAddrUid:
+          type: integer
+          format: int32
+        numberRanges:
+          type: array
+          items:
+            $ref: '#/components/schemas/NumberRangeInfo'
+        participantName:
+          $ref: '#/components/schemas/CustomerParticipantName'
+        postSaleForTempBasket:
+          type: boolean
+        repatriation:
+          type: boolean
+        rtmOrderUid:
+          type: integer
+          format: int32
+        salesChannel:
+          type: string
+        salesPartnerItem:
+          $ref: '#/components/schemas/RtmDetails'
+        salesPerson:
+          type: string
+        salesPersonInternal:
+          type: boolean
+        session:
+          $ref: '#/components/schemas/SessionRequest'
+        taskStepPassedYn:
+          type: boolean
+        temporary:
+          type: boolean
+        upfrontPaymentDetails:
+          $ref: '#/components/schemas/UpfrontPaymentInfo'
+        workTaskListSetToDefault:
+          type: boolean
+        wscOrderNumber:
+          type: integer
+          format: int32
+    BasketDataSetItemResponse:
+      title: BasketDataSetItemResponse
+      type: object
+      properties:
+        basketDataSet:
+          $ref: '#/components/schemas/BasketData'
+    BasketInfoSearchCriteria:
+      title: BasketInfoSearchCriteria
+      type: object
+      properties:
+        accountNo:
+          type: integer
+          format: int32
+        accountSubGrp:
+          type: string
+        basketNo:
+          type: integer
+          format: int32
+        basketStatusCd:
+          type: string
+        estimation:
+          type: boolean
+        handle:
+          type: string
+        lastUsedFromDate:
+          type: string
+          format: date-time
+        lastUsedToDate:
+          type: string
+          format: date-time
+        salesOrderId:
+          type: integer
+          format: int32
+        session:
+          $ref: '#/components/schemas/SessionRequest'
+        userName:
+          type: string
+    BasketItem:
+      title: BasketItem
+      type: object
+      properties:
+        actionCharge:
+          type: boolean
+        allowActionIgnoringPackage:
+          type: boolean
+        basketConfig:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketConfigInfo'
+        basketItemId:
+          $ref: '#/components/schemas/BasketItemIdInfo'
+        bulkCollectDataTypeItem:
+          type: boolean
+        contractUid:
+          type: integer
+          format: int32
+        externalUid:
+          type: integer
+          format: int32
+        firstUserReferenceNumber:
+          type: integer
+          format: int32
+        loadOnlyMandOptions:
+          type: boolean
+        method:
+          type: string
+        nodeId:
+          type: string
+        options:
+          $ref: '#/components/schemas/ConfigurationOptionsInfo'
+        ownerDeptCd:
+          type: string
+        package:
+          type: boolean
+        packageConfig:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackageConfigInfo'
+        packageHasOpenOrders:
+          type: boolean
+        quantity:
+          type: integer
+          format: int32
+        recoveryReasonCode:
+          type: string
+        relatedToBasketItemNo:
+          type: integer
+          format: int32
+        remove:
+          type: boolean
+        statusCode:
+          type: string
+        totalQuantity:
+          type: integer
+          format: int32
+    BasketItemIdInfo:
+      title: BasketItemIdInfo
+      type: object
+      properties:
+        barcode:
+          type: string
+        catalogueItemUid:
+          type: integer
+          format: int32
+        catalogueReference:
+          type: string
+        catalogueUid:
+          type: integer
+          format: int32
+        existingItemNo:
+          type: integer
+          format: int32
+        oldEquipUids:
+          type: array
+          items:
+            type: integer
+            format: int32
+        selectedInstallAddrUid:
+          type: integer
+          format: int32
+        serialNo:
+          type: string
+        tariffCode:
+          type: string
+    BasketListInfoResponse:
+      title: BasketListInfoResponse
+      type: object
+      properties:
+        baskets:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketListItemInfo'
+    BasketListItemInfo:
+      title: BasketListItemInfo
+      type: object
+      properties:
+        accountName:
+          $ref: '#/components/schemas/CustomerParticipantName'
+        accountNo:
+          type: integer
+          format: int32
+        basketUid:
+          type: integer
+          format: int32
+        completingSale:
+          type: boolean
+        lastUsedDateTime:
+          type: string
+          format: date-time
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketListProductInfo'
+        sold:
+          type: boolean
+        username:
+          type: string
+        woNoStatusDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkOrderStatusItemInfo'
+    BasketListProductInfo:
+      title: BasketListProductInfo
+      type: object
+      properties:
+        listAccessNo:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessNoEquipUidItemInfo'
+        methodCode:
+          type: string
+        productCode:
+          type: string
+    BasketReferral:
+      title: BasketReferral
+      type: object
+      properties:
+        salesPartnerAccountNo:
+          type: integer
+          format: int32
+    BasketTopLevAction:
+      title: BasketTopLevAction
+      type: object
+      properties:
+        acceptLinePlantResults:
+          type: boolean
+        commit:
+          type: boolean
+        commitSynchronously:
+          type: boolean
+        remove:
+          type: boolean
+        validate:
+          type: boolean
+    BasketWODetailsConfig:
+      title: BasketWODetailsConfig
+      type: object
+      properties:
+        activationDate:
+          type: string
+          format: date-time
+        contactEmail:
+          type: string
+        contactName:
+          type: string
+        contactPhoneNo:
+          type: string
+        groupReference:
+          type: string
+        preferredActionDate:
+          type: string
+          format: date-time
+        purchaseOrderNo:
+          type: string
+        targetDate:
+          type: string
+          format: date-time
+        tempProductTerminationDate:
+          type: string
+          format: date-time
+        warrantyExpireDate:
+          type: string
+          format: date-time
+    BasketWorkTaskDetail:
+      title: BasketWorkTaskDetail
+      type: object
+      properties:
+        quotaGroupForProvideSide:
+          type: string
+        quotaGroupForSimpleActionOrRecoverSide:
+          type: string
+        simpleActionOrSeparateOptions:
+          type: boolean
+        workTasksForProvideSide:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkTaskListItemDetail'
+        workTasksForSimpleActionOrRecoverSide:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkTaskListItemDetail'
+    BillSectionSettingsForNumberItemDetail:
+      title: BillSectionSettingsForNumberItemDetail
+      type: object
+      properties:
+        accessNo:
+          type: string
+        accountNo:
+          type: integer
+          format: int32
+        billSectionSettings:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillSectionSettingsItemDetail'
+        equipUid:
+          type: integer
+          format: int32
+        productDescription:
+          type: string
+        productType:
+          type: string
+    BillSectionSettingsItemDetail:
+      title: BillSectionSettingsItemDetail
+      type: object
+      properties:
+        billSection:
+          type: string
+        itemisationProductCharge:
+          $ref: '#/components/schemas/CustomCurrency'
+        itemisationProductCode:
+          type: string
+        itemisationProductDescription:
+          type: string
+        itemisationProductSuffix:
+          type: string
+        itemisationProductSuffixDescription:
+          type: string
+        option:
+          type: string
+    BroadBandConfigDetail:
+      title: BroadBandConfigDetail
+      type: object
+      properties:
+        contactEmailAddress:
+          type: string
+        domainName:
+          type: string
+        dslUserNameSuffix:
+          type: string
+        password:
+          type: string
+        userName:
+          type: string
+    CatalogueDetailListItem:
+      title: CatalogueDetailListItem
+      type: object
+      properties:
+        catalogueEffectiveDate:
+          type: string
+          format: date-time
+        catalogueName:
+          type: string
+        catalogueUid:
+          type: integer
+          format: int32
+    CatalogueDetailListResponse:
+      title: CatalogueDetailListResponse
+      type: object
+      properties:
+        catalogues:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogueDetailListItem'
+    CatalogueSearchCriteria:
+      title: CatalogueSearchCriteria
+      type: object
+      properties:
+        catalogueUid:
+          type: integer
+          format: int32
+        handle:
+          type: string
+        session:
+          $ref: '#/components/schemas/SessionRequest'
+    CerillionNameValueItem:
+      title: CerillionNameValueItem
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          $ref: '#/components/schemas/CustomVariant'
+    ChargeOptionIdInfo:
+      title: ChargeOptionIdInfo
+      type: object
+      properties:
+        chargeTypeCode:
+          type: string
+        compGroupCode:
+          type: string
+        salesAmendedPrice:
+          $ref: '#/components/schemas/CustomCurrency'
+        tariffCode:
+          type: string
+        thirdPayment:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThirdPaymentInfo'
+    CommitBasketActionResponse:
+      title: CommitBasketActionResponse
+      type: object
+      properties:
+        newRecordIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomRecordId'
+    ConfigurationOptionsInfo:
+      title: ConfigurationOptionsInfo
+      type: object
+      properties:
+        excludeCharges:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeOptionIdInfo'
+        excludeTariffCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptionIdInfo'
+        includeCharges:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeOptionIdInfo'
+        includeTariffCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptionIdInfo'
+    CreditProfileDetail:
+      title: CreditProfileDetail
+      type: object
+      properties:
+        barrable:
+          $ref: '#/components/schemas/CustomVariant'
+        creditProfileCode:
+          type: string
+    CustomCurrency:
+      title: CustomCurrency
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        itemised:
+          type: boolean
+        value:
+          type: number
+          format: double
+    CustomRecordId:
+      title: CustomRecordId
+      type: object
+      properties:
+        recordIdType:
+          type: string
+        uid:
+          type: integer
+          format: int32
+    CustomUDF:
+      title: CustomUDF
+      type: object
+      properties:
+        fieldName:
+          type: string
+        fieldValue:
+          $ref: '#/components/schemas/CustomVariant'
+        hidden:
+          type: boolean
+    CustomVariant:
+      title: CustomVariant
+      type: object
+      properties:
+        booleanValue:
+          type: boolean
+        currencyValue:
+          $ref: '#/components/schemas/CustomCurrency'
+        dateValue:
+          type: string
+          format: date-time
+        doubleValue:
+          type: number
+          format: double
+        intValue:
+          type: integer
+          format: int32
+        stringValue:
+          type: string
+        variantType:
+          type: integer
+          format: int32
+    CustomerAddress:
+      title: CustomerAddress
+      type: object
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        addressLookupKey:
+          type: string
+        addressProfileUid:
+          type: integer
+          format: int32
+        areaName:
+          type: string
+        countryName:
+          type: string
+        dpid:
+          type: integer
+          format: int32
+        entrance:
+          type: string
+        exchangeCode:
+          type: string
+        extension:
+          type: string
+        externalAddressUid:
+          type: integer
+          format: int32
+        flatNo:
+          type: string
+        informalAddress:
+          type: string
+        manuallyEditedYn:
+          type: string
+        networkNodeIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerNodeId'
+        organizationName:
+          type: string
+        pcode:
+          type: integer
+          format: int32
+        placeName:
+          type: string
+        postCode:
+          type: string
+        streetName:
+          type: string
+        streetNo:
+          type: string
+        uid:
+          type: integer
+          format: int32
+    CustomerAndAccountDetailRequest:
+      title: CustomerAndAccountDetailRequest
+      type: object
+      properties:
+        accountDetailItem:
+          $ref: '#/components/schemas/AccDetailItemRequest'
+        customerDetailItem:
+          $ref: '#/components/schemas/CustomerDetailItemRequest'
+        session:
+          $ref: '#/components/schemas/SessionRequest'
+    CustomerContactAssociation:
+      title: CustomerContactAssociation
+      type: object
+      properties:
+        contactAssociationUid:
+          type: integer
+          format: int32
+        locked:
+          type: boolean
+        primaryContact:
+          type: boolean
+        reasonCode:
+          type: string
+    CustomerContactDetail:
+      title: CustomerContactDetail
+      type: object
+      properties:
+        accountGroupCd:
+          type: string
+        accountSubGroupCd:
+          type: string
+        birthDate:
+          type: string
+          format: date-time
+        companyName:
+          type: string
+        contactUid:
+          type: integer
+          format: int32
+        correspondenceAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        departmentName:
+          type: string
+        dpConsentYn:
+          $ref: '#/components/schemas/CustomVariant'
+        emailAddress1:
+          type: string
+        emailAddress2:
+          type: string
+        fileReferenceNo:
+          type: string
+        genderCode:
+          type: string
+        idNumber:
+          type: string
+        information1:
+          type: string
+        information2:
+          type: string
+        isLocked:
+          $ref: '#/components/schemas/CustomVariant'
+        maritalStatusCode:
+          type: string
+        name:
+          $ref: '#/components/schemas/CustomerParticipantName'
+        officeName:
+          type: string
+        password:
+          type: string
+        personTypeCode:
+          type: string
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerPhoneNumber'
+        position:
+          type: string
+        userDefinedFieldSet:
+          $ref: '#/components/schemas/CustomerUDFList'
+    CustomerContactDetailList:
+      title: CustomerContactDetailList
+      type: object
+      properties:
+        contactAssociation:
+          $ref: '#/components/schemas/CustomerContactAssociation'
+        contactDetail:
+          $ref: '#/components/schemas/CustomerContactDetail'
+    CustomerDetailItemRequest:
+      title: CustomerDetailItemRequest
+      type: object
+      properties:
+        accountGroupCd:
+          type: string
+        accountSubGroupCd:
+          type: string
+        allowCustomerLevelSecurity:
+          $ref: '#/components/schemas/CustomVariant'
+        class1TypeCode:
+          type: string
+        class2CategoryCode:
+          type: string
+        class3ClassCode:
+          type: string
+        contactsAndAssociations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerContactDetailList'
+        correspondenceAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        customerUid:
+          type: integer
+          format: int32
+        dpConsentYn:
+          $ref: '#/components/schemas/CustomVariant'
+        handle:
+          type: string
+        importanceCode:
+          type: string
+        importanceReason:
+          type: string
+        name:
+          $ref: '#/components/schemas/CustomerParticipantName'
+        session:
+          $ref: '#/components/schemas/SessionRequest'
+        skipEmailAndPhoneNumberValidation:
+          type: boolean
+        statusCode:
+          type: string
+        userDefinedFieldSet:
+          $ref: '#/components/schemas/CustomerUDFList'
+    CustomerNodeId:
+      title: CustomerNodeId
+      type: object
+      properties:
+        available:
+          type: boolean
+        networkNodeUid:
+          type: integer
+          format: int32
+        nodeId:
+          type: string
+        ownerDeptCd:
+          type: string
+    CustomerParticipantName:
+      title: CustomerParticipantName
+      type: object
+      properties:
+        forenamesInitials:
+          type: string
+        honours:
+          type: string
+        middleName:
+          type: string
+        surnameCompanyName:
+          type: string
+        title:
+          type: string
+    CustomerPhoneNumber:
+      title: CustomerPhoneNumber
+      type: object
+      properties:
+        phoneNumber:
+          type: string
+        phoneTypeCd:
+          type: string
+    CustomerResponse:
+      title: CustomerResponse
+      type: object
+      properties:
+        newRecordIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomRecordId'
+    CustomerUDFList:
+      title: CustomerUDFList
+      type: object
+      properties:
+        userDefinedFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomUDF'
+    DSLServiceTypeDetail:
+      title: DSLServiceTypeDetail
+      type: object
+      properties:
+        estimatedMaximumDownstreamSpeed:
+          type: string
+        estimatedMaximumUpstreamSpeed:
+          type: string
+        estimatedMinimumDownstreamSpeed:
+          type: string
+        estimatedMinimumUpstreamSpeed:
+          type: string
+        name:
+          type: string
+    DirDeliveryDetailItem:
+      title: DirDeliveryDetailItem
+      type: object
+      properties:
+        directoryDeliveryAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        directoryDeliveryAddressUid:
+          type: integer
+          format: int32
+        directoryDeliveryQuantity:
+          type: integer
+          format: int32
+    DirectoryEntryDetail:
+      title: DirectoryEntryDetail
+      type: object
+      properties:
+        accessNo:
+          type: string
+        accountNo:
+          type: integer
+          format: int32
+        additionalText1:
+          type: string
+        additionalText2:
+          type: string
+        addressLine1:
+          type: string
+        areaName:
+          type: string
+        category:
+          type: string
+        deleted:
+          type: boolean
+        detailsGenerated:
+          type: boolean
+        directorySection:
+          type: string
+        displayName:
+          type: string
+        email:
+          type: string
+        exportStatusCd:
+          type: string
+        forename:
+          type: string
+        inclusionStatus:
+          type: integer
+          format: int32
+        knownAs:
+          type: string
+        placeName:
+          type: string
+        postCode:
+          type: string
+        profession:
+          type: string
+        qualifications:
+          type: string
+        seqNo:
+          type: integer
+          format: int32
+        sortKey:
+          type: string
+        staffUsername:
+          type: string
+        streetName:
+          type: string
+        surname:
+          type: string
+        title:
+          type: string
+        woNo:
+          type: integer
+          format: int32
+    EquipmentConfigDetail:
+      title: EquipmentConfigDetail
+      type: object
+      properties:
+        agentCode:
+          type: string
+        referenceNo:
+          type: string
+    GSMConfigDetail:
+      title: GSMConfigDetail
+      type: object
+      properties:
+        customerId:
+          type: string
+        handsetNo:
+          type: string
+        handsetTypeCode:
+          type: string
+        homeZone:
+          type: string
+        iccid:
+          type: string
+        mailboxNo:
+          type: string
+        password:
+          type: string
+    ItemisationConfigDetail:
+      title: ItemisationConfigDetail
+      type: object
+      properties:
+        billSectionSettingsForNumber:
+          $ref: '#/components/schemas/BillSectionSettingsForNumberItemDetail'
+        chargeForItemisation:
+          type: boolean
+        itemisationDestInternational:
+          type: boolean
+        itemisationDestLocal:
+          type: boolean
+        itemisationDestNational:
+          type: boolean
+        itemisationLevelCode:
+          type: string
+    LeasedLineConfigDetail:
+      title: LeasedLineConfigDetail
+      type: object
+      properties:
+        bEndAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        circuitName:
+          type: string
+        contactName:
+          type: string
+        contactNo:
+          type: string
+        contractReference:
+          type: string
+        customerName:
+          type: string
+        functionCode:
+          type: string
+        lineLength:
+          type: integer
+          format: int32
+        serialNo:
+          type: integer
+          format: int32
+        signalling:
+          type: string
+        specification:
+          type: string
+    LinePlantIntegrationInfoDetail:
+      title: LinePlantIntegrationInfoDetail
+      type: object
+      properties:
+        capacityCheckErrorCode:
+          type: string
+        capacityCheckMessage:
+          type: string
+        capacityCheckResultCode:
+          type: string
+        carryOutCoverageCheck:
+          type: boolean
+        carryOutLinePlantCapacityCheck:
+          type: boolean
+        carryOutLinePlantReservation:
+          type: boolean
+        confirmToTerminateAndReserve:
+          type: boolean
+        reservationErrorCode:
+          type: string
+        reservationMessage:
+          type: string
+        reservationResultCode:
+          type: string
+        reservationStatusCode:
+          type: string
+        reservedAccessNo:
+          type: string
+        suggestedExchangeCode:
+          type: string
+        supportedDSLServiceTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DSLServiceTypeDetail'
+    LoginRequest:
+      title: LoginRequest
+      type: object
+      properties:
+        password:
+          type: string
+        session:
+          $ref: '#/components/schemas/SessionRequest'
+        username:
+          type: string
+    LoginResponse:
+      title: LoginResponse
+      type: object
+      properties:
+        handle:
+          type: string
+    ModelAndView:
+      title: ModelAndView
+      type: object
+      properties:
+        empty:
+          type: boolean
+        model:
+          type: object
+        modelMap:
+          type: object
+          additionalProperties:
+            type: object
+        reference:
+          type: boolean
+        status:
+          type: string
+          enum:
+            - ACCEPTED
+            - ALREADY_REPORTED
+            - BAD_GATEWAY
+            - BAD_REQUEST
+            - BANDWIDTH_LIMIT_EXCEEDED
+            - CHECKPOINT
+            - CONFLICT
+            - CONTINUE
+            - CREATED
+            - DESTINATION_LOCKED
+            - EXPECTATION_FAILED
+            - FAILED_DEPENDENCY
+            - FORBIDDEN
+            - FOUND
+            - GATEWAY_TIMEOUT
+            - GONE
+            - HTTP_VERSION_NOT_SUPPORTED
+            - IM_USED
+            - INSUFFICIENT_SPACE_ON_RESOURCE
+            - INSUFFICIENT_STORAGE
+            - INTERNAL_SERVER_ERROR
+            - I_AM_A_TEAPOT
+            - LENGTH_REQUIRED
+            - LOCKED
+            - LOOP_DETECTED
+            - METHOD_FAILURE
+            - METHOD_NOT_ALLOWED
+            - MOVED_PERMANENTLY
+            - MOVED_TEMPORARILY
+            - MULTIPLE_CHOICES
+            - MULTI_STATUS
+            - NETWORK_AUTHENTICATION_REQUIRED
+            - NON_AUTHORITATIVE_INFORMATION
+            - NOT_ACCEPTABLE
+            - NOT_EXTENDED
+            - NOT_FOUND
+            - NOT_IMPLEMENTED
+            - NOT_MODIFIED
+            - NO_CONTENT
+            - OK
+            - PARTIAL_CONTENT
+            - PAYLOAD_TOO_LARGE
+            - PAYMENT_REQUIRED
+            - PERMANENT_REDIRECT
+            - PRECONDITION_FAILED
+            - PRECONDITION_REQUIRED
+            - PROCESSING
+            - PROXY_AUTHENTICATION_REQUIRED
+            - REQUESTED_RANGE_NOT_SATISFIABLE
+            - REQUEST_ENTITY_TOO_LARGE
+            - REQUEST_HEADER_FIELDS_TOO_LARGE
+            - REQUEST_TIMEOUT
+            - REQUEST_URI_TOO_LONG
+            - RESET_CONTENT
+            - SEE_OTHER
+            - SERVICE_UNAVAILABLE
+            - SWITCHING_PROTOCOLS
+            - TEMPORARY_REDIRECT
+            - TOO_EARLY
+            - TOO_MANY_REQUESTS
+            - UNAUTHORIZED
+            - UNAVAILABLE_FOR_LEGAL_REASONS
+            - UNPROCESSABLE_ENTITY
+            - UNSUPPORTED_MEDIA_TYPE
+            - UPGRADE_REQUIRED
+            - URI_TOO_LONG
+            - USE_PROXY
+            - VARIANT_ALSO_NEGOTIATES
+        view:
+          $ref: '#/components/schemas/View'
+        viewName:
+          type: string
+    ModifyBasketResponse:
+      title: ModifyBasketResponse
+      type: object
+      properties:
+        newRecordIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomRecordId'
+    NoteListItemDetail:
+      title: NoteListItemDetail
+      type: object
+      properties:
+        accountNo:
+          type: integer
+          format: int32
+        lineDate:
+          type: string
+          format: date-time
+        lines:
+          type: array
+          items:
+            type: string
+        noteType:
+          type: string
+        user:
+          type: string
+    NumberRangeInfo:
+      title: NumberRangeInfo
+      type: object
+      properties:
+        exchangeCd:
+          type: string
+        groupName:
+          type: string
+        highestDDINumber:
+          type: string
+        lineTypeCd:
+          type: string
+        lowestDDINumber:
+          type: string
+        numberRangeTypeCd:
+          type: string
+        rangeQuantity:
+          type: integer
+          format: int32
+        statusCode:
+          type: string
+    OperatorLimitsConfigDetail:
+      title: OperatorLimitsConfigDetail
+      type: object
+      properties:
+        operatorLimitsDefinedForItem:
+          type: array
+          items:
+            $ref: '#/components/schemas/BalanceSpendingLimitDetail'
+        operatorLimitsIncludedForItem:
+          type: array
+          items:
+            $ref: '#/components/schemas/BalanceSpendingLimitDetail'
+    OptionIdInfo:
+      title: OptionIdInfo
+      type: object
+      properties:
+        compGroupCode:
+          type: string
+        tariffCode:
+          type: string
+    PBXLineServiceListItemInfo:
+      title: PBXLineServiceListItemInfo
+      type: object
+      properties:
+        accessNo:
+          $ref: '#/components/schemas/AccessNoItem'
+        equipUid:
+          type: integer
+          format: int32
+        installationAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        levelOfCover:
+          type: string
+        lineTypeCode:
+          type: string
+        numberRangeTypeCode:
+          type: string
+        serviceCode:
+          type: string
+        serviceHasBalance:
+          type: boolean
+        statusCode:
+          type: string
+        supportContractNo:
+          type: integer
+          format: int32
+        tariffCode:
+          type: string
+    PBXServiceConfigDetail:
+      title: PBXServiceConfigDetail
+      type: object
+      properties:
+        existingGroupAccessNo:
+          type: string
+        pbxGroupName:
+          type: string
+        pbxSuffix:
+          type: integer
+          format: int32
+    PackageConfigInfo:
+      title: PackageConfigInfo
+      type: object
+      properties:
+        occurrence:
+          type: integer
+          format: int32
+        packageInfoReadOnly:
+          $ref: '#/components/schemas/PackageInfoDetail'
+        representsOldProduct:
+          type: boolean
+        workOrderProfileCode:
+          type: string
+    PackageInfoDetail:
+      title: PackageInfoDetail
+      type: object
+      properties:
+        serviceCode:
+          type: string
+    ProductDetail:
+      title: ProductDetail
+      type: object
+      properties:
+        communityTypeCode:
+          type: string
+        defaultApn:
+          type: string
+        fttp:
+          type: boolean
+        line:
+          type: boolean
+        numberPlanCode:
+          type: string
+        numberRangeTypeCode:
+          type: string
+        productTypeCode:
+          type: string
+        serviceCode:
+          type: string
+        staticIpProduct:
+          type: boolean
+        tariffActionCode:
+          type: string
+    ProductDetailItemInfo:
+      title: ProductDetailItemInfo
+      type: object
+      properties:
+        associationMandatory:
+          type: boolean
+        associationOptional:
+          type: boolean
+        communityProduct:
+          type: boolean
+        defaultAPN:
+          type: string
+        gsmNumberClass:
+          type: string
+        hasAdhocDiscount:
+          type: boolean
+        isArchived:
+          type: boolean
+        isEnhanced:
+          type: boolean
+        isEquipment:
+          type: boolean
+        isLine:
+          type: boolean
+        isPackage:
+          type: boolean
+        isSSAutoDeactivation:
+          type: boolean
+        isService:
+          type: boolean
+        isTemporary:
+          type: boolean
+        linkOptionCode:
+          type: string
+        order11Code:
+          type: string
+        packageCode:
+          type: string
+        productTypeCode:
+          type: string
+        routineMaIntegerenanceFrequency:
+          type: integer
+          format: int32
+        serviceCode:
+          type: string
+        staticIpProductYn:
+          type: string
+        subscriptionGroup:
+          type: string
+        systemTypeCode:
+          type: string
+        tariffActionCode:
+          type: string
+        tariffCode:
+          type: string
+        tariffDescription:
+          type: string
+        tariffGroupCode:
+          type: string
+        tariffPeriod:
+          type: integer
+          format: int32
+        teleService:
+          type: integer
+          format: int32
+        usageTypeCode:
+          type: string
+        warrantyPeriod:
+          type: integer
+          format: int32
+    ProductDetailItemResponse:
+      title: ProductDetailItemResponse
+      type: object
+      properties:
+        productDetailItemInfo:
+          $ref: '#/components/schemas/ProductDetailItemInfo'
+    ProductDetailSearchCriteria:
+      title: ProductDetailSearchCriteria
+      type: object
+      properties:
+        handle:
+          type: string
+        session:
+          $ref: '#/components/schemas/SessionRequest'
+        tariffCode:
+          type: string
+    ProductGroupLimitedDetailsInfo:
+      title: ProductGroupLimitedDetailsInfo
+      type: object
+      properties:
+        groupCode:
+          type: string
+        groupProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductLimitedDetailInfo'
+    ProductLimitedDetailInfo:
+      title: ProductLimitedDetailInfo
+      type: object
+      properties:
+        code:
+          type: string
+        desc:
+          type: string
+        pkg:
+          type: boolean
+        srvCode:
+          type: string
+        typeCode:
+          type: string
+    ProductLimitedListItemResponse:
+      title: ProductLimitedListItemResponse
+      type: object
+      properties:
+        productLimitedDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductGroupLimitedDetailsInfo'
+    ProductSearchCriteria:
+      title: ProductSearchCriteria
+      type: object
+      properties:
+        handle:
+          type: string
+        session:
+          $ref: '#/components/schemas/SessionRequest'
+    RTMOrderDetailsItem:
+      title: RTMOrderDetailsItem
+      type: object
+      properties:
+        clientName:
+          type: string
+        companyName:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        salesPersonId:
+          type: string
+    RelationConfigDetail:
+      title: RelationConfigDetail
+      type: object
+      properties:
+        occurrence:
+          type: integer
+          format: int32
+        toAccessNo:
+          type: string
+        toBasketItemNo:
+          type: integer
+          format: int32
+        toBasketOptionNo:
+          type: integer
+          format: int32
+        toEquipEquipUid:
+          type: integer
+          format: int32
+        toExternalAccessNo:
+          type: string
+        toOccurrence:
+          type: integer
+          format: int32
+        toRelationship:
+          $ref: '#/components/schemas/OptionIdInfo'
+        toServiceCode:
+          type: string
+        toServiceEquipUid:
+          type: integer
+          format: int32
+    RtmDetails:
+      title: RtmDetails
+      type: object
+      properties:
+        clientUid:
+          type: integer
+          format: int32
+        companyUid:
+          type: integer
+          format: int32
+        salesPersonId:
+          type: string
+    ServiceConfigDetail:
+      title: ServiceConfigDetail
+      type: object
+      properties:
+        accessNo:
+          type: string
+        agentCode:
+          type: string
+        costingEndDate:
+          type: string
+          format: date-time
+        costingStartDate:
+          type: string
+          format: date-time
+        customerId:
+          type: string
+        exchangeCode:
+          type: string
+        lineTypeCode:
+          type: string
+        numberType:
+          type: string
+        numberTypeCode:
+          type: string
+        portInDSL:
+          type: string
+        portingAction:
+          type: string
+        portingDonorOpCd:
+          type: string
+        portingEmailAddr:
+          type: string
+        portingOpCd:
+          type: string
+        portingPhoneNo:
+          type: string
+        portingRecipientOpCd:
+          type: string
+        portingStatus:
+          type: string
+    ServiceListItemInfo:
+      title: ServiceListItemInfo
+      type: object
+      properties:
+        accessNo:
+          $ref: '#/components/schemas/AccessNoItem'
+        equipUid:
+          type: integer
+          format: int32
+        installationAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        levelOfCover:
+          type: string
+        lineTypeCode:
+          type: string
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/PBXLineServiceListItemInfo'
+        numberRangeTypeCode:
+          type: string
+        serviceCode:
+          type: string
+        serviceHasBalance:
+          type: boolean
+        statusCode:
+          type: string
+        supportContractNo:
+          type: integer
+          format: int32
+        tariffCode:
+          type: string
+    ServiceSummaryCriteria:
+      title: ServiceSummaryCriteria
+      type: object
+      properties:
+        equipUid:
+          type: integer
+          format: int32
+        handle:
+          type: string
+        session:
+          $ref: '#/components/schemas/SessionRequest'
+    ServiceSummaryItemResponse:
+      title: ServiceSummaryItemResponse
+      type: object
+      properties:
+        contextElements:
+          type: array
+          items:
+            $ref: '#/components/schemas/CerillionNameValueItem'
+    SessionRequest:
+      title: SessionRequest
+      type: object
+      properties:
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+        correlationId:
+          type: string
+        email:
+          type: string
+        fullName:
+          type: string
+        loginName:
+          type: string
+        xCorrelationId:
+          type: string
+    StandardBalanceConfigDetail:
+      title: StandardBalanceConfigDetail
+      type: object
+      properties:
+        standardBalanceDefinedForItem:
+          type: array
+          items:
+            $ref: '#/components/schemas/BalanceSpendingLimitDetail'
+        standardBalanceIncludedForItem:
+          type: array
+          items:
+            $ref: '#/components/schemas/BalanceSpendingLimitDetail'
+    SuretyDepositConfigDetail:
+      title: SuretyDepositConfigDetail
+      type: object
+      properties:
+        exclusionReason:
+          type: string
+        paidCharge:
+          $ref: '#/components/schemas/CustomCurrency'
+        refundDeposit:
+          type: string
+    ThirdPaymentInfo:
+      title: ThirdPaymentInfo
+      type: object
+      properties:
+        basketItemNo:
+          type: integer
+          format: int32
+        basketOptionNo:
+          type: integer
+          format: int32
+        occurrence:
+          type: integer
+          format: int32
+        thirdAccountNo:
+          type: integer
+          format: int32
+        thirdEndDate:
+          type: string
+          format: date-time
+        thirdPaymentAmount:
+          $ref: '#/components/schemas/CustomCurrency'
+        thirdPaymentPercent:
+          type: integer
+          format: int32
+        thirdQuantity:
+          type: integer
+          format: int32
+        thirdStartDate:
+          type: string
+          format: date-time
+        thirdStatusCode:
+          type: string
+    UpfrontPaymentInfo:
+      title: UpfrontPaymentInfo
+      type: object
+      properties:
+        bankAccountNo:
+          type: integer
+          format: int32
+        bankSortCode:
+          type: string
+        billingAgreementId:
+          type: string
+        cardNo:
+          type: string
+        cardType:
+          type: string
+        changeAmount:
+          $ref: '#/components/schemas/CustomCurrency'
+        chequeNo:
+          type: integer
+          format: int32
+        customerName:
+          type: string
+        equipUid:
+          type: integer
+          format: int32
+        expiryDt:
+          type: string
+          format: date-time
+        newCard:
+          type: boolean
+        paymentDt:
+          type: string
+          format: date-time
+        paymentMethodCd:
+          type: string
+        primeUid:
+          type: integer
+          format: int32
+        receiptNo:
+          type: string
+        saveNewCard:
+          type: boolean
+        statusCd:
+          type: string
+        tenderedAmount:
+          $ref: '#/components/schemas/CustomCurrency'
+        tenderedUsedAmount:
+          $ref: '#/components/schemas/CustomCurrency'
+    View:
+      title: View
+      type: object
+      properties:
+        contentType:
+          type: string
+    WorkOrderDetailCriteria:
+      title: WorkOrderDetailCriteria
+      type: object
+      properties:
+        handle:
+          type: string
+        session:
+          $ref: '#/components/schemas/SessionRequest'
+        workOrderNo:
+          type: integer
+          format: int32
+    WorkOrderDetailsItem:
+      title: WorkOrderDetailsItem
+      type: object
+      properties:
+        accountNo:
+          type: integer
+          format: int32
+        activationDate:
+          type: string
+          format: date-time
+        appointmentStatusCd:
+          type: string
+        appointmentUid:
+          type: integer
+          format: int32
+        automaticallyProgressed:
+          type: boolean
+        basketUid:
+          type: integer
+          format: int32
+        completeDate:
+          type: string
+          format: date-time
+        composite:
+          type: boolean
+        compositeProfileCode:
+          type: string
+        contactEmail:
+          type: string
+        contactName:
+          type: string
+        contactNumber:
+          type: string
+        costingEndDate:
+          type: string
+          format: date-time
+        costingStartDate:
+          type: string
+          format: date-time
+        createDate:
+          type: string
+          format: date-time
+        createUser:
+          type: string
+        engineerUsername:
+          type: string
+        fitterCode:
+          type: string
+        groupReference:
+          type: string
+        insitu:
+          type: string
+        installationAddresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerAddress'
+        jobCardReference:
+          type: string
+        jobSteps:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkOrderDetailsItemJobStep'
+        labourAddressUid:
+          type: integer
+          format: int32
+        orderIncludesService:
+          type: boolean
+        otherBasketUids:
+          type: array
+          items:
+            type: integer
+            format: int32
+        otherWorkOrderNo:
+          type: integer
+          format: int32
+        preferredActionDate:
+          type: string
+          format: date-time
+        previouslyScheduledYn:
+          type: boolean
+        priority:
+          type: boolean
+        profileCode:
+          type: string
+        pullOutRecoveryDate:
+          type: string
+          format: date-time
+        purchaseOrderNo:
+          type: string
+        recovery:
+          type: boolean
+        rtmOrderDetails:
+          $ref: '#/components/schemas/RTMOrderDetailsItem'
+        salesOrderNo:
+          type: integer
+          format: int32
+        salespersonUser:
+          type: string
+        statusCode:
+          type: string
+        targetDate:
+          type: string
+          format: date-time
+        workOrderNo:
+          type: integer
+          format: int32
+        workOrdersOnSale:
+          type: array
+          items:
+            type: integer
+            format: int32
+        wscOrderNumber:
+          type: integer
+          format: int32
+    WorkOrderDetailsItemJobStep:
+      title: WorkOrderDetailsItemJobStep
+      type: object
+      properties:
+        activateDate:
+          type: string
+          format: date-time
+        activateStepNo:
+          type: integer
+          format: int32
+        activityAssignedToDepartment:
+          type: string
+        activityAssignedToUser:
+          type: string
+        activityUid:
+          type: integer
+          format: int32
+        autoCompleteYn:
+          type: string
+        clearUser:
+          type: string
+        completeDate:
+          type: string
+          format: date-time
+        delayCode:
+          type: string
+        delayUser:
+          type: string
+        escalationStatusCode:
+          type: string
+        legNo:
+          type: integer
+          format: int32
+        linePlantInterfaceActionCd:
+          type: string
+        lockingWorkOrderNos:
+          type: array
+          items:
+            type: integer
+            format: int32
+        reminderDate:
+          type: string
+          format: date-time
+        responsibleDepartmentCode:
+          type: string
+        revisitIfWorkOrderCancelled:
+          type: boolean
+        seqNo:
+          type: integer
+          format: int32
+        statusCode:
+          type: string
+        stepDefCode:
+          type: string
+        stepNo:
+          type: integer
+          format: int32
+    WorkOrderDetailsItemResponse:
+      title: WorkOrderDetailsItemResponse
+      type: object
+      properties:
+        workOrder:
+          $ref: '#/components/schemas/WorkOrderDetailsItem'
+    WorkOrderStatusItemInfo:
+      title: WorkOrderStatusItemInfo
+      type: object
+      properties:
+        statusCode:
+          type: string
+        workOrderNo:
+          type: integer
+          format: int32
+    WorkTaskListItemDetail:
+      title: WorkTaskListItemDetail
+      type: object
+      properties:
+        points:
+          type: integer
+          format: int32
+        seqNo:
+          type: integer
+          format: int32
+        workTaskCharge:
+          $ref: '#/components/schemas/CustomCurrency'
+        workTaskCode:
+          type: string
+        workTaskDescription:
+          type: string
