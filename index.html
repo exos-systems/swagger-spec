@@ -1,24 +1,51 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>ReDoc</title>
-    <!-- needed for adaptive design -->
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
 
-    <!--
-    ReDoc doesn't change outer page styles
-    -->
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
-    </style>
+<head>
+  <title>ExosSystem Swagger</title>
+  <!-- needed for adaptive design -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      padding-top: 40px;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+    }
+
+    #links_container {
+      margin: 0;
+      padding: 0;
+      background-color: #0033a0;
+    }
+
+    #links_container li {
+      display: inline-block;
+      padding: 10px;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
 </head>
+
 <body>
-<redoc spec-url="./openapi-3.0/cart_mgmt_openapi3.0.yml"/>
-<script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
+  <nav>
+    <ul id="links_container">
+    </ul>
+  </nav>
+
+  <redoc scroll-y-offset="body > nav"></redoc>
+
+  <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
+  <script src="index.js"></script>
 </body>
+
 </html>

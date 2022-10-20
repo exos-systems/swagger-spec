@@ -1,0 +1,22 @@
+name: Build and Deploy (dev)
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  checkCodeQuality:
+    uses: ./.github/workflows/callable-sonarqube-check.yaml
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+  deployToK8s:
+    uses: ./.github/workflows/callable-build-and-deploy.yaml
+    with:
+      ENV_VARIABLES_PATH: ".github/variables/dev.env"
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS_1 }}
+      GHCR_LOGIN_PWD: ${{ secrets.GITHUB_TOKEN }}
+      GHCR_READ_IMG_TOKEN: ${{ secrets.GIT_TOKEN }}
+    needs: [checkCodeQuality]

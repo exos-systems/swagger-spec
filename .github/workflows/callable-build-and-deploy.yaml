@@ -1,0 +1,77 @@
+name: Build,Push and Deploy in K8s
+
+on:
+  workflow_call:
+    inputs:
+      ENV_VARIABLES_PATH:
+        required: true
+        type: string
+
+    secrets:
+      AZURE_CREDENTIALS:
+        required: true
+      GHCR_LOGIN_PWD:
+        required: true
+      GHCR_READ_IMG_TOKEN:
+        required: true
+
+jobs:
+  deployToK8s:
+    permissions:
+      security-events: write
+      contents: read
+      id-token: write
+      packages: write
+    runs-on: ubuntu-latest
+    steps:
+      #Checks out the repository this file is in
+      - uses: actions/checkout@v3
+
+      - name: Set Environment Variables
+        uses: ./.github/actions/setvars
+        with:
+          varFilePath: ${{ inputs.ENV_VARIABLES_PATH }}
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_LOGIN_PWD }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ github.repository }}:${{ github.sha }}
+
+      # Login to Azure
+      - name: Azure login
+        uses: azure/login@v1.4.3
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # Retrieves your Azure Kubernetes Service cluster's kubeconfig file
+      - name: Get K8s context
+        uses: azure/aks-set-context@v2.0
+        with:
+          resource-group: ${{ env.ClUSTER_RESOURCE_GROUP }}
+          cluster-name: ${{ env.CLUSTER_NAME }}
+
+      # Create K8s secrets to pull images
+      - name: Create secret in Kubernetes cluster
+        uses: Azure/k8s-create-secret@v4
+        with:
+          namespace: ${{ env.NAMESPACE }}
+          secret-name: ${{ env.K8S_IMG_PULL_SECRET }}
+          container-registry-url: https://ghcr.io/
+          container-registry-username: ${{ github.actor }}
+          container-registry-password: ${{ secrets.GHCR_READ_IMG_TOKEN }}
+
+      - name: Install Helm
+        uses: azure/setup-helm@v3
+
+      - name: Deploy To Kubernetes
+        run: |
+          helm upgrade --install ${{env.CONTAINER_NAME}} ${{env.HELM_TEMPLATE}} --set image.repository=ghcr.io/${{ github.repository }} --namespace=${{env.NAMESPACE}} --set image.tag=${{ github.sha }} --set hostName=${{ env.HOST_NAME }} --set routePath=${{ env.ROUTE_PATH }} --set imagePullSecrets\[0\].name=${{ env.K8S_IMG_PULL_SECRET }}

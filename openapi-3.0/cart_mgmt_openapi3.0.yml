@@ -180,13 +180,13 @@ paths:
                 href:
                   type: string
                   description: ""
-                '@baseType':
+                "@baseType":
                   type: string
                   description: ""
-                '@type':
+                "@type":
                   type: string
                   description: ""
-                '@schemaLocation':
+                "@schemaLocation":
                   type: string
                   description: ""
         required: false
@@ -246,13 +246,13 @@ paths:
                 href:
                   type: string
                   description: ""
-                '@baseType':
+                "@baseType":
                   type: string
                   description: ""
-                '@type':
+                "@type":
                   type: string
                   description: ""
-                '@schemaLocation':
+                "@schemaLocation":
                   type: string
                   description: ""
         required: false
