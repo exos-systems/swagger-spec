@@ -6,7 +6,7 @@ spec:
   hosts:
   - {{ .Values.hostName }}
   gateways:
-  - istio-system/exos-gateway
+  - istio-system/swagger-gateway
   http:
   - match:
     - uri:

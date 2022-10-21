@@ -1,6 +1,6 @@
 FROM nginx:1.15.8-alpine
 
-WORKDIR  /usr/share/nginx/html/swagger
+WORKDIR  /usr/share/nginx/html
 COPY index.html .
 COPY index.js .
 COPY openapi-3.0 openapi-3.0
