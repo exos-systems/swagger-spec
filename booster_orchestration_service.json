@@ -1,35 +1,69 @@
+
+
 {
-    "swagger": "2.0",
-    "info": {
-      "title": "Booster Orchestration Services API",
-      "description": "",
-      "version": ""
-    },
-    "host": "127.0.0.1:8002",
-    "schemes": [
-      "http"
-    ],
-    "paths": {
-      "/boosterOrchestration/": {
-        "post": {
-          "operationId": "create",
-          "responses": {
-            "201": {
-              "description": ""
-            }
-          },
-          "parameters": [
-            
-          ],
-          "tags": [
-            "boosterOrchestration"
-          ]
-        }
+  "swagger": "2.0",
+  "info": {
+    "title": "Service Validation API",
+    "description": "",
+    "version": ""
+  },
+  "host": "127.0.0.1:8000",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/sendCode/": {
+      "post": {
+        "operationId": "sendCode_create",
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "parameters": [
+          
+        ],
+        "tags": [
+          "sendCode"
+        ]
       }
     },
-    "securityDefinitions": {
-      "basic": {
-        "type": "basic"
+    "/serviceValidation/": {
+      "post": {
+        "operationId": "serviceValidation_create",
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "parameters": [
+          
+        ],
+        "tags": [
+          "serviceValidation"
+        ]
+      }
+    },
+    "/validateBooster/": {
+      "post": {
+        "operationId": "validateBooster_create",
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "parameters": [
+          
+        ],
+        "tags": [
+          "validateBooster"
+        ]
       }
     }
+  },
+  "securityDefinitions": {
+    "basic": {
+      "type": "basic"
+    }
   }
+}
