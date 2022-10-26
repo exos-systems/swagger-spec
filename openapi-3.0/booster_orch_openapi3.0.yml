@@ -4,13 +4,31 @@ info:
   description: ""
   version: ""
 servers:
-  - url: http://127.0.0.1:8002/
+- url: http://127.0.0.1:8002/
 paths:
-  /boosterOrchestration/:
+  /sendCode/:
     post:
       tags:
-        - boosterOrchestration
-      operationId: create
+      - sendCode
+      operationId: sendCode_create
+      responses:
+        201:
+          description: ""
+          content: {}
+  /serviceValidation/:
+    post:
+      tags:
+      - serviceValidation
+      operationId: serviceValidation_create
+      responses:
+        201:
+          description: ""
+          content: {}
+  /validateBooster/:
+    post:
+      tags:
+      - validateBooster
+      operationId: validateBooster_create
       responses:
         201:
           description: ""
