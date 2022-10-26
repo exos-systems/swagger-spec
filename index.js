@@ -51,6 +51,7 @@ function onClick() {
   Redoc.init(url);
 }
 
+
 // dynamically building navigation items
 var $list = document.getElementById('links_container');
 apis.forEach(function (api) {
