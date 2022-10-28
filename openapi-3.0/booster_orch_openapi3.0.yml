@@ -6,35 +6,206 @@ info:
 servers:
 - url: http://127.0.0.1:8002/
 paths:
-  /sendCode/:
-    post:
-      tags:
-      - sendCode
-      operationId: sendCode_create
-      responses:
-        201:
-          description: ""
-          content: {}
+
   /serviceValidation/:
     post:
       tags:
-      - serviceValidation
-      operationId: serviceValidation_create
+        - serviceValidation
+      summary: validate the services for mobile number 
+      description: provide mobile number to check services.
+      operationId: serviceValidation
+      requestBody:
+        description: validate the services for mobile number
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/serviceValidation'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/serviceValidation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/serviceValidation'
       responses:
-        201:
-          description: ""
-          content: {}
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/serviceResponseCode'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/serviceResponseCode'
+  /sendCode/:
+    post:
+      tags:
+        - sendCode
+      summary: Send OTP to user 
+      description: This can only be done by the POSTPAY user.
+      operationId: sendCode
+      requestBody:
+        description: Created OTP for verification
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sendCode'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/sendCode'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/sendCode'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sendResponseCode'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/sendResponseCode'
+  
   /validateBooster/:
     post:
       tags:
-      - validateBooster
-      operationId: validateBooster_create
+        - validateBooster
+      summary: validate the booster and add it 
+      description: After validating the user booster can be added
+      operationId: validateBooster
+      requestBody:
+        description: After validating the user booster can be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/validateBooster'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/validateBooster'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/validateBooster'
       responses:
-        201:
-          description: ""
-          content: {}
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoosterResponseCode'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BoosterResponseCode'
+          
+          
+          
 components:
-  securitySchemes:
-    basic:
-      type: http
-      scheme: basic
+  schemas:
+    Text:
+      type: object
+      properties:
+        text:
+          type: string
+          example: OTP
+    ProductOrder:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        action:
+          type: string
+          example: add
+        product:
+          $ref: '#/components/schemas/Prod'
+
+    validateBooster:
+      type: object
+      properties:
+        note:
+          $ref: '#/components/schemas/Text'
+        productOrderItem:
+          $ref: '#/components/schemas/ProductOrder'
+    Prod:
+     type: object
+     properties:
+        product:
+          type: array
+          items:
+            $ref: '#/components/schemas/Prod'
+        productCharacteristic:
+          $ref: '#/components/schemas/ProductChar'
+        realizingResource:
+          $ref: '#/components/schemas/RealizingRes'
+    ProductChar:
+      type: object
+      properties:
+        name:
+          type: string
+          example: ISONETIMEBOOSTER
+        value:
+          type: string
+          example: true
+    RealizingRes:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+          example: 42472498249
+        name:
+          type: string
+          example: MSISDN
+        value:
+          type: string
+          example: string
+    BoosterResponseCode:
+      type: object
+      properties:
+        staus_code:
+          type: string
+          format: int64
+          example: 400
+        message:
+          type: string
+          example: Top Up Failed
+    sendCode:
+      required:
+        - mobile_number
+      type: object
+      properties:
+        mobile_number:
+          type: string
+          example: string
+    sendResponseCode:
+      type: object
+      properties:
+        staus_code:
+          type: string
+          format: int64
+          example: 200
+        message:
+          type: string
+          example: success
+    serviceValidation:
+      required:
+        - accessNo
+      type: object
+      properties:
+        accessNo:
+          type: string
+          example: string
+    serviceResponseCode:
+      type: object
+      properties:
+        staus_code:
+          type: string
+          format: int64
+          example: 200
+        tariffCode:
+          type: string
+          example: string
+        isPostPaid:
+          type: string
+          example: true
+
