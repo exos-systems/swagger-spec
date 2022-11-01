@@ -1,17 +1,16 @@
 openapi: 3.0.1
 info:
   title: Booster Orchestration Services API
-  description: ""
-  version: ""
+  description: ''
+  version: ''
 servers:
-- url: http://127.0.0.1:8002/
+  - url: http://127.0.0.1:8002/
 paths:
-
   /serviceValidation/:
     post:
       tags:
         - serviceValidation
-      summary: validate the services for mobile number 
+      summary: validate the services for mobile number
       description: provide mobile number to check services.
       operationId: serviceValidation
       requestBody:
@@ -40,7 +39,7 @@ paths:
     post:
       tags:
         - sendCode
-      summary: Send OTP to user 
+      summary: Send OTP to user
       description: This can only be done by the POSTPAY user.
       operationId: sendCode
       requestBody:
@@ -65,12 +64,11 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/sendResponseCode'
-  
   /validateBooster/:
     post:
       tags:
         - validateBooster
-      summary: validate the booster and add it 
+      summary: validate the booster and add it
       description: After validating the user booster can be added
       operationId: validateBooster
       requestBody:
@@ -95,9 +93,6 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/BoosterResponseCode'
-          
-          
-          
 components:
   schemas:
     Text:
@@ -118,7 +113,6 @@ components:
           example: add
         product:
           $ref: '#/components/schemas/Prod'
-
     validateBooster:
       type: object
       properties:
@@ -127,8 +121,8 @@ components:
         productOrderItem:
           $ref: '#/components/schemas/ProductOrder'
     Prod:
-     type: object
-     properties:
+      type: object
+      properties:
         product:
           type: array
           items:
@@ -171,10 +165,10 @@ components:
           example: Top Up Failed
     sendCode:
       required:
-        - mobile_number
+        - mobileNumber
       type: object
       properties:
-        mobile_number:
+        mobileNumber:
           type: string
           example: string
     sendResponseCode:
@@ -189,10 +183,10 @@ components:
           example: success
     serviceValidation:
       required:
-        - accessNo
+        - serviceNumber
       type: object
       properties:
-        accessNo:
+        serviceNumber:
           type: string
           example: string
     serviceResponseCode:
@@ -208,4 +202,3 @@ components:
         isPostPaid:
           type: string
           example: true
-
