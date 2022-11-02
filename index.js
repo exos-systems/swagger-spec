@@ -40,7 +40,11 @@ var apis = [
   {
     name: 'Zendesk',
     url: './openapi-3.0/zendesk_openapi3.0.yml'
-  }
+  },
+ {
+   name: 'Wrapper',
+   url: './openapi-3.0/wrapper_openapi3.0.yml'
+ }
 ];
 
 // initially render first API

@@ -1,0 +1,653 @@
+openapi: 3.0.1
+info:
+  title: Wrapper Services API
+  description: ''
+  version: ''
+servers:
+  - url: http://127.0.0.1:8001/
+paths:
+  /findService/:
+    post:
+      tags:
+        - findService
+      summary: get service details for service number
+      description: provide mobile number to get the services details
+      operationId: findService
+      requestBody:
+        description: provide mobile number to get the services details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/serviceValidation'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/serviceValidation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/serviceValidation'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/serviceResponseCode'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/serviceResponseCode'
+  /userAccountDetail/:
+    get:
+      tags:
+        - userAccountDetail
+      summary: User Account Details
+      description: User can get there account details.
+      operationId: userAccountDetail
+      # requestBody:
+      #   description: Created OTP for verification
+      #   content:
+      #     application/json:
+      #       schema:
+      #         $ref: '#/components/schemas/sendCode'
+      #     application/xml:
+      #       schema:
+      #         $ref: '#/components/schemas/sendCode'
+      #     application/x-www-form-urlencoded:
+      #       schema:
+      #         $ref: '#/components/schemas/sendCode'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sendResponseCode'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/sendResponseCode'
+  /workOrderDetail/{BSSOrderNo}:
+    get:
+      tags:
+        - workOrderDetail
+      summary: Find BSSOrder by ID
+      description: Returns a single basket
+      operationId: getWorkOrderDetailById
+      parameters:
+        - name: BSSOrderNo
+          in: path
+          description: ID of BSSOrder to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BSSOrderDetail'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BSSOrderDetail'
+  /basketDetails/{productOrderId}:
+    get:
+      tags:
+        - basketDetails
+      summary: Find basket by ID
+      description: Returns a single basket
+      operationId: getBasketDetailById
+      parameters:
+        - name: productOrderId
+          in: path
+          description: ID of productOrder to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/basketDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/basketDetails'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Order not found
+components:
+  schemas:
+    basketDetails:
+      type: object
+      properties:
+        status_code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: string
+    BSSOrderDetail:
+      type: object
+      properties:
+        workOrder:
+          $ref: '#/components/schemas/workOrder'
+    workOrder:
+      type: object
+      properties:
+        accountNo:
+          type: integer
+          example: 649244000
+        activationDate:
+          type: integer
+          example: 649244000
+        appointmentStatusCd:
+          type: integer
+          example: 649244000
+        appointmentUid:
+          type: integer
+          example: 649244000
+        basketUid:
+          type: integer
+          example: 649244000
+        completeDate:
+          type: integer
+          example: 649244000
+        compositeProfileCode:
+          type: string
+          example: string
+        contactEmail:
+          type: string
+          example: string
+        contactName:
+          type: string
+          example: string
+        contactNumber:
+          type: string
+          example: string
+        costingEndDate:
+          type: integer
+          example: 649244000
+        costingStartDate:
+          type: integer
+          example: 649244000
+        createDate:
+          type: integer
+          example: 649244000
+        createUser:
+          type: string
+          example: string
+        engineerUsername:
+          type: string
+          example: string
+        fitterCode:
+          type: string
+          example: string
+        groupReference:
+          type: string
+          example: string
+        insitu:
+          type: string
+          example: string
+        installationAddresses:
+          type: array
+          items:
+            $ref: ''
+            example:
+        jobCardReference:
+          type: string
+          example: string
+        jobSteps:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductChar'
+        labourAddressUid:
+          type: integer
+          example: 992
+        orderIncludesService:
+          type: boolean
+          example: true
+        otherBasketUids:
+          type: array
+          items:
+            $ref: ''
+            example:
+        otherWorkOrderNo:
+          type: integer
+          example: 99457987
+        preferredActionDate:
+          type: integer
+          example: 74656945
+        previouslyScheduledYn:
+          type: boolean
+          example: false
+        profileCode:
+          type: string
+          example: string
+        pullOutRecoveryDate:
+          type: string
+          example: string
+        purchaseOrderNo:
+          type: string
+          example: string
+        rtmOrderDetails:
+          $ref: '#/components/schemas/orderDetails'
+          example:
+        salesOrderNo:
+          type: integer
+          example: 2845792
+        salespersonUser:
+          type: string
+          example: string
+        statusCode:
+          type: string
+          example: string
+        targetDate:
+          type: integer
+          example: 2849543
+        workOrderNo:
+          type: integer
+          example: 32
+        workOrdersOnSale:
+          type: array
+          items:
+            $ref: ''
+            example: string
+        wscOrderNumber:
+          type: integer
+          example: 321
+        priority:
+          type: boolean
+          example: false
+        automaticallyProgressed:
+          type: boolean
+          example: false
+        composite:
+          type: boolean
+          example: false
+        recovery:
+          type: boolean
+          example: false
+    jobSteps:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProductChar'
+    productCharacteristic:
+      $ref: '#/components/schemas/ProductChar'
+    realizingResource:
+      $ref: '#/components/schemas/RealizingRes'
+    orderDetails:
+      type: object
+      properties:
+        clientName:
+          type: string
+          example: string
+        companyName:
+          type: string
+          example: string
+        firstName:
+          type: string
+          example: string
+        lastName:
+          type: string
+          example: string
+        salesPersonId:
+          type: string
+          example: string
+    ProductChar:
+      type: object
+      properties:
+        activateDate:
+          type: integer
+          example: 649244000
+        activateStepNo:
+          type: integer
+          example: 32
+        activityAssignedToDepartment:
+          type: string
+          example: string
+        activityAssignedToUser:
+          type: string
+          example: string
+        activityUid:
+          type: integer
+          example: -13
+        autoCompleteYn:
+          type: string
+          example: string
+        clearUser:
+          type: string
+          example: string
+        completeDate:
+          type: integer
+          example: 1656534
+        delayCode:
+          type: string
+          example: string
+        delayUser:
+          type: string
+          example: string
+        escalationStatusCode:
+          type: string
+          example: string
+        legNo:
+          type: integer
+          example: 0
+        linePlantInterfaceActionCd:
+          type: string
+          example: string
+        lockingWorkOrderNos:
+          type: array
+          items:
+            $ref: ''
+            example:
+        reminderDate:
+          type: integer
+          example: -6213545
+        responsibleDepartmentCode:
+          type: string
+          example: string
+        revisitIfWorkOrderCancelled:
+          type: string
+          example: string
+        seqNo:
+          type: integer
+          example: 1
+        statusCode:
+          type: string
+          example: string
+        stepDefCode:
+          type: string
+          example: string
+        stepNo:
+          type: integer
+          example: 1
+    matchAccountData:
+      type: object
+      properties:
+        accountClassificationCode:
+          type: string
+          example: string
+        accountGroupCd:
+          type: string
+          example: string
+        accountName:
+          $ref: '#/components/schemas/accountData'
+        accountNo:
+          type: integer
+          example: 2564742
+        accountSubGroupCd:
+          type: string
+          example: string
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/locationData'
+        statusCode:
+          type: string
+          example: string
+    locationData:
+      type: object
+      properties:
+        serviceAddress:
+          $ref: '#/components/schemas/serviceAddressData'
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/serviceData'
+    serviceData:
+      type: object
+      properties:
+        accessNo:
+          $ref: '#/components/schemas/accessData'
+        equipUid:
+          type: integer
+          example: 534542
+        installationAddress:
+          $ref: '#/components/schemas/installationAddressData'
+        levelOfCover:
+          type: string
+          example: string
+        lineTypeCode:
+          type: string
+          example: string
+        numberRangeTypeCode:
+          type: string
+          example: string
+        serviceCode:
+          type: string
+          example: string
+        serviceHasBalance:
+          type: string
+          example: string
+        statusCode:
+          type: string
+          example: string
+        supportContractNo:
+          type: string
+          example: string
+        tariffCode:
+          type: string
+          example: string
+        lines:
+          type: array
+          items:
+            $ref: ""
+            example:
+    accessData:
+      type: object
+      properties:
+        accessNo:
+          type: string
+          example: string
+        exDirectory:
+          type: boolean
+          example: false
+        pbxQuantity:
+          type: integer
+          example: 4342
+        pbxSx:
+          type: integer
+          example: 43
+        pbx:
+          type: boolean
+          example: false
+    installationAddressData:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+          example: string
+        addressLine2:
+          type: string
+          example: string
+        addressLookupKey:
+          type: string
+          example: string
+        addressProfileUid:
+          type: integer
+          example: 87
+        areaName:
+          type: string
+          example: string
+        countryName:
+          type: string
+          example: string
+        dpid:
+          type: integer
+          example: 08
+        entrance:
+          type: string
+          example: string
+        exchangeCode:
+          type: string
+          example: string
+        extension:
+          type: string
+          example: string
+        externalAddressUid:
+          type: integer
+          example: 0
+        flatNo:
+          type: string
+          example: string
+        informalAddress:
+          type: string
+          example: string
+        manuallyEditedYn:
+          type: string
+          example: string
+        networkNodeIds:
+          type: array
+          items:
+            $ref: ""
+            example:
+        organizationName:
+          type: string
+          example: string
+        pcode:
+          type: integer
+          example: 8
+        placeName:
+          type: string
+          example: string
+        postCode:
+          type: string
+          example: string
+        streetName:
+          type: string
+          example: string
+        streetNo:
+          type: string
+          example: string
+        uid:
+          type: integer
+          example: 43
+    serviceAddressData:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+          example: string
+        addressLine2:
+          type: string
+          example: string
+        addressLookupKey:
+          type: string
+          example: string
+        addressProfileUid:
+          type: integer
+          example: 482
+        areaName:
+          type: string
+          example: string
+        countryName:
+          type: string
+          example: string
+        dpid:
+          type: integer
+          example: 4
+        entrance:
+          type: string
+          example: string
+        exchangeCode:
+          type: string
+          example: string
+        extension:
+          type: string
+          example: string
+        externalAddressUid:
+          type: integer
+          example: 35
+        flatNo:
+          type: string
+          example: string
+        informalAddress:
+          type: string
+          example: string
+        manuallyEditedYn:
+          type: string
+          example: string
+        networkNodeIds:
+          type: array
+          items:
+            $ref: ""
+            example:
+        organizationName:
+          type: string
+          example: string
+        pcode:
+          type: integer
+          example: 93
+        placeName:
+          type: string
+          example: string
+        postCode:
+          type: string
+          example: string
+        streetName:
+          type: string
+          example: string
+        streetNo:
+          type: string
+          example: string
+        uid:
+          type: integer
+          example: 95847
+    accountData:
+      type: object
+      properties:
+        forenamesInitials:
+          type: string
+          example: string
+        honours:
+          type: string
+          example: string
+        middleName:
+          type: string
+          example: string
+        surnameCompanyName:
+          type: string
+          example: string
+        title:
+          type: string
+          example: string
+    sendCode:
+      required:
+        - mobileNumber
+      type: object
+      properties:
+        mobileNumber:
+          type: string
+          example: string
+    sendResponseCode:
+      type: object
+      properties:
+        accountNos:
+          type: array
+          items:
+            $ref: ''
+    serviceValidation:
+      required:
+        - serviceNumber
+      type: object
+      properties:
+        serviceNumber:
+          type: string
+          example: string
+    serviceResponseCode:
+      type: object
+      properties:
+        matchingAccounts:
+          type: array
+          format: int64
+          items:
+            $ref: '#/components/schemas/matchAccountData'
+        tariffCode:
+          type: string
+          example: string
+        isPostPaid:
+          type: string
+          example: true
