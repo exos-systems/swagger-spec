@@ -57,6 +57,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+  
   /api/basket:
     put:
       tags:
@@ -431,6 +432,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessNumberQueryListResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/getProductTree:
+    post:
+      tags:
+        - service-controller
+      summary: getProductTree
+      operationId: getProductTreeUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductTreeCriteria'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductTreeItemResponse'
         '201':
           description: Created
         '401':
@@ -1774,6 +1801,170 @@ components:
           type: boolean
         validate:
           type: boolean
+    BasketTreeChargeBalanceItem:
+      title: BasketTreeChargeBalanceItem
+      type: object
+      properties:
+        balAccountCd:
+          type: string
+        balDefineUid:
+          type: integer
+          format: int32
+        balGroupCd:
+          type: string
+        balRecurInAdvanceHours:
+          type: integer
+          format: int32
+        balRecurType:
+          type: integer
+          format: int32
+        balanceAmount:
+          type: number
+          format: double
+        balanceAmountToDisplay:
+          type: string
+        balanceAssociatedWithEquip:
+          type: boolean
+        balanceDefinitionName:
+          type: string
+        balanceInitialAmount:
+          type: number
+          format: double
+        unitName:
+          type: string
+        unitSystemCode:
+          type: string
+    BasketTreeChargesItem:
+      title: BasketTreeChargesItem
+      type: object
+      properties:
+        chargeBalance:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketTreeChargeBalanceItem'
+        chargeDescription:
+          type: string
+        chargeGroupOptional:
+          type: boolean
+        chargePeriod:
+          type: integer
+          format: int32
+        chargeTypeCode:
+          type: string
+        chargeValue:
+          $ref: '#/components/schemas/CustomCurrency'
+        depositType:
+          type: string
+        included:
+          type: boolean
+        netChargeValue:
+          $ref: '#/components/schemas/CustomCurrency'
+        salesAmendable:
+          type: boolean
+        salesAmendableValueShown:
+          type: boolean
+        standardChargeValue:
+          $ref: '#/components/schemas/CustomCurrency'
+        standardNetChargeValue:
+          $ref: '#/components/schemas/CustomCurrency'
+        taxInclusive:
+          type: boolean
+        thirdPartyCode:
+          type: string
+        upfront:
+          type: boolean
+    BasketTreeCompGroupItem:
+      title: BasketTreeCompGroupItem
+      type: object
+      properties:
+        compGroupCode:
+          type: string
+        compGroupDescription:
+          type: string
+        compProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketTreeProductItem'
+        defaultExpandedYn:
+          type: boolean
+        maximumNumberToPick:
+          type: integer
+          format: int32
+        minimumNumberToPick:
+          type: integer
+          format: int32
+    BasketTreeProductItem:
+      title: BasketTreeProductItem
+      type: object
+      properties:
+        accessNumber:
+          type: string
+        charges:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketTreeChargesItem'
+        currentOrder:
+          $ref: '#/components/schemas/BasketWorkOrderInProgressItem'
+        equipUid:
+          type: integer
+          format: int32
+        included:
+          type: boolean
+        numberRanges:
+          type: array
+          items:
+            $ref: '#/components/schemas/NumberRangeInfo'
+        originalInclusionStatus:
+          type: string
+        pbxChannel:
+          type: integer
+          format: int32
+        pbxChannelSize:
+          type: integer
+          format: int32
+        productCode:
+          type: string
+        productDescription:
+          type: string
+        statusCode:
+          type: string
+    BasketTreeTopProductItem:
+      title: BasketTreeTopProductItem
+      type: object
+      properties:
+        accessNumber:
+          type: string
+        charges:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketTreeChargesItem'
+        currentOrder:
+          $ref: '#/components/schemas/BasketWorkOrderInProgressItem'
+        equipUid:
+          type: integer
+          format: int32
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketTreeCompGroupItem'
+        numberRanges:
+          type: array
+          items:
+            $ref: '#/components/schemas/NumberRangeInfo'
+        pbxChannel:
+          type: integer
+          format: int32
+        pbxChannelSize:
+          type: integer
+          format: int32
+        productCode:
+          type: string
+        productDescription:
+          type: string
+        secondaryService:
+          type: boolean
+        statusCode:
+          type: string
     BasketWODetailsConfig:
       title: BasketWODetailsConfig
       type: object
@@ -1803,6 +1994,25 @@ components:
         warrantyExpireDate:
           type: string
           format: date-time
+    BasketWorkOrderInProgressItem:
+      title: BasketWorkOrderInProgressItem
+      type: object
+      properties:
+        basketMethod:
+          type: string
+        lockingWorkOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketWorkOrderInProgressItem'
+        pastPNR:
+          type: boolean
+        profileCode:
+          type: string
+        scheduledToBeRecovered:
+          type: boolean
+        woNo:
+          type: integer
+          format: int32
     BasketWorkTaskDetail:
       title: BasketWorkTaskDetail
       type: object
@@ -2825,6 +3035,31 @@ components:
           type: string
         session:
           $ref: '#/components/schemas/SessionRequest'
+    ProductTreeCriteria:
+      title: ProductTreeCriteria
+      type: object
+      properties:
+        equipUid:
+          type: integer
+          format: int32
+        handle:
+          type: string
+        session:
+          $ref: '#/components/schemas/SessionRequest'
+    ProductTreeItemResponse:
+      title: ProductTreeItemResponse
+      type: object
+      properties:
+        assocPBXTrees:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketTreeTopProductItem'
+        assocTrees:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketTreeTopProductItem'
+        tree:
+          $ref: '#/components/schemas/BasketTreeTopProductItem'
     RTMOrderDetailsItem:
       title: RTMOrderDetailsItem
       type: object
