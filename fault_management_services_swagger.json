@@ -1,1056 +1,1416 @@
-swagger: '2.0'
-info:
-  title: Fault Managment Services API
-  description:
-  version: 4.0.0
-host: localhost:8000
-basePath: /api/troubleTicket/
-schemes:
-  - https
-consumes:
-  - application/json;charset=utf-8
-produces:
-  - application/json;charset=utf-8
-tags:
-  - name: troubleTicket
-paths:
-  /troubleTicket:
-    post:
-      operationId: createTroubleTicket
-      summary: Creates a TroubleTicket
-      description: This operation creates a TroubleTicket entity.
-      tags:
-        - troubleTicket
-      parameters:
-        - name: troubleTicket
-          description: The TroubleTicket to be created
-          required: true
-          schema:
-            $ref: '#/definitions/TroubleTicket_Create'
-          in: body
-      responses:
-        '201':
-          description: Created
-          schema:
-            $ref: '#/definitions/TroubleTicket'
-        '400':
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/Error'
-        '401':
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/Error'
-        '403':
-          description: Forbidden
-          schema:
-            $ref: '#/definitions/Error'
-        '405':
-          description: Method Not allowed
-          schema:
-            $ref: '#/definitions/Error'
-        '409':
-          description: Conflict
-          schema:
-            $ref: '#/definitions/Error'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/Error'
-definitions:
-  Attachment:
-    type: object
-    description: Complements the description of an element (for instance a product) through video, pictures...
-    properties:
-      id:
-        type: string
-        description: Unique identifier for this particular attachment
-      href:
-        type: string
-        description: URI for this Attachment
-      attachmentType:
-        type: string
-        description: Attachment type such as video, picture
-      content:
-        type: string
-        description: The actual contents of the attachment object, if embedded, encoded as base64
-      description:
-        type: string
-        description: A narrative text describing the content of the attachment
-      mimeType:
-        type: string
-        description: Attachment mime type such as extension file for video, picture and document
-      name:
-        type: string
-        description: The name of the attachment
-      url:
-        type: string
-        description: Uniform Resource Locator, is a web page address (a subset of URI)
-      size:
-        $ref: '#/definitions/Quantity'
-        description: The size of the attachment.
-      validFor:
-        $ref: '#/definitions/TimePeriod'
-        description: The period of time for which the attachment is valid
-      '@baseType':
-        type: string
-        description: When sub-classing, this defines the super-class
-      '@schemaLocation':
-        type: string
-        format: uri
-        description: A URI to a JSON-Schema file that defines additional attributes and relationships
-      '@type':
-        type: string
-        description: When sub-classing, this defines the sub-class entity name
-  AttachmentRef:
-    type: object
-    description: Attachment reference. An attachment complements the description of an element (for instance a product) through video, pictures
-    properties:
-      id:
-        type: string
-        description: Unique-Identifier for this attachment
-      href:
-        type: string
-        description: URL serving as reference for the attachment resource
-      description:
-        type: string
-        description: A narrative text describing the content of the attachment
-      name:
-        type: string
-        description: Name of the related entity.
-      url:
-        type: string
-        description: Link to the attachment media/content
-      '@baseType':
-        type: string
-        description: When sub-classing, this defines the super-class
-      '@schemaLocation':
-        type: string
-        format: uri
-        description: A URI to a JSON-Schema file that defines additional attributes and relationships
-      '@type':
-        type: string
-        description: When sub-classing, this defines the sub-class entity name
-      '@referredType':
-        type: string
-        description: The actual type of the target instance when needed for disambiguation.
-    required:
-      - id
-  AttachmentRefOrValue:
-    type: object
-    description: An attachment by value or by reference. For AttachmentRefOrValue, the attribute type,schemaLocation and referredType are related to the contained entity and not to AttchmentRefOrValue itself
-    properties:
-      id:
-        type: string
-        description: Unique identifier for this particular attachment
-      href:
-        type: string
-        description: URI for this Attachment
-      attachmentType:
-        type: string
-        description: Attachment type such as video, picture
-      content:
-        type: string
-        description: The actual contents of the attachment object, if embedded, encoded as base64
-      description:
-        type: string
-        description: A narrative text describing the content of the attachment
-      mimeType:
-        type: string
-        description: Attachment mime type such as extension file for video, picture and document
-      name:
-        type: string
-        description: The name of the attachment
-      url:
-        type: string
-        description: Uniform Resource Locator, is a web page address (a subset of URI)
-      size:
-        $ref: '#/definitions/Quantity'
-        description: The size of the attachment.
-      validFor:
-        $ref: '#/definitions/TimePeriod'
-        description: The period of time for which the attachment is valid
-      '@baseType':
-        type: string
-        description: When sub-classing, this defines the super-class
-      '@schemaLocation':
-        type: string
-        format: uri
-        description: A URI to a JSON-Schema file that defines additional attributes and relationships
-      '@type':
-        type: string
-        description: When sub-classing, this defines the sub-class entity name
-      '@referredType':
-        type: string
-        description: The actual type of the target instance when needed for disambiguation.
-  ChannelRef:
-    type: object
-    description: The channel to which the resource reference to. e.g. channel for selling product offerings, channel for opening a trouble ticket etc..
-    properties:
-      id:
-        type: string
-        description: Unique identifier of a related entity.
-      href:
-        type: string
-        description: Reference of the related entity.
-      name:
-        type: string
-        description: Name of the channel.
-      '@baseType':
-        type: string
-        description: When sub-classing, this defines the super-class
-      '@schemaLocation':
-        type: string
-        format: uri
-        description: A URI to a JSON-Schema file that defines additional attributes and relationships
-      '@type':
-        type: string
-        description: When sub-classing, this defines the sub-class entity name
-      '@referredType':
-        type: string
-        description: The actual type of the target instance when needed for disambiguation.
-    required:
-      - id
-  EntityRef:
-    type: object
-    description: Entity reference schema to be use for all entityRef class.
-    properties:
-      id:
-        type: string
-        description: Unique identifier of a related entity.
-      href:
-        type: string
-        description: Reference of the related entity.
-      name:
-        type: string
-        description: Name of the related entity.
-      '@baseType':
-        type: string
-        description: When sub-classing, this defines the super-class
-      '@schemaLocation':
-        type: string
-        format: uri
-        description: A URI to a JSON-Schema file that defines additional attributes and relationships
-      '@type':
-        type: string
-        description: When sub-classing, this defines the sub-class entity name
-      '@referredType':
-        type: string
-        description: The actual type of the target instance when needed for disambiguation.
-    required:
-      - id
-  Note:
-    type: object
-    description: Extra information about a given entity
-    properties:
-      id:
-        type: string
-        description: Identifier of the note within its containing entity (may or may not be globally unique, depending on provider implementation)
-      author:
-        type: string
-        description: Author of the note
-      date:
-        type: string
-        format: date-time
-        description: Date of the note
-      text:
-        type: string
-        description: Text of the note
-      '@baseType':
-        type: string
-        description: When sub-classing, this defines the super-class
-      '@schemaLocation':
-        type: string
-        format: uri
-        description: A URI to a JSON-Schema file that defines additional attributes and relationships
-      '@type':
-        type: string
-        description: When sub-classing, this defines the sub-class entity name
-  Quantity:
-    type: object
-    description: An amount in a given unit
-    properties:
-      amount:
-        default: 1
-        type: number
-        format: float
-        description: Numeric value in a given unit
-      units:
-        type: string
-        description: Unit
-  RelatedEntity:
-    type: object
-    description: A reference to an entity, where the type of the entity is not known in advance.
-    required:
-      - '@referredType'
-      - id
-      - role
-    properties:
-      id:
-        type: string
-        description: Unique identifier of a related entity.
-      href:
-        type: string
-        description: Reference of the related entity.
-      name:
-        type: string
-        description: Name of the related entity.
-      role:
-        type: string
-        description: The role of an entity.
-      '@baseType':
-        type: string
-        description: When sub-classing, this defines the super-class
-      '@schemaLocation':
-        type: string
-        format: uri
-        description: A URI to a JSON-Schema file that defines additional attributes and relationships
-      '@type':
-        type: string
-        description: When sub-classing, this defines the sub-class entity name
-      '@referredType':
-        type: string
-        description: The actual type of the target instance when needed for disambiguation.
-  RelatedParty:
-    type: object
-    description: Related Entity reference. A related party defines party or party role linked to a specific entity.
-    required:
-      - '@referredType'
-      - id
-    properties:
-      id:
-        type: string
-        description: Unique identifier of a related entity.
-      href:
-        type: string
-        description: Reference of the related entity.
-      name:
-        type: string
-        description: Name of the related entity.
-      role:
-        type: string
-        description: Role played by the related party
-      '@baseType':
-        type: string
-        description: When sub-classing, this defines the super-class
-      '@schemaLocation':
-        type: string
-        format: uri
-        description: A URI to a JSON-Schema file that defines additional attributes and relationships
-      '@type':
-        type: string
-        description: When sub-classing, this defines the sub-class entity name
-      '@referredType':
-        type: string
-        description: The actual type of the target instance when needed for disambiguation.
-  StatusChange:
-    type: object
-    description: Holds the status notification reasons and associated date the status changed, populated by the server
-    properties:
-      changeDate:
-        type: string
-        format: date-time
-        description: The date and time the status changed.
-      changeReason:
-        type: string
-        description: The reason why the status changed.
-      status:
-        type: string
-        description: The status of the trouble ticket
-      '@baseType':
-        type: string
-        description: When sub-classing, this defines the super-class
-      '@schemaLocation':
-        type: string
-        format: uri
-        description: A URI to a JSON-Schema file that defines additional attributes and relationships
-      '@type':
-        type: string
-        description: When sub-classing, this defines the sub-class entity name
-  TimePeriod:
-    type: object
-    description: A period of time, either as a deadline (endDateTime only) a startDateTime only, or both
-    properties:
-      endDateTime:
-        type: string
-        format: date-time
-        description: End of the time period, using IETC-RFC-3339 format
-      startDateTime:
-        type: string
-        format: date-time
-        description: Start of the time period, using IETC-RFC-3339 format. If you define a start, you must also define an end
-  TroubleTicket:
-    type: object
-    description: A trouble ticket is a record of an issue that is created, tracked, and managed by a trouble ticket management system
-    properties:
-      id:
-        type: string
-        description: Unique identifier of the trouble ticket
-      href:
-        type: string
-        description: Hyperlink, a reference to the trouble ticket entity
-      creationDate:
-        type: string
-        format: date-time
-        description: The date on which the trouble ticket was created
-      description:
-        type: string
-        description: Description of the trouble or issue
-      expectedResolutionDate:
-        type: string
-        format: date-time
-        description: The expected resolution date determined by the trouble ticket system
-      externalId:
-        type: string
-        description: Additional identifier coming from an external system
-      lastUpdate:
-        type: string
-        format: date-time
-        description: The date and time that the trouble ticked was last updated
-      name:
-        type: string
-        description: Name of the trouble ticket, typically a short description provided by the user that create the ticket
-      priority:
-        type: string
-        description: 'The priority of the trouble ticket and how quickly the issue should be resolved. Example: Critical, High, Medium, Low. The value is set by the ticket management system considering the severity, ticket type etc...'
-      requestedResolutionDate:
-        type: string
-        format: date-time
-        description: The resolution date requested by the user
-      resolutionDate:
-        type: string
-        format: date-time
-        description: The date and time the trouble ticket was resolved
-      severity:
-        type: string
-        description: |-
-          The severity of the issue. Indicate the implication of the issue on the expected functionality e.g. of a system, application, service etc.. 
-          Severity values can be for example : Critical, Major, Minor
-      statusChangeDate:
-        type: string
-        format: date-time
-        description: The date and time the status changed.
-      statusChangeReason:
-        type: string
-        description: The reason for changing the status
-      ticketType:
-        type: string
-        description: represent a business type of the trouble ticket e.g. incident, complain, request
-      attachment:
-        type: array
-        items:
-          $ref: '#/definitions/AttachmentRefOrValue'
-        description: File(s) attached to the trouble ticket. e.g. pictur of broken device, scaning of a bill or charge
-      channel:
-        $ref: '#/definitions/ChannelRef'
-        description: The channel that origin the trouble ticket
-      note:
-        type: array
-        items:
-          $ref: '#/definitions/Note'
-        description: The note(s) that are associated to the ticket.
-      relatedEntity:
-        type: array
-        items:
-          $ref: '#/definitions/RelatedEntity'
-        description: An entity that is related to the ticket such as a bill, a product, etc. The entity against which the ticket is associated.
-      relatedParty:
-        type: array
-        items:
-          $ref: '#/definitions/RelatedParty'
-        description: The related party(ies) that are associated to the ticket.
-      status:
-        $ref: '#/definitions/TroubleTicketStatusType'
-        description: The current status of the trouble ticket
-      statusChange:
-        type: array
-        items:
-          $ref: '#/definitions/StatusChange'
-        description: The status change history that are associated to the ticket.Populated by the server
-      troubleTicketRelationship:
-        type: array
-        items:
-          $ref: '#/definitions/TroubleTicketRelationship'
-        description: A list of trouble ticket relationships (TroubleTicketRelationship [*]). Represents a relationship between trouble tickets
-      '@baseType':
-        type: string
-        description: When sub-classing, this defines the super-class
-      '@schemaLocation':
-        type: string
-        format: uri
-        description: A URI to a JSON-Schema file that defines additional attributes and relationships
-      '@type':
-        type: string
-        description: When sub-classing, this defines the sub-class entity name
-  TroubleTicket_Create:
-    type: object
-    description: |-
-      A trouble ticket is a record of an issue that is created, tracked, and managed by a trouble ticket management system
-      Skipped properties: id,href
-    required:
-      - description
-      - severity
-      - ticketType
-    properties:
-      creationDate:
-        type: string
-        format: date-time
-        description: The date on which the trouble ticket was created
-      description:
-        type: string
-        description: Description of the trouble or issue
-      expectedResolutionDate:
-        type: string
-        format: date-time
-        description: The expected resolution date determined by the trouble ticket system
-      externalId:
-        type: string
-        description: Additional identifier coming from an external system
-      lastUpdate:
-        type: string
-        format: date-time
-        description: The date and time that the trouble ticked was last updated
-      name:
-        type: string
-        description: Name of the trouble ticket, typically a short description provided by the user that create the ticket
-      priority:
-        type: string
-        description: 'The priority of the trouble ticket and how quickly the issue should be resolved. Example: Critical, High, Medium, Low. The value is set by the ticket management system considering the severity, ticket type etc...'
-      requestedResolutionDate:
-        type: string
-        format: date-time
-        description: The resolution date requested by the user
-      resolutionDate:
-        type: string
-        format: date-time
-        description: The date and time the trouble ticket was resolved
-      severity:
-        type: string
-        description: |-
-          The severity of the issue. Indicate the implication of the issue on the expected functionality e.g. of a system, application, service etc.. 
-          Severity values can be for example : Critical, Major, Minor
-      statusChangeDate:
-        type: string
-        format: date-time
-        description: The date and time the status changed.
-      statusChangeReason:
-        type: string
-        description: The reason for changing the status
-      ticketType:
-        type: string
-        description: represent a business type of the trouble ticket e.g. incident, complain, request
-      attachment:
-        type: array
-        items:
-          $ref: '#/definitions/AttachmentRefOrValue'
-        description: File(s) attached to the trouble ticket. e.g. pictur of broken device, scaning of a bill or charge
-      channel:
-        $ref: '#/definitions/ChannelRef'
-        description: The channel that origin the trouble ticket
-      note:
-        type: array
-        items:
-          $ref: '#/definitions/Note'
-        description: The note(s) that are associated to the ticket.
-      relatedEntity:
-        type: array
-        items:
-          $ref: '#/definitions/RelatedEntity'
-        description: An entity that is related to the ticket such as a bill, a product, etc. The entity against which the ticket is associated.
-      relatedParty:
-        type: array
-        items:
-          $ref: '#/definitions/RelatedParty'
-        description: The related party(ies) that are associated to the ticket.
-      status:
-        $ref: '#/definitions/TroubleTicketStatusType'
-        description: The current status of the trouble ticket
-      statusChange:
-        type: array
-        items:
-          $ref: '#/definitions/StatusChange'
-        description: The status change history that are associated to the ticket.Populated by the server
-      troubleTicketRelationship:
-        type: array
-        items:
-          $ref: '#/definitions/TroubleTicketRelationship'
-        description: A list of trouble ticket relationships (TroubleTicketRelationship [*]). Represents a relationship between trouble tickets
-      '@baseType':
-        type: string
-        description: When sub-classing, this defines the super-class
-      '@schemaLocation':
-        type: string
-        format: uri
-        description: A URI to a JSON-Schema file that defines additional attributes and relationships
-      '@type':
-        type: string
-        description: When sub-classing, this defines the sub-class entity name
-  TroubleTicket_Update:
-    type: object
-    description: |-
-      A trouble ticket is a record of an issue that is created, tracked, and managed by a trouble ticket management system
-      Skipped properties: id,href,creationDate,lastUpdate,statusChange,statusChangeDate
-    properties:
-      description:
-        type: string
-        description: Description of the trouble or issue
-      expectedResolutionDate:
-        type: string
-        format: date-time
-        description: The expected resolution date determined by the trouble ticket system
-      externalId:
-        type: string
-        description: Additional identifier coming from an external system
-      name:
-        type: string
-        description: Name of the trouble ticket, typically a short description provided by the user that create the ticket
-      priority:
-        type: string
-        description: 'The priority of the trouble ticket and how quickly the issue should be resolved. Example: Critical, High, Medium, Low. The value is set by the ticket management system considering the severity, ticket type etc...'
-      requestedResolutionDate:
-        type: string
-        format: date-time
-        description: The resolution date requested by the user
-      resolutionDate:
-        type: string
-        format: date-time
-        description: The date and time the trouble ticket was resolved
-      severity:
-        type: string
-        description: |-
-          The severity of the issue. Indicate the implication of the issue on the expected functionality e.g. of a system, application, service etc.. 
-          Severity values can be for example : Critical, Major, Minor
-      statusChangeReason:
-        type: string
-        description: The reason for changing the status
-      ticketType:
-        type: string
-        description: represent a business type of the trouble ticket e.g. incident, complain, request
-      attachment:
-        type: array
-        items:
-          $ref: '#/definitions/AttachmentRefOrValue'
-        description: File(s) attached to the trouble ticket. e.g. pictur of broken device, scaning of a bill or charge
-      channel:
-        $ref: '#/definitions/ChannelRef'
-        description: The channel that origin the trouble ticket
-      note:
-        type: array
-        items:
-          $ref: '#/definitions/Note'
-        description: The note(s) that are associated to the ticket.
-      relatedEntity:
-        type: array
-        items:
-          $ref: '#/definitions/RelatedEntity'
-        description: An entity that is related to the ticket such as a bill, a product, etc. The entity against which the ticket is associated.
-      relatedParty:
-        type: array
-        items:
-          $ref: '#/definitions/RelatedParty'
-        description: The related party(ies) that are associated to the ticket.
-      status:
-        $ref: '#/definitions/TroubleTicketStatusType'
-        description: The current status of the trouble ticket
-      troubleTicketRelationship:
-        type: array
-        items:
-          $ref: '#/definitions/TroubleTicketRelationship'
-        description: A list of trouble ticket relationships (TroubleTicketRelationship [*]). Represents a relationship between trouble tickets
-      '@baseType':
-        type: string
-        description: When sub-classing, this defines the super-class
-      '@schemaLocation':
-        type: string
-        format: uri
-        description: A URI to a JSON-Schema file that defines additional attributes and relationships
-      '@type':
-        type: string
-        description: When sub-classing, this defines the sub-class entity name
-  TroubleTicketRelationship:
-    type: object
-    description: Represents a relationship between trouble Trouble Tickets
-    properties:
-      id:
-        type: string
-        description: Unique identifier of the Trouble Ticket
-      href:
-        type: string
-        description: Reference of the Trouble Ticket
-      name:
-        type: string
-        description: Name of the Trouble Ticket
-      relationshipType:
-        type: string
-        description: Type of the  Trouble Ticket relationship can be isChiled, dependent etc...
-      '@baseType':
-        type: string
-        description: When sub-classing, this defines the super-class
-      '@schemaLocation':
-        type: string
-        format: uri
-        description: A URI to a JSON-Schema file that defines additional attributes and relationships
-      '@type':
-        type: string
-        description: When sub-classing, this defines the sub-class entity name
-  TroubleTicketStatusType:
-    type: string
-    description: Possible values for the status of the trouble ticket
-    enum:
-      - acknowledged
-      - rejected
-      - pending
-      - held
-      - inProgress
-      - cancelled
-      - closed
-      - resolved
-  EventSubscription:
-    type: object
-    description: Sets the communication endpoint address the service instance must use to deliver notification information
-    required:
-      - id
-      - callback
-    properties:
-      id:
-        type: string
-        description: Id of the listener
-      callback:
-        type: string
-        description: The callback being registered.
-      query:
-        type: string
-        description: additional data to be passed
-  EventSubscriptionInput:
-    type: object
-    description: Sets the communication endpoint address the service instance must use to deliver notification information
-    required:
-      - callback
-    properties:
-      callback:
-        type: string
-        description: The callback being registered.
-      query:
-        type: string
-        description: additional data to be passed
-  TroubleTicketCreateEvent:
-    type: object
-    description: The notification data structure
-    properties:
-      id:
-        type: string
-        description: Identifier of the Process flow
-      href:
-        type: string
-        description: Reference of the ProcessFlow
-      eventId:
-        type: string
-        description: The identifier of the notification.
-      eventTime:
-        type: string
-        format: date-time
-        description: Time of the event occurrence.
-      eventType:
-        type: string
-        description: The type of the notification.
-      correlationId:
-        type: string
-        description: The correlation id for this event.
-      domain:
-        type: string
-        description: The domain of the event.
-      title:
-        type: string
-        description: The title of the event.
-      description:
-        type: string
-        description: An explnatory of the event.
-      priority:
-        type: string
-        description: A priority.
-      timeOcurred:
-        type: string
-        format: date-time
-        description: The time the event occured.
-      event:
-        description: The event payload linked to the involved resource object
-        $ref: '#/definitions/TroubleTicketCreateEventPayload'
-  TroubleTicketCreateEventPayload:
-    type: object
-    description: The event data structure
-    properties:
-      troubleTicket:
-        description: The involved resource data for the event
-        $ref: '#/definitions/TroubleTicket'
-  TroubleTicketAttributeValueChangeEvent:
-    type: object
-    description: The notification data structure
-    properties:
-      eventId:
-        type: string
-        description: The identifier of the notification.
-      eventTime:
-        type: string
-        format: date-time
-        description: Time of the event occurrence.
-      eventType:
-        type: string
-        description: The type of the notification.
-      correlationId:
-        type: string
-        description: The correlation id for this event.
-      domain:
-        type: string
-        description: The domain of the event.
-      title:
-        type: string
-        description: The title of the event.
-      description:
-        type: string
-        description: An explnatory of the event.
-      priority:
-        type: string
-        description: A priority.
-      timeOcurred:
-        type: string
-        format: date-time
-        description: The time the event occured.
-      fieldPath:
-        type: string
-        description: The path identifying the object field concerned by this notification.
-      event:
-        description: The event payload linked to the involved resource object
-        $ref: '#/definitions/TroubleTicketAttributeValueChangeEventPayload'
-  TroubleTicketAttributeValueChangeEventPayload:
-    type: object
-    description: The event data structure
-    properties:
-      troubleTicket:
-        description: The involved resource data for the event
-        $ref: '#/definitions/TroubleTicket'
-  TroubleTicketStatusChangeEvent:
-    type: object
-    description: The notification data structure
-    properties:
-      id:
-        type: string
-        description: Identifier of the Process flow
-      href:
-        type: string
-        description: Reference of the ProcessFlow
-      eventId:
-        type: string
-        description: The identifier of the notification.
-      eventTime:
-        type: string
-        format: date-time
-        description: Time of the event occurrence.
-      eventType:
-        type: string
-        description: The type of the notification.
-      correlationId:
-        type: string
-        description: The correlation id for this event.
-      domain:
-        type: string
-        description: The domain of the event.
-      title:
-        type: string
-        description: The title of the event.
-      description:
-        type: string
-        description: An explnatory of the event.
-      priority:
-        type: string
-        description: A priority.
-      timeOcurred:
-        type: string
-        format: date-time
-        description: The time the event occured.
-      event:
-        description: The event payload linked to the involved resource object
-        $ref: '#/definitions/TroubleTicketStatusChangeEventPayload'
-  TroubleTicketStatusChangeEventPayload:
-    type: object
-    description: The event data structure
-    properties:
-      troubleTicket:
-        description: The involved resource data for the event
-        $ref: '#/definitions/TroubleTicket'
-  TroubleTicketDeleteEvent:
-    type: object
-    description: The notification data structure
-    properties:
-      id:
-        type: string
-        description: Identifier of the Process flow
-      href:
-        type: string
-        description: Reference of the ProcessFlow
-      eventId:
-        type: string
-        description: The identifier of the notification.
-      eventTime:
-        type: string
-        format: date-time
-        description: Time of the event occurrence.
-      eventType:
-        type: string
-        description: The type of the notification.
-      correlationId:
-        type: string
-        description: The correlation id for this event.
-      domain:
-        type: string
-        description: The domain of the event.
-      title:
-        type: string
-        description: The title of the event.
-      description:
-        type: string
-        description: An explnatory of the event.
-      priority:
-        type: string
-        description: A priority.
-      timeOcurred:
-        type: string
-        format: date-time
-        description: The time the event occured.
-      event:
-        description: The event payload linked to the involved resource object
-        $ref: '#/definitions/TroubleTicketDeleteEventPayload'
-  TroubleTicketDeleteEventPayload:
-    type: object
-    description: The event data structure
-    properties:
-      troubleTicket:
-        description: The involved resource data for the event
-        $ref: '#/definitions/TroubleTicket'
-  TroubleTicketResolvedEvent:
-    type: object
-    description: The notification data structure
-    properties:
-      id:
-        type: string
-        description: Identifier of the Process flow
-      href:
-        type: string
-        description: Reference of the ProcessFlow
-      eventId:
-        type: string
-        description: The identifier of the notification.
-      eventTime:
-        type: string
-        format: date-time
-        description: Time of the event occurrence.
-      eventType:
-        type: string
-        description: The type of the notification.
-      correlationId:
-        type: string
-        description: The correlation id for this event.
-      domain:
-        type: string
-        description: The domain of the event.
-      title:
-        type: string
-        description: The title of the event.
-      description:
-        type: string
-        description: An explnatory of the event.
-      priority:
-        type: string
-        description: A priority.
-      timeOcurred:
-        type: string
-        format: date-time
-        description: The time the event occured.
-      event:
-        description: The event payload linked to the involved resource object
-        $ref: '#/definitions/TroubleTicketResolvedEventPayload'
-  TroubleTicketResolvedEventPayload:
-    type: object
-    description: The event data structure
-    properties:
-      troubleTicket:
-        description: The involved resource data for the event
-        $ref: '#/definitions/TroubleTicket'
-  TroubleTicketInformationRequiredEvent:
-    type: object
-    description: The notification data structure
-    properties:
-      eventId:
-        type: string
-        description: The identifier of the notification.
-      eventTime:
-        type: string
-        format: date-time
-        description: Time of the event occurrence.
-      eventType:
-        type: string
-        description: The type of the notification.
-      correlationId:
-        type: string
-        description: The correlation id for this event.
-      domain:
-        type: string
-        description: The domain of the event.
-      title:
-        type: string
-        description: The title of the event.
-      description:
-        type: string
-        description: An explnatory of the event.
-      priority:
-        type: string
-        description: A priority.
-      timeOcurred:
-        type: string
-        format: date-time
-        description: The time the event occured.
-      fieldPath:
-        type: string
-        description: The path identifying the object field concerned by this notification.
-      event:
-        description: The event payload linked to the involved resource object
-        $ref: '#/definitions/TroubleTicketInformationRequiredEventPayload'
-  TroubleTicketInformationRequiredEventPayload:
-    type: object
-    description: The event data structure
-    properties:
-      troubleTicket:
-        description: The involved resource data for the event
-        $ref: '#/definitions/TroubleTicket'
-  Error:
-    description: Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)
-    type: object
-    required:
-      - code
-      - reason
-    properties:
-      code:
-        type: string
-        description: Application relevant detail, defined in the API or a common list.
-      reason:
-        type: string
-        description: Explanation of the reason for the error which can be shown to a client user.
-      message:
-        type: string
-        description: More details and corrective actions related to the error which can be shown to a client user.
-      status:
-        type: string
-        description: HTTP Error code extension
-      referenceError:
-        type: string
-        format: uri
-        description: URI of documentation describing the error.
-      '@baseType':
-        type: string
-        description: When sub-classing, this defines the super-class.
-      '@schemaLocation':
-        type: string
-        format: uri
-        description: A URI to a JSON-Schema file that defines additional attributes and relationships
-      '@type':
-        type: string
-        description: When sub-classing, this defines the sub-class entity name.
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Fault Management Services API",
+    "description": "",
+    "version": "4.0.0"
+  },
+  "host": "localhost:8000",
+  "basePath": "/api/troubleTicket/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json;charset=utf-8"
+  ],
+  "produces": [
+    "application/json;charset=utf-8"
+  ],
+  "tags": [
+    {
+      "name": "troubleTicket"
+    }
+  ],
+  "paths": {
+    "/troubleTicket": {
+      "post": {
+        "operationId": "createTroubleTicket",
+        "summary": "Creates a TroubleTicket",
+        "description": "This operation creates a TroubleTicket entity.",
+        "tags": [
+          "troubleTicket"
+        ],
+        "parameters": [
+          {
+            "name": "troubleTicket",
+            "description": "The TroubleTicket to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TroubleTicket_Create"
+            },
+            "in": "body"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/TroubleTicket"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Attachment": {
+      "type": "object",
+      "description": "Complements the description of an element (for instance a product) through video, pictures...",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this particular attachment"
+        },
+        "href": {
+          "type": "string",
+          "description": "URI for this Attachment"
+        },
+        "attachmentType": {
+          "type": "string",
+          "description": "Attachment type such as video, picture"
+        },
+        "content": {
+          "type": "string",
+          "description": "The actual contents of the attachment object, if embedded, encoded as base64"
+        },
+        "description": {
+          "type": "string",
+          "description": "A narrative text describing the content of the attachment"
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "Attachment mime type such as extension file for video, picture and document"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the attachment"
+        },
+        "url": {
+          "type": "string",
+          "description": "Uniform Resource Locator, is a web page address (a subset of URI)"
+        },
+        "size": {
+          "$ref": "#/definitions/Quantity",
+          "description": "The size of the attachment."
+        },
+        "validFor": {
+          "$ref": "#/definitions/TimePeriod",
+          "description": "The period of time for which the attachment is valid"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "AttachmentRef": {
+      "type": "object",
+      "description": "Attachment reference. An attachment complements the description of an element (for instance a product) through video, pictures",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique-Identifier for this attachment"
+        },
+        "href": {
+          "type": "string",
+          "description": "URL serving as reference for the attachment resource"
+        },
+        "description": {
+          "type": "string",
+          "description": "A narrative text describing the content of the attachment"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the related entity."
+        },
+        "url": {
+          "type": "string",
+          "description": "Link to the attachment media/content"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "AttachmentRefOrValue": {
+      "type": "object",
+      "description": "An attachment by value or by reference. For AttachmentRefOrValue, the attribute type,schemaLocation and referredType are related to the contained entity and not to AttchmentRefOrValue itself",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this particular attachment"
+        },
+        "href": {
+          "type": "string",
+          "description": "URI for this Attachment"
+        },
+        "attachmentType": {
+          "type": "string",
+          "description": "Attachment type such as video, picture"
+        },
+        "content": {
+          "type": "string",
+          "description": "The actual contents of the attachment object, if embedded, encoded as base64"
+        },
+        "description": {
+          "type": "string",
+          "description": "A narrative text describing the content of the attachment"
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "Attachment mime type such as extension file for video, picture and document"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the attachment"
+        },
+        "url": {
+          "type": "string",
+          "description": "Uniform Resource Locator, is a web page address (a subset of URI)"
+        },
+        "size": {
+          "$ref": "#/definitions/Quantity",
+          "description": "The size of the attachment."
+        },
+        "validFor": {
+          "$ref": "#/definitions/TimePeriod",
+          "description": "The period of time for which the attachment is valid"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      }
+    },
+    "ChannelRef": {
+      "type": "object",
+      "description": "The channel to which the resource reference to. e.g. channel for selling product offerings, channel for opening a trouble ticket etc..",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of a related entity."
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the related entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the channel."
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "EntityRef": {
+      "type": "object",
+      "description": "Entity reference schema to be use for all entityRef class.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of a related entity."
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the related entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the related entity."
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "Note": {
+      "type": "object",
+      "description": "Extra information about a given entity",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the note within its containing entity (may or may not be globally unique, depending on provider implementation)"
+        },
+        "author": {
+          "type": "string",
+          "description": "Author of the note"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date of the note"
+        },
+        "text": {
+          "type": "string",
+          "description": "Text of the note"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "Quantity": {
+      "type": "object",
+      "description": "An amount in a given unit",
+      "properties": {
+        "amount": {
+          "default": 1,
+          "type": "number",
+          "format": "float",
+          "description": "Numeric value in a given unit"
+        },
+        "units": {
+          "type": "string",
+          "description": "Unit"
+        }
+      }
+    },
+    "RelatedEntity": {
+      "type": "object",
+      "description": "A reference to an entity, where the type of the entity is not known in advance.",
+      "required": [
+        "@referredType",
+        "id",
+        "role"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of a related entity."
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the related entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the related entity."
+        },
+        "role": {
+          "type": "string",
+          "description": "The role of an entity."
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      }
+    },
+    "RelatedParty": {
+      "type": "object",
+      "description": "Related Entity reference. A related party defines party or party role linked to a specific entity.",
+      "required": [
+        "@referredType",
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of a related entity."
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the related entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the related entity."
+        },
+        "role": {
+          "type": "string",
+          "description": "Role played by the related party"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      }
+    },
+    "StatusChange": {
+      "type": "object",
+      "description": "Holds the status notification reasons and associated date the status changed, populated by the server",
+      "properties": {
+        "changeDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the status changed."
+        },
+        "changeReason": {
+          "type": "string",
+          "description": "The reason why the status changed."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the trouble ticket"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "TimePeriod": {
+      "type": "object",
+      "description": "A period of time, either as a deadline (endDateTime only) a startDateTime only, or both",
+      "properties": {
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End of the time period, using IETC-RFC-3339 format"
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start of the time period, using IETC-RFC-3339 format. If you define a start, you must also define an end"
+        }
+      }
+    },
+    "TroubleTicket": {
+      "type": "object",
+      "description": "A trouble ticket is a record of an issue that is created, tracked, and managed by a trouble ticket management system",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the trouble ticket"
+        },
+        "href": {
+          "type": "string",
+          "description": "Hyperlink, a reference to the trouble ticket entity"
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date on which the trouble ticket was created"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the trouble or issue"
+        },
+        "expectedResolutionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expected resolution date determined by the trouble ticket system"
+        },
+        "externalId": {
+          "type": "string",
+          "description": "Additional identifier coming from an external system"
+        },
+        "lastUpdate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time that the trouble ticked was last updated"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the trouble ticket, typically a short description provided by the user that create the ticket"
+        },
+        "priority": {
+          "type": "string",
+          "description": "The priority of the trouble ticket and how quickly the issue should be resolved. Example: Critical, High, Medium, Low. The value is set by the ticket management system considering the severity, ticket type etc..."
+        },
+        "requestedResolutionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The resolution date requested by the user"
+        },
+        "resolutionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the trouble ticket was resolved"
+        },
+        "severity": {
+          "type": "string",
+          "description": "The severity of the issue. Indicate the implication of the issue on the expected functionality e.g. of a system, application, service etc.. \nSeverity values can be for example : Critical, Major, Minor"
+        },
+        "statusChangeDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the status changed."
+        },
+        "statusChangeReason": {
+          "type": "string",
+          "description": "The reason for changing the status"
+        },
+        "ticketType": {
+          "type": "string",
+          "description": "represent a business type of the trouble ticket e.g. incident, complain, request"
+        },
+        "attachment": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttachmentRefOrValue"
+          },
+          "description": "File(s) attached to the trouble ticket. e.g. pictur of broken device, scaning of a bill or charge"
+        },
+        "channel": {
+          "$ref": "#/definitions/ChannelRef",
+          "description": "The channel that origin the trouble ticket"
+        },
+        "note": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Note"
+          },
+          "description": "The note(s) that are associated to the ticket."
+        },
+        "relatedEntity": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RelatedEntity"
+          },
+          "description": "An entity that is related to the ticket such as a bill, a product, etc. The entity against which the ticket is associated."
+        },
+        "relatedParty": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RelatedParty"
+          },
+          "description": "The related party(ies) that are associated to the ticket."
+        },
+        "status": {
+          "$ref": "#/definitions/TroubleTicketStatusType",
+          "description": "The current status of the trouble ticket"
+        },
+        "statusChange": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatusChange"
+          },
+          "description": "The status change history that are associated to the ticket.Populated by the server"
+        },
+        "troubleTicketRelationship": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TroubleTicketRelationship"
+          },
+          "description": "A list of trouble ticket relationships (TroubleTicketRelationship [*]). Represents a relationship between trouble tickets"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "TroubleTicket_Create": {
+      "type": "object",
+      "description": "A trouble ticket is a record of an issue that is created, tracked, and managed by a trouble ticket management system\nSkipped properties: id,href",
+      "required": [
+        "description",
+        "severity",
+        "ticketType"
+      ],
+      "properties": {
+        "creationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date on which the trouble ticket was created"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the trouble or issue"
+        },
+        "expectedResolutionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expected resolution date determined by the trouble ticket system"
+        },
+        "externalId": {
+          "type": "string",
+          "description": "Additional identifier coming from an external system"
+        },
+        "lastUpdate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time that the trouble ticked was last updated"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the trouble ticket, typically a short description provided by the user that create the ticket"
+        },
+        "priority": {
+          "type": "string",
+          "description": "The priority of the trouble ticket and how quickly the issue should be resolved. Example: Critical, High, Medium, Low. The value is set by the ticket management system considering the severity, ticket type etc..."
+        },
+        "requestedResolutionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The resolution date requested by the user"
+        },
+        "resolutionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the trouble ticket was resolved"
+        },
+        "severity": {
+          "type": "string",
+          "description": "The severity of the issue. Indicate the implication of the issue on the expected functionality e.g. of a system, application, service etc.. \nSeverity values can be for example : Critical, Major, Minor"
+        },
+        "statusChangeDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the status changed."
+        },
+        "statusChangeReason": {
+          "type": "string",
+          "description": "The reason for changing the status"
+        },
+        "ticketType": {
+          "type": "string",
+          "description": "represent a business type of the trouble ticket e.g. incident, complain, request"
+        },
+        "attachment": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttachmentRefOrValue"
+          },
+          "description": "File(s) attached to the trouble ticket. e.g. pictur of broken device, scaning of a bill or charge"
+        },
+        "channel": {
+          "$ref": "#/definitions/ChannelRef",
+          "description": "The channel that origin the trouble ticket"
+        },
+        "note": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Note"
+          },
+          "description": "The note(s) that are associated to the ticket."
+        },
+        "relatedEntity": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RelatedEntity"
+          },
+          "description": "An entity that is related to the ticket such as a bill, a product, etc. The entity against which the ticket is associated."
+        },
+        "relatedParty": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RelatedParty"
+          },
+          "description": "The related party(ies) that are associated to the ticket."
+        },
+        "status": {
+          "$ref": "#/definitions/TroubleTicketStatusType",
+          "description": "The current status of the trouble ticket"
+        },
+        "statusChange": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatusChange"
+          },
+          "description": "The status change history that are associated to the ticket.Populated by the server"
+        },
+        "troubleTicketRelationship": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TroubleTicketRelationship"
+          },
+          "description": "A list of trouble ticket relationships (TroubleTicketRelationship [*]). Represents a relationship between trouble tickets"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "TroubleTicket_Update": {
+      "type": "object",
+      "description": "A trouble ticket is a record of an issue that is created, tracked, and managed by a trouble ticket management system\nSkipped properties: id,href,creationDate,lastUpdate,statusChange,statusChangeDate",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the trouble or issue"
+        },
+        "expectedResolutionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expected resolution date determined by the trouble ticket system"
+        },
+        "externalId": {
+          "type": "string",
+          "description": "Additional identifier coming from an external system"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the trouble ticket, typically a short description provided by the user that create the ticket"
+        },
+        "priority": {
+          "type": "string",
+          "description": "The priority of the trouble ticket and how quickly the issue should be resolved. Example: Critical, High, Medium, Low. The value is set by the ticket management system considering the severity, ticket type etc..."
+        },
+        "requestedResolutionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The resolution date requested by the user"
+        },
+        "resolutionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the trouble ticket was resolved"
+        },
+        "severity": {
+          "type": "string",
+          "description": "The severity of the issue. Indicate the implication of the issue on the expected functionality e.g. of a system, application, service etc.. \nSeverity values can be for example : Critical, Major, Minor"
+        },
+        "statusChangeReason": {
+          "type": "string",
+          "description": "The reason for changing the status"
+        },
+        "ticketType": {
+          "type": "string",
+          "description": "represent a business type of the trouble ticket e.g. incident, complain, request"
+        },
+        "attachment": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttachmentRefOrValue"
+          },
+          "description": "File(s) attached to the trouble ticket. e.g. pictur of broken device, scaning of a bill or charge"
+        },
+        "channel": {
+          "$ref": "#/definitions/ChannelRef",
+          "description": "The channel that origin the trouble ticket"
+        },
+        "note": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Note"
+          },
+          "description": "The note(s) that are associated to the ticket."
+        },
+        "relatedEntity": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RelatedEntity"
+          },
+          "description": "An entity that is related to the ticket such as a bill, a product, etc. The entity against which the ticket is associated."
+        },
+        "relatedParty": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RelatedParty"
+          },
+          "description": "The related party(ies) that are associated to the ticket."
+        },
+        "status": {
+          "$ref": "#/definitions/TroubleTicketStatusType",
+          "description": "The current status of the trouble ticket"
+        },
+        "troubleTicketRelationship": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TroubleTicketRelationship"
+          },
+          "description": "A list of trouble ticket relationships (TroubleTicketRelationship [*]). Represents a relationship between trouble tickets"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "TroubleTicketRelationship": {
+      "type": "object",
+      "description": "Represents a relationship between trouble Trouble Tickets",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the Trouble Ticket"
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the Trouble Ticket"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Trouble Ticket"
+        },
+        "relationshipType": {
+          "type": "string",
+          "description": "Type of the  Trouble Ticket relationship can be isChiled, dependent etc..."
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "TroubleTicketStatusType": {
+      "type": "string",
+      "description": "Possible values for the status of the trouble ticket",
+      "enum": [
+        "acknowledged",
+        "rejected",
+        "pending",
+        "held",
+        "inProgress",
+        "cancelled",
+        "closed",
+        "resolved"
+      ]
+    },
+    "EventSubscription": {
+      "type": "object",
+      "description": "Sets the communication endpoint address the service instance must use to deliver notification information",
+      "required": [
+        "id",
+        "callback"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the listener"
+        },
+        "callback": {
+          "type": "string",
+          "description": "The callback being registered."
+        },
+        "query": {
+          "type": "string",
+          "description": "additional data to be passed"
+        }
+      }
+    },
+    "EventSubscriptionInput": {
+      "type": "object",
+      "description": "Sets the communication endpoint address the service instance must use to deliver notification information",
+      "required": [
+        "callback"
+      ],
+      "properties": {
+        "callback": {
+          "type": "string",
+          "description": "The callback being registered."
+        },
+        "query": {
+          "type": "string",
+          "description": "additional data to be passed"
+        }
+      }
+    },
+    "TroubleTicketCreateEvent": {
+      "type": "object",
+      "description": "The notification data structure",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the Process flow"
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the ProcessFlow"
+        },
+        "eventId": {
+          "type": "string",
+          "description": "The identifier of the notification."
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the event occurrence."
+        },
+        "eventType": {
+          "type": "string",
+          "description": "The type of the notification."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The correlation id for this event."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain of the event."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the event."
+        },
+        "description": {
+          "type": "string",
+          "description": "An explnatory of the event."
+        },
+        "priority": {
+          "type": "string",
+          "description": "A priority."
+        },
+        "timeOcurred": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the event occured."
+        },
+        "event": {
+          "description": "The event payload linked to the involved resource object",
+          "$ref": "#/definitions/TroubleTicketCreateEventPayload"
+        }
+      }
+    },
+    "TroubleTicketCreateEventPayload": {
+      "type": "object",
+      "description": "The event data structure",
+      "properties": {
+        "troubleTicket": {
+          "description": "The involved resource data for the event",
+          "$ref": "#/definitions/TroubleTicket"
+        }
+      }
+    },
+    "TroubleTicketAttributeValueChangeEvent": {
+      "type": "object",
+      "description": "The notification data structure",
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "description": "The identifier of the notification."
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the event occurrence."
+        },
+        "eventType": {
+          "type": "string",
+          "description": "The type of the notification."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The correlation id for this event."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain of the event."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the event."
+        },
+        "description": {
+          "type": "string",
+          "description": "An explnatory of the event."
+        },
+        "priority": {
+          "type": "string",
+          "description": "A priority."
+        },
+        "timeOcurred": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the event occured."
+        },
+        "fieldPath": {
+          "type": "string",
+          "description": "The path identifying the object field concerned by this notification."
+        },
+        "event": {
+          "description": "The event payload linked to the involved resource object",
+          "$ref": "#/definitions/TroubleTicketAttributeValueChangeEventPayload"
+        }
+      }
+    },
+    "TroubleTicketAttributeValueChangeEventPayload": {
+      "type": "object",
+      "description": "The event data structure",
+      "properties": {
+        "troubleTicket": {
+          "description": "The involved resource data for the event",
+          "$ref": "#/definitions/TroubleTicket"
+        }
+      }
+    },
+    "TroubleTicketStatusChangeEvent": {
+      "type": "object",
+      "description": "The notification data structure",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the Process flow"
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the ProcessFlow"
+        },
+        "eventId": {
+          "type": "string",
+          "description": "The identifier of the notification."
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the event occurrence."
+        },
+        "eventType": {
+          "type": "string",
+          "description": "The type of the notification."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The correlation id for this event."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain of the event."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the event."
+        },
+        "description": {
+          "type": "string",
+          "description": "An explnatory of the event."
+        },
+        "priority": {
+          "type": "string",
+          "description": "A priority."
+        },
+        "timeOcurred": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the event occured."
+        },
+        "event": {
+          "description": "The event payload linked to the involved resource object",
+          "$ref": "#/definitions/TroubleTicketStatusChangeEventPayload"
+        }
+      }
+    },
+    "TroubleTicketStatusChangeEventPayload": {
+      "type": "object",
+      "description": "The event data structure",
+      "properties": {
+        "troubleTicket": {
+          "description": "The involved resource data for the event",
+          "$ref": "#/definitions/TroubleTicket"
+        }
+      }
+    },
+    "TroubleTicketDeleteEvent": {
+      "type": "object",
+      "description": "The notification data structure",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the Process flow"
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the ProcessFlow"
+        },
+        "eventId": {
+          "type": "string",
+          "description": "The identifier of the notification."
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the event occurrence."
+        },
+        "eventType": {
+          "type": "string",
+          "description": "The type of the notification."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The correlation id for this event."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain of the event."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the event."
+        },
+        "description": {
+          "type": "string",
+          "description": "An explnatory of the event."
+        },
+        "priority": {
+          "type": "string",
+          "description": "A priority."
+        },
+        "timeOcurred": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the event occured."
+        },
+        "event": {
+          "description": "The event payload linked to the involved resource object",
+          "$ref": "#/definitions/TroubleTicketDeleteEventPayload"
+        }
+      }
+    },
+    "TroubleTicketDeleteEventPayload": {
+      "type": "object",
+      "description": "The event data structure",
+      "properties": {
+        "troubleTicket": {
+          "description": "The involved resource data for the event",
+          "$ref": "#/definitions/TroubleTicket"
+        }
+      }
+    },
+    "TroubleTicketResolvedEvent": {
+      "type": "object",
+      "description": "The notification data structure",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the Process flow"
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the ProcessFlow"
+        },
+        "eventId": {
+          "type": "string",
+          "description": "The identifier of the notification."
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the event occurrence."
+        },
+        "eventType": {
+          "type": "string",
+          "description": "The type of the notification."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The correlation id for this event."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain of the event."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the event."
+        },
+        "description": {
+          "type": "string",
+          "description": "An explnatory of the event."
+        },
+        "priority": {
+          "type": "string",
+          "description": "A priority."
+        },
+        "timeOcurred": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the event occured."
+        },
+        "event": {
+          "description": "The event payload linked to the involved resource object",
+          "$ref": "#/definitions/TroubleTicketResolvedEventPayload"
+        }
+      }
+    },
+    "TroubleTicketResolvedEventPayload": {
+      "type": "object",
+      "description": "The event data structure",
+      "properties": {
+        "troubleTicket": {
+          "description": "The involved resource data for the event",
+          "$ref": "#/definitions/TroubleTicket"
+        }
+      }
+    },
+    "TroubleTicketInformationRequiredEvent": {
+      "type": "object",
+      "description": "The notification data structure",
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "description": "The identifier of the notification."
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the event occurrence."
+        },
+        "eventType": {
+          "type": "string",
+          "description": "The type of the notification."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The correlation id for this event."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain of the event."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the event."
+        },
+        "description": {
+          "type": "string",
+          "description": "An explnatory of the event."
+        },
+        "priority": {
+          "type": "string",
+          "description": "A priority."
+        },
+        "timeOcurred": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the event occured."
+        },
+        "fieldPath": {
+          "type": "string",
+          "description": "The path identifying the object field concerned by this notification."
+        },
+        "event": {
+          "description": "The event payload linked to the involved resource object",
+          "$ref": "#/definitions/TroubleTicketInformationRequiredEventPayload"
+        }
+      }
+    },
+    "TroubleTicketInformationRequiredEventPayload": {
+      "type": "object",
+      "description": "The event data structure",
+      "properties": {
+        "troubleTicket": {
+          "description": "The involved resource data for the event",
+          "$ref": "#/definitions/TroubleTicket"
+        }
+      }
+    },
+    "Error": {
+      "description": "Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)",
+      "type": "object",
+      "required": [
+        "code",
+        "reason"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Application relevant detail, defined in the API or a common list."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Explanation of the reason for the error which can be shown to a client user."
+        },
+        "message": {
+          "type": "string",
+          "description": "More details and corrective actions related to the error which can be shown to a client user."
+        },
+        "status": {
+          "type": "string",
+          "description": "HTTP Error code extension"
+        },
+        "referenceError": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI of documentation describing the error."
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class."
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name."
+        }
+      }
+    }
+  }
+}
